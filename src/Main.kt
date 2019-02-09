@@ -8,5 +8,6 @@ fun main(args: Array<String>) {
     val partida = Partida(TableroCuatroEnRaya(), jugadores)
     partida.addObservador(ObservadorCuatroEnRaya())
     partida.comenzar()
+    adsa
 
 }
