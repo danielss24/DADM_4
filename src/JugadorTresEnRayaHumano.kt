@@ -1,3 +1,4 @@
+/*
 import es.uam.eps.multij.AccionMover
 import es.uam.eps.multij.Evento
 import es.uam.eps.multij.Jugador
@@ -20,4 +21,4 @@ class JugadorTresEnRayaHumano(var name: String): Jugador {
             }
         }
     }
-}
+}*/

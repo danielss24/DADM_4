@@ -1,6 +1,7 @@
 import es.uam.eps.multij.Movimiento
 import es.uam.eps.multij.Tablero
 import java.util.ArrayList
+import MovimientoConecta4
 
 class TableroConecta4(var name: String): Tablero() {
 
@@ -30,7 +31,7 @@ class TableroConecta4(var name: String): Tablero() {
         var MovimientosValidos = ArrayList<Movimiento>();
         for(col in 1..7){
             if (isFull(col) == false){
-                MovimientosValidos += MovimientoConecta4(col=col)
+                MovimientosValidos.add(MovimientoConecta4(col))
             }
         }
         return MovimientosValidos
@@ -47,14 +48,35 @@ class TableroConecta4(var name: String): Tablero() {
     }
 
     override fun stringToTablero(cadena: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (cadena is String) {
+            var filas = cadena.split("\n")
+            var filaIndex = 0
+            var columnaIndex = 0
+            for (fil in filas){
+                var pos = fil.split(" ")
+                for (col in pos) {
+                    tablero[columnaIndex][filaIndex] = col.toInt()
+                    columnaIndex +=1
+                }
+                columnaIndex = 0
+                filaIndex +=1
+            }
+        }
     }
 
     override fun tableroToString(): String {
-        stringTablero
+        var tableroString = ""
+        for (fil in NUM_FIL..1){
+            for (col in 1..NUM_COL){
+                tableroString += (" " + tablero[col][fil])
+            }
+            tableroString += " \n"
+        }
+        return tableroString
     }
 
     override fun toString(): String {
+        return tableroToString()
     }
 
     fun isFull(columna: Int): Boolean{
@@ -73,6 +95,5 @@ class TableroConecta4(var name: String): Tablero() {
         }
         return -1
     }
-
 
 }

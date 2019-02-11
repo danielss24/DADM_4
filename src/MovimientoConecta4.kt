@@ -5,10 +5,12 @@ public class MovimientoConecta4 () : Movimiento() {
     var col : Int = -1
     var playerId : Int = -1
 
-    fun Movimiento(col : Int, playerId: Int = -1){
+    fun MovimientoConecta4(col : Int, playerId: Int = -1){
         this.col = col
         this.playerId = playerId
     }
+
+
 
     /**
      * genera una cadena que describe este movimiento
@@ -23,11 +25,14 @@ public class MovimientoConecta4 () : Movimiento() {
      * @return el valor de la comparacion (true o false)
      */
     override fun equals(o: Any?): Boolean {
-        if (o.col == this.col && o.playerId == this.playerId) {
-            return true
-        } else {
-            return false
+        if (o is MovimientoConecta4) {
+            if (o.col == this.col && o.playerId == this.playerId) {
+                return true
+            } else {
+                return false
+            }
         }
+        return false
     }
 
 
