@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
     jugadores += JugadorTresEnRayaHumano("Humano")
     val partida = Partida(TableroCuatroEnRaya(), jugadores)
     partida.addObservador(ObservadorCuatroEnRaya())
-    partida.comenzar()as
+    partida.comenzar()
 
 
 }
