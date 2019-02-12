@@ -12,7 +12,7 @@ class JugadorConecta4
     override fun onCambioEnPartida(evento: Evento) {
         when (evento.tipo) {
             Evento.EVENTO_FIN, Evento.EVENTO_CAMBIO -> {
-
+                TODO("SEGUIR POR AQUI 12-02-2019")
             }
             Evento.EVENTO_CONFIRMA -> {
                 // este jugador confirma al azar
