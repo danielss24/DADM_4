@@ -1,5 +1,4 @@
-/*
-import es.uam.eps.multij.AccionMover
+/*import es.uam.eps.multij.AccionMover
 import es.uam.eps.multij.Evento
 import es.uam.eps.multij.Jugador
 import es.uam.eps.multij.Tablero

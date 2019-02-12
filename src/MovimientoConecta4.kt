@@ -1,16 +1,12 @@
 import es.uam.eps.multij.Movimiento
 
-public class MovimientoConecta4 () : Movimiento() {
+public class MovimientoConecta4 (var col: Int, var playerId: Int = -1) : Movimiento() {
 
-    var col : Int = -1
-    var playerId : Int = -1
 
-    fun MovimientoConecta4(col : Int, playerId: Int = -1){
+    init {
         this.col = col
         this.playerId = playerId
     }
-
-
 
     /**
      * genera una cadena que describe este movimiento

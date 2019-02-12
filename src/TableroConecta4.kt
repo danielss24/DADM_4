@@ -1,9 +1,8 @@
 import es.uam.eps.multij.Movimiento
 import es.uam.eps.multij.Tablero
-import java.util.ArrayList
 import MovimientoConecta4
 
-class TableroConecta4(var name: String): Tablero() {
+class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
 
     var tablero = ArrayList<ArrayList<Int>>()
 
@@ -11,8 +10,10 @@ class TableroConecta4(var name: String): Tablero() {
     val NUM_FIL = 6
     val IS_EMPTY = -1
 
-    fun Tablero(){
-        TODO("tablero to cero")
+    init {
+        this.name = name
+        this.turno = (0..1).random()
+        this.estado = EN_CURSO
     }
 
     override fun esValido(m: Movimiento?): Boolean {
@@ -28,7 +29,7 @@ class TableroConecta4(var name: String): Tablero() {
     }
 
     override fun movimientosValidos(): ArrayList<Movimiento> {
-        var MovimientosValidos = ArrayList<Movimiento>();
+        var MovimientosValidos = ArrayList<Movimiento>()
         for(col in 1..7){
             if (isFull(col) == false){
                 MovimientosValidos.add(MovimientoConecta4(col))
@@ -65,7 +66,7 @@ class TableroConecta4(var name: String): Tablero() {
     }
 
     override fun tableroToString(): String {
-        var tableroString = ""
+        var tableroString = String()
         for (fil in NUM_FIL..1){
             for (col in 1..NUM_COL){
                 tableroString += (" " + tablero[col][fil])
@@ -95,5 +96,7 @@ class TableroConecta4(var name: String): Tablero() {
         }
         return -1
     }
+
+
 
 }
