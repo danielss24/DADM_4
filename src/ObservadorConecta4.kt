@@ -10,9 +10,18 @@ class ObservadorConecta4
             Evento.EVENTO_CAMBIO -> {
 
             }
+            Evento.EVENTO_TURNO ->{
+
+            }
+            Evento.EVENTO_CONFIRMA -> {
+
+            }
             Evento.EVENTO_ERROR -> {
                 println(evento.descripcion)
                 evento.partida.continuar()
+            }
+            Evento.EVENTO_FIN -> {
+
             }
         }
     }
