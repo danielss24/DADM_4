@@ -16,11 +16,12 @@ class JugadorConecta4
             }
             Evento.EVENTO_CONFIRMA -> {
                 // este jugador confirma al azar
+                //TODO a lo mejor habría que pòner un finally en las exception para hacer algo siempre y que no se cuelgue
                 try {
                     evento.partida.confirmaAccion(
                             this, evento.causa, Math.random() > .5)
                 } catch (e: Exception) {
-
+                    //throw ExcepcionJuego("Error en la confirmación de la acción")
                 }
             }
             Evento.EVENTO_TURNO -> {
@@ -31,7 +32,7 @@ class JugadorConecta4
                     evento.partida.realizaAccion(AccionMover(
                             this, t.movimientosValidos()[r]))
                 } catch (e: Exception) {
-
+                    //throw ExcepcionJuego("Error en el cambio de turno")
                 }
 
             }

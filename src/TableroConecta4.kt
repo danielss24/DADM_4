@@ -14,6 +14,10 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
         this.name = name
         this.turno = (0..1).random()
         this.estado = EN_CURSO
+        //Está inicialización del tablero habría que mirarsela
+        this.tablero = arrayListOf(arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1),
+                arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1),
+                arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1))
     }
 
     override fun esValido(m: Movimiento?): Boolean {
@@ -81,7 +85,9 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
     }
 
     fun isFull(columna: Int): Boolean{
-        if (tablero[columna][6]!=0){
+        //Lo he cambiaod de 0 a -1 porque 0 era jugador 1 y 1 jugadopr dos ahora
+        //Also cambiado que aquí iban -1 porque contamos desde 0
+        if (tablero[columna-1][NUM_FIL-1]!=-1){
             return true
         } else {
             return false
