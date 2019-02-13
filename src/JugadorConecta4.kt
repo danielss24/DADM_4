@@ -1,5 +1,6 @@
 package es.uam.eps.multij
 import TableroConecta4
+import MovimientoConecta4
 
 /**
  *
@@ -15,24 +16,24 @@ class JugadorConecta4
                 return
             }
             Evento.EVENTO_CONFIRMA -> {
-                // este jugador confirma al azar
                 //TODO a lo mejor habría que pòner un finally en las exception para hacer algo siempre y que no se cuelgue
                 try {
                     evento.partida.confirmaAccion(
                             this, evento.causa, Math.random() > .5)
                 } catch (e: Exception) {
-                    //throw ExcepcionJuego("Error en la confirmación de la acción")
+                    throw ExcepcionJuego("Error en la confirmación de la acción")
                 }
             }
             Evento.EVENTO_TURNO -> {
-                // jugar al azar, que gran idea
                 val t = evento.partida.tablero
-                print("Elige la columna:\n")
+                print("\n Elige columna ${evento.partida.getJugador(evento.partida.tablero.turno).nombre}: \n")
                 val r = readLine()!!.toInt()
+                val movimientoJugador = MovimientoConecta4(r)
+                //TODO comprobare biewn el último movimiento
                 try {
-                    evento.partida.realizaAccion(AccionMover(this, t.movimientosValidos()[r]))
+                    evento.partida.realizaAccion(AccionMover(this, movimientoJugador))
                 } catch (e: Exception) {
-                    //throw ExcepcionJuego("Error en el cambio de turno")
+                    throw ExcepcionJuego("Error en al elegir la columna")
                 }
 
             }

@@ -28,6 +28,7 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
                 return true
             }
         }
+        TODO("Exception de no es movimientoConecta4")
         return false
     }
 
@@ -84,7 +85,7 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
     override fun tableroToString(): String {
         var tableroString = String()
         var input = " "
-        tableroString += "\n ---------------------\n"
+        tableroString += "\t--------------------------\n"
         for (fil in (NUM_FIL-1) downTo 0){
             for (col in 0..(NUM_COL-1)){
                 if (tablero[col][fil] == -1){
@@ -92,12 +93,12 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
                 } else {
                     input = tablero[col][fil].toString()
                 }
-                tableroString += (" " + input)
+                tableroString += ("\t" + input)
             }
             tableroString += " \n"
         }
-        tableroString += " ---------------------\n"
-        tableroString += "  0  1  2  3  4  5  6 \n"
+        tableroString += "\t--------------------------\n"
+        tableroString += "\t0\t1\t2\t3\t4\t5\t6 \n"
         return tableroString
     }
 
