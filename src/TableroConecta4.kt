@@ -34,7 +34,7 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
 
     override fun movimientosValidos(): ArrayList<Movimiento> {
         var MovimientosValidos = ArrayList<Movimiento>()
-        for(col in 1..7){
+        for(col in 0..6){
             if (isFull(col) == false){
                 MovimientosValidos.add(MovimientoConecta4(col))
             }
@@ -47,6 +47,7 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
             if (esValido(m)==true){
                 tablero[m.col][getFreePos(m.col)] = this.turno//m.playerId
                 this.cambiaTurno()
+                this.ultimoMovimiento = m
 
             } else {
                 println("Error - Movimiento no valido")
@@ -74,7 +75,7 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
     override fun tableroToString(): String {
         var tableroString = String()
         var input = " "
-        tableroString += " ---------------------\n"
+        tableroString += "\t--------------------------\n"
         for (fil in (NUM_FIL-1) downTo 0){
             for (col in 0..(NUM_COL-1)){
                 if (tablero[col][fil] == -1){
@@ -82,12 +83,12 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
                 } else {
                     input = tablero[col][fil].toString()
                 }
-                tableroString += (" " + input)
+                tableroString += ("\t" + input)
             }
             tableroString += " \n"
         }
-        tableroString += " ---------------------\n"
-        tableroString += "  0  1  2  3  4  5  6 \n"
+        tableroString += "\t--------------------------\n"
+        tableroString += "\t0\t1\t2\t3\t4\t5\t6 \n"
         return tableroString
     }
 
@@ -98,7 +99,7 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
     fun isFull(columna: Int): Boolean{
         //Lo he cambiaod de 0 a -1 porque 0 era jugador 1 y 1 jugadopr dos ahora
         //Also cambiado que aquí iban -1 porque contamos desde 0
-        if (tablero[columna-1][NUM_FIL-1]!=-1){
+        if (tablero[columna][NUM_FIL-1]!=-1){
             return true
         } else {
             return false
@@ -113,7 +114,5 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
         }
         return -1
     }
-
-
 
 }
