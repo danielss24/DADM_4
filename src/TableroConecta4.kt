@@ -14,6 +14,10 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
         this.name = name
         this.turno = (0..1).random()
         this.estado = EN_CURSO
+        //Está inicialización del tablero habría que mirarsela
+        this.tablero = arrayListOf(arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1),
+                arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1),
+                arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1))
     }
 
     override fun esValido(m: Movimiento?): Boolean {
@@ -41,7 +45,9 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
     override fun mueve(m: Movimiento?) {
         if (m is MovimientoConecta4){
             if (esValido(m)==true){
-                tablero[m.col][getFreePos(m.col)] = m.playerId
+                tablero[m.col][getFreePos(m.col)] = this.turno//m.playerId
+                this.cambiaTurno()
+
             } else {
                 println("Error - Movimiento no valido")
             }
@@ -67,12 +73,21 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
 
     override fun tableroToString(): String {
         var tableroString = String()
-        for (fil in NUM_FIL..1){
-            for (col in 1..NUM_COL){
-                tableroString += (" " + tablero[col][fil])
+        var input = " "
+        tableroString += " ---------------------\n"
+        for (fil in (NUM_FIL-1) downTo 0){
+            for (col in 0..(NUM_COL-1)){
+                if (tablero[col][fil] == -1){
+                    input = " "
+                } else {
+                    input = tablero[col][fil].toString()
+                }
+                tableroString += (" " + input)
             }
             tableroString += " \n"
         }
+        tableroString += " ---------------------\n"
+        tableroString += "  0  1  2  3  4  5  6 \n"
         return tableroString
     }
 
@@ -81,7 +96,9 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
     }
 
     fun isFull(columna: Int): Boolean{
-        if (tablero[columna][6]!=0){
+        //Lo he cambiaod de 0 a -1 porque 0 era jugador 1 y 1 jugadopr dos ahora
+        //Also cambiado que aquí iban -1 porque contamos desde 0
+        if (tablero[columna-1][NUM_FIL-1]!=-1){
             return true
         } else {
             return false
@@ -89,7 +106,7 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
     }
 
     fun getFreePos(columna: Int): Int{
-        for (fil in 1..NUM_FIL){
+        for (fil in 0..(NUM_FIL-1)){
             if (tablero[columna][fil]== IS_EMPTY ){
                 return fil
             }
