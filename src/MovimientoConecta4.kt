@@ -1,10 +1,11 @@
 import es.uam.eps.multij.Movimiento
 
-public class MovimientoConecta4 (var col: Int) : Movimiento() {
+public class MovimientoConecta4 (var col: Int, var playerId: Int = -1) : Movimiento() {
 
 
     init {
         this.col = col
+        this.playerId = playerId
     }
 
     /**

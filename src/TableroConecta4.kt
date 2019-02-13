@@ -48,7 +48,17 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
                 tablero[m.col][getFreePos(m.col)] = this.turno//m.playerId
                 this.cambiaTurno()
                 this.ultimoMovimiento = m
+                when (comprobacionConecta4()) {
+                    EN_CURSO -> {
 
+                    }
+                    FINALIZADA -> {
+
+                    }
+                    TABLAS -> {
+
+                    }
+                }
             } else {
                 println("Error - Movimiento no valido")
             }
@@ -115,4 +125,87 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
         return -1
     }
 
+    fun comprobacionConecta4(): Int {
+        this.estado = EN_CURSO
+        if (FINALIZADA == comprobacionConecta4_Horizontal()) {
+            this.estado = FINALIZADA
+        } else if (FINALIZADA == comprobacionConecta4_Vertical()) {
+            this.estado = FINALIZADA
+        } else if (FINALIZADA == comprobacionConecta4_DiagonalSup()) {
+            this.estado = FINALIZADA
+        } else if (FINALIZADA == comprobacionConecta4_DiagonalInf()) {
+            this.estado = FINALIZADA
+        } else if (this.movimientosValidos().size == 0) {
+            this.estado = TABLAS
+        }
+        return this.estado
+    }
+
+    fun comprobacionConecta4_Horizontal(): Int {
+        var col = 0
+        var fil = 0
+        while (col < NUM_COL - 3) {
+            while (fil < NUM_FIL) {
+                if (tablero[col][fil] == 1 && tablero[col][fil + 1] == 1 && tablero[col][fil + 2] == 1 && tablero[col][fil + 3] == 1) {
+                    return FINALIZADA
+                } else if (tablero[col][fil] == 0 && tablero[col][fil + 1] == 0 && tablero[col][fil + 2] == 0 && tablero[col][fil + 3] == 0) {
+                    return FINALIZADA
+                }
+                fil++
+            }
+            col++
+        }
+        return EN_CURSO
+    }
+
+    fun comprobacionConecta4_Vertical(): Int {
+        var col = 0
+        var fil = 0
+        while (fil < NUM_FIL) {
+            while (col < NUM_COL) {
+                if (tablero[col][fil] == 1 && tablero[col + 1][fil] == 1 && tablero[col + 2][fil] == 1 && tablero[col + 3][fil] == 1) {
+                    return FINALIZADA
+                } else if (tablero[col][fil] == 20 && tablero[col + 1][fil] == 0 && tablero[col + 2][fil] == 0 && tablero[col + 3][fil] == 0) {
+                    return FINALIZADA
+                }
+                col++
+            }
+            fil++
+        }
+        return EN_CURSO
+    }
+
+    fun comprobacionConecta4_DiagonalSup(): Int {
+        var col = 0
+        var fil = 0
+        while (col < NUM_COL - 3) {
+            while (fil < NUM_FIL - 3) {
+                if (tablero[col][fil] == 1 && tablero[col + 1][fil + 1] == 1 && tablero[col + 2][fil + 2] == 1 && tablero[col + 3][fil + 3] == 1) {
+                    return FINALIZADA
+                } else if (tablero[col][fil] == 0 && tablero[col + 1][fil + 1] == 0 && tablero[col + 2][fil + 2] == 0 && tablero[col + 3][fil + 3] == 0) {
+                    return FINALIZADA
+                }
+                fil++
+            }
+            col++
+        }
+        return EN_CURSO
+    }
+
+    fun comprobacionConecta4_DiagonalInf(): Int {
+        var col = 0
+        while (col < NUM_COL - 3) {
+            var fil = 5
+            while (fil > NUM_FIL - 3) {
+                if (tablero[col][fil] == 1 && tablero[col + 1][fil - 1] == 1 && tablero[col + 2][fil - 2] == 1 && tablero[col + 3][fil - 3] == 1) {
+                    return FINALIZADA
+                } else if (tablero[col][fil] == 0 && tablero[col + 1][fil - 1] == 0 && tablero[col + 2][fil - 2] == 0 && tablero[col + 3][fil - 3] == 0) {
+                    return FINALIZADA
+                }
+                fil--
+            }
+            col++
+        }
+        return EN_CURSO
+    }
 }
