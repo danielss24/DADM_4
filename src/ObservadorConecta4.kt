@@ -11,11 +11,10 @@ class ObservadorConecta4
     override fun onCambioEnPartida(evento: Evento){
         when(evento?.tipo){
             Evento.EVENTO_CAMBIO, Evento.EVENTO_FIN -> {
-                print("Turno: ${evento.partida.tablero.numJugadas} \n")
-                print("Mueve el jugador ${evento.partida.getJugador(evento.partida.tablero.turno).nombre} \n")
+                //print("\n\nTurno: ${evento.partida.tablero.numJugadas} \n")
+                //print("Mueve el jugador ${evento.partida.getJugador(evento.partida.tablero.turno).nombre} \n")
                 print(evento.partida.tablero)
                 print(evento.descripcion)
-
             }
             Evento.EVENTO_ERROR -> {
                 print(evento.partida.tablero)
