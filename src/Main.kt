@@ -6,8 +6,46 @@ import es.uam.eps.multij.Partida
 import TableroConecta4
 fun main(args: Array<String>) {
     val jugadores = arrayListOf<Jugador>()
-    jugadores += JugadorConecta4("Humano1")
-    jugadores += JugadorConecta4("Humano2")
+
+    println("Bienvenido a 4 en raya")
+    println("En cualquier momento de la partida introduzca un 8 para guardar partida, 9 para salir sin guardar.")
+    println("\t(1)- Un solo jugador")
+    println("\t(2)- Multijugador")
+    println("\t(3)- Cargar ultima partida")
+    println("\t(4)- Salir")
+    println("\t(5)- Todo PC")
+    print("Modo:")
+    val modo = readLine()!!.toInt()
+
+    when (modo) {
+        1 -> {
+            println("Introduzca su nombre:")
+            var nombreJg1 = readLine().toString()
+            jugadores += JugadorConecta4(nombreJg1)
+            jugadores += JugadorAleatorio("Maquina")
+        }
+        2 -> {
+            println("Introduzca su nombre jugador1:")
+            var nombreJg1 = readLine()!!.toString()
+            jugadores += JugadorConecta4(nombreJg1)
+            println("Introduzca su nombre jugador2:")
+            nombreJg1 = readLine()!!.toString()
+            jugadores += JugadorConecta4(nombreJg1)
+
+        }
+        3 -> {
+
+        }
+        4 -> {
+            return
+        }
+        5 -> {
+            jugadores += JugadorAleatorio("Aleatorio1")
+            jugadores += JugadorAleatorio("Aleatorio2")
+
+        }
+    }
+
     val partida = Partida(TableroConecta4(), jugadores)
     partida.addObservador(ObservadorConecta4())
     partida.comenzar()

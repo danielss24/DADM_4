@@ -46,11 +46,10 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
         if (m is MovimientoConecta4){
             if (esValido(m)==true){
                 tablero[m.col][getFreePos(m.col)] = this.turno//m.playerId
-                this.cambiaTurno()
-                this.ultimoMovimiento = m
                 when (comprobacionConecta4()) {
                     EN_CURSO -> {
-
+                        this.cambiaTurno()
+                        this.ultimoMovimiento = m
                     }
                     FINALIZADA -> {
 
@@ -85,7 +84,7 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
     override fun tableroToString(): String {
         var tableroString = String()
         var input = " "
-        tableroString += "\t--------------------------\n"
+        tableroString += "\n\t--------------------------\n"
         for (fil in (NUM_FIL-1) downTo 0){
             for (col in 0..(NUM_COL-1)){
                 if (tablero[col][fil] == -1){
