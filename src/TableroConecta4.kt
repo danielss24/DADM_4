@@ -142,35 +142,37 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
     }
 
     fun comprobacionConecta4_Horizontal(): Int {
-        var col = 0
+
         var fil = 0
-        while (col < NUM_COL - 3) {
-            while (fil < NUM_FIL) {
-                if (tablero[col][fil] == 1 && tablero[col][fil + 1] == 1 && tablero[col][fil + 2] == 1 && tablero[col][fil + 3] == 1) {
+        while (fil < NUM_FIL ) {
+            var col = 0
+            while (col < NUM_COL - 3) {
+                if (tablero[col][fil] == 1 && tablero[col+1][fil] == 1 && tablero[col+2][fil] == 1 && tablero[col+3][fil] == 1) {
                     return FINALIZADA
-                } else if (tablero[col][fil] == 0 && tablero[col][fil + 1] == 0 && tablero[col][fil + 2] == 0 && tablero[col][fil + 3] == 0) {
+                } else if (tablero[col][fil] == 0 && tablero[col+1][fil] == 0 && tablero[col+2][fil] == 0 && tablero[col+3][fil] == 0) {
                     return FINALIZADA
                 }
-                fil++
+                col++
             }
-            col++
+            fil++
         }
         return EN_CURSO
     }
 
     fun comprobacionConecta4_Vertical(): Int {
         var col = 0
-        var fil = 0
-        while (fil < NUM_FIL) {
-            while (col < NUM_COL) {
-                if (tablero[col][fil] == 1 && tablero[col + 1][fil] == 1 && tablero[col + 2][fil] == 1 && tablero[col + 3][fil] == 1) {
+
+        while (col < NUM_COL) {
+            var fil = 0
+            while (fil < NUM_FIL-2) {
+                if (tablero[col][fil] == 1 && tablero[col][fil+1] == 1 && tablero[col][fil+2] == 1 && tablero[col][fil+3] == 1) {
                     return FINALIZADA
-                } else if (tablero[col][fil] == 20 && tablero[col + 1][fil] == 0 && tablero[col + 2][fil] == 0 && tablero[col + 3][fil] == 0) {
+                } else if (tablero[col][fil] == 0 && tablero[col][fil+1] == 0 && tablero[col][fil+2] == 0 && tablero[col][fil+3] == 0) {
                     return FINALIZADA
                 }
-                col++
+                fil++
             }
-            fil++
+            col++
         }
         return EN_CURSO
     }
