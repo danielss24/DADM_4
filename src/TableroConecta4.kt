@@ -218,11 +218,6 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
                         && tablero[col + 2][fil - 2] == 0 && tablero[col + 3][fil - 3] == 0) {
                     return FINALIZADA
                 }
-                print(tablero[col][fil])
-                print(tablero[col+1][fil-1])
-                print(tablero[col+2][fil-2])
-                print(tablero[col+3][fil-3])
-                println()
                 fil--
             }
             col++
