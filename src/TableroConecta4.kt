@@ -167,7 +167,7 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
         var fil = 0
         while (col < NUM_COL) {
             fil = 0
-            while (fil < NUM_FIL-2) {
+            while (fil < NUM_FIL-3) {
                 if (tablero[col][fil] == 1 && tablero[col][fil+1] == 1 && tablero[col][fil+2] == 1
                         && tablero[col][fil+3] == 1) {
                     return FINALIZADA
@@ -206,10 +206,9 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
     }
 
     fun comprobacionConecta4_DiagonalInf(): Int {
-        var col = 0
+        var col= 0
         var fil = 5
         while (col < NUM_COL - 3) {
-            col
             fil = 5
             while (fil > 2) {
                 if (tablero[col][fil] == 1 && tablero[col + 1][fil -1 ] == 1 &&
