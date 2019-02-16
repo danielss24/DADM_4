@@ -224,4 +224,23 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
         }
         return EN_CURSO
     }
+
+    fun imprimeTablero(): String {
+        var col = NUM_COL
+
+        var tableroString = ""
+        while (col>0) {
+            var fil = NUM_FIL
+            while (fil > 0) {
+                if (tablero[col-1][fil-1] == -1) {
+                    tableroString += "X"
+                } else {
+                    tableroString += tablero[col-1][fil-1].toString()
+                }
+                fil--
+            }
+            col--
+        }
+        return tableroString
+    }
 }
