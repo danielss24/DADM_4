@@ -1,6 +1,8 @@
 import es.uam.eps.multij.Movimiento
 import es.uam.eps.multij.Tablero
 import MovimientoConecta4
+import java.io.File
+import java.io.FileNotFoundException
 
 class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
 
@@ -44,22 +46,49 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
 
     override fun mueve(m: Movimiento?) {
         if (m is MovimientoConecta4){
-            if (esValido(m)==true){
-                tablero[m.col][getFreePos(m.col)] = this.turno//m.playerId
-                when (comprobacionConecta4()) {
-                    EN_CURSO -> {
-                        this.cambiaTurno()
-                        this.ultimoMovimiento = m
-                    }
-                    FINALIZADA -> {
-
-                    }
-                    TABLAS -> {
-
-                    }
+            if (m.col == 8){
+                println("Estos son las partidas guardadas, elige el nombre para guardar esta partida\n" +
+                        "Si ya existe, la partida se sobreecribirá.")
+                print("Nombre:")
+                val nombreFichero = readLine()!!.toString() + ".txt"
+                val path = File("./saves")
+                if (path.mkdirs()){
+                    println("Directory path was created successfully")
+                } else {
+                    println("Failed to create directory path")
                 }
+                val fichero = File(path, nombreFichero)
+                // now attach the OutputStream to the file object, instead of a String representation
+                try {
+                    fichero.writeText("Turno: ${this.turno}\n" + "Tablero: ${this.tablero}")
+                } catch (e: FileNotFoundException) {
+                    e.printStackTrace()
+                }
+                // have the object build the directory structure, if needed.
+
+                this.estado = FINALIZADA
+            } else if (m.col == 9){
+                this.estado = FINALIZADA
+                print("Hasta luego!")
             } else {
-                println("Error - Movimiento no valido")
+                if (esValido(m)==true){
+                    when (comprobacionConecta4()) {
+                        EN_CURSO -> {
+                            tablero[m.col][getFreePos(m.col)] = this.turno//m.playerId
+                            this.cambiaTurno()
+                            this.ultimoMovimiento = m
+                        }
+                        FINALIZADA -> {
+
+                        }
+                        TABLAS -> {
+
+                        }
+                    }
+
+                } else {
+                    println("Error - Movimiento no valido")
+                }
             }
         }
     }
