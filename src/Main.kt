@@ -4,6 +4,8 @@ import es.uam.eps.multij.JugadorAleatorio
 import es.uam.eps.multij.JugadorConecta4
 import es.uam.eps.multij.Partida
 import TableroConecta4
+import java.io.File
+
 fun main(args: Array<String>) {
     val jugadores = arrayListOf<Jugador>()
 
@@ -20,7 +22,7 @@ fun main(args: Array<String>) {
     when (modo) {
         1 -> {
             println("Introduzca su nombre:")
-            var nombreJg1 = readLine().toString()
+            val nombreJg1 = readLine()!!.toString()
             jugadores += JugadorConecta4(nombreJg1)
             jugadores += JugadorAleatorio("Maquina")
         }
@@ -34,6 +36,13 @@ fun main(args: Array<String>) {
 
         }
         3 -> {
+            val path = File("./saves")
+            println("Estos son las partidas guardadas, elige el nombre para cargar esa partida\n")
+            for (archivo in path.list()){
+                println("\t-> " + archivo)
+            }
+            print("Fichero:")
+            var fichero = readLine()!!.toString()
 
         }
         4 -> {

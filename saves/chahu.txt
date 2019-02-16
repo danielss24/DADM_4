@@ -1,7 +1,7 @@
 Turno: 0
-NumJugadas: 1
-TurnoActual: fsafas
-Jugador1: fsafas
+NumJugadas: 9
+TurnoActual: 2fsafa
+Jugador1: 2fsafa
 Jugador2: Maquina
 Tablero: 
 	--------------------------
@@ -9,7 +9,7 @@ Tablero:
 	 	 	 	 	 	 	  
 	 	 	 	 	 	 	  
 	 	 	 	 	 	 	  
-	 	 	 	 	 	 	  
-	 	1	 	 	 	 	  
+	 	1	1	0	1	 	  
+	 	1	0	1	0	0	  
 	--------------------------
 	0	1	2	3	4	5	6 

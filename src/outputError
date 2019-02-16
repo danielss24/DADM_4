@@ -1,0 +1,95 @@
+"C:\Program Files\Java\jdk-11.0.2\bin\java.exe" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.3.4\lib\idea_rt.jar=64077:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.3.4\bin" -Dfile.encoding=UTF-8 -classpath "C:\Users\danie\CloudStation\EPS UNI\CUARTO\MOVILES\out\production\DADM_4;C:\Users\danie\.IdeaIC2018.3\config\plugins\Kotlin\kotlinc\lib\kotlin-stdlib.jar;C:\Users\danie\.IdeaIC2018.3\config\plugins\Kotlin\kotlinc\lib\kotlin-reflect.jar;C:\Users\danie\.IdeaIC2018.3\config\plugins\Kotlin\kotlinc\lib\kotlin-test.jar;C:\Users\danie\.IdeaIC2018.3\config\plugins\Kotlin\kotlinc\lib\kotlin-stdlib-jdk7.jar;C:\Users\danie\.IdeaIC2018.3\config\plugins\Kotlin\kotlinc\lib\kotlin-stdlib-jdk8.jar;C:\Users\danie\CloudStation\EPS UNI\CUARTO\MOVILES\lib\multijugador.jar" MainKt
+Bienvenido a 4 en raya
+En cualquier momento de la partida introduzca un 8 para guardar partida, 9 para salir sin guardar.
+	(1)- Un solo jugador
+	(2)- Multijugador
+	(3)- Cargar ultima partida
+	(4)- Salir
+	(5)- Todo PC
+Modo:1
+Introduzca su nombre:
+fsafasfas
+
+	--------------------------
+
+
+
+
+
+
+	--------------------------
+	0	1	2	3	4	5	6
+La partida va a comenzar
+ Elige columna fsafasfas:
+2
+
+	--------------------------
+
+
+
+
+
+	 	 	0
+	--------------------------
+	0	1	2	3	4	5	6
+fsafasfas ha jugado 2
+	--------------------------
+
+
+
+
+
+	 	1	0
+	--------------------------
+	0	1	2	3	4	5	6
+Maquina ha jugado 1
+ Elige columna fsafasfas:
+3
+
+	--------------------------
+
+
+
+
+
+	 	1	0	0
+	--------------------------
+	0	1	2	3	4	5	6
+fsafasfas ha jugado 3
+	--------------------------
+
+
+
+
+	 	1
+	 	1	0	0
+	--------------------------
+	0	1	2	3	4	5	6
+Maquina ha jugado 1
+ Elige columna fsafasfas:
+3
+
+	--------------------------
+
+
+
+
+	 	1	 	0
+	 	1	0	0
+	--------------------------
+	0	1	2	3	4	5	6
+fsafasfas ha jugado 3
+	--------------------------
+
+
+
+
+	 	1	 	0
+	 	1	0	0	1
+	--------------------------
+	0	1	2	3	4	5	6
+Maquina ha jugado 4
+ Elige columna fsafasfas:
+
+
+Process finished with exit code 0
