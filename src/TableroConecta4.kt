@@ -16,7 +16,6 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
         this.name = name
         this.turno = (0..1).random()
         this.estado = EN_CURSO
-        //Está inicialización del tablero habría que mirarsela
         this.tablero = arrayListOf(arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1),
                 arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1),
                 arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1))
@@ -213,8 +212,8 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
 
     fun imprimeTablero(): String {
         var col = NUM_COL
-
         var tableroString = ""
+
         while (col>0) {
             var fil = NUM_FIL
             while (fil > 0) {
@@ -230,31 +229,48 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
         return tableroString
     }
 
-    fun cargaTablero(tablero: ArrayList<ArrayList<Int>>){
-        this.tablero = tablero
-    }
 
     override fun stringToTablero(cadena: String?) {
-        cadena!!.toList()
-        var iterator = 0
-        var col = NUM_COL
+        //TODO futuro, poder cargar jugadores desde aquí
+        if(cadena is String) {
+            var iteradorFichero = cadena.split("\n")
 
-        while (col > 0 ){
-            var fil = NUM_FIL
-            while (fil > 0){
-                if(cadena[iterator] == '1'){
-                    tablero[col-1][fil-1] = 1
-                }else if(cadena[iterator] == '0'){
-                    tablero[col-1][fil-1] = 0
-                }else{
-                    tablero[col-1][fil-1] = -1
-                }
-                iterator++
-                fil--
-            }
-            col--
+            //seteando turno
+            var turnoActual = iteradorFichero[0].split(":")[1].trim()
+            turno = turnoActual.toInt()
+
+            //seteando Num jugadas
+            numJugadas = iteradorFichero[1].split(":")[1].trim().toInt()
+
+            //seteando tablero
+            this.cargaTablero(iteradorFichero[5].split(":")[1].trim())
 
         }
     }
+
+    fun cargaTablero(cadena: String?){
+        if(cadena is String){
+            cadena!!.toList()
+            var iterator = 0
+            var col = NUM_COL
+            while (col > 0 ){
+                var fil = NUM_FIL
+                while (fil > 0){
+                    if(cadena[iterator] == '1'){
+                        tablero[col-1][fil-1] = 1
+                    }else if(cadena[iterator] == '0'){
+                        tablero[col-1][fil-1] = 0
+                    }else{
+                        tablero[col-1][fil-1] = -1
+                    }
+                    iterator++
+                    fil--
+                }
+                col--
+            }
+        }
+
+    }
+
 
 }
