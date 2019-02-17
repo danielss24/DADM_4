@@ -58,11 +58,11 @@ constructor(private val nombre: String) : Jugador {
                                 var tableroArray = tableroTMP.imprimeTablero()
                                 fichero.writeText("Turno: ${evento.partida.tablero.turno}\n" +
                                         "NumJugadas: ${evento.partida.tablero.numJugadas}\n" +
-                                        "TurnoActual: " + TurnoActual + "\n" +
+                                        "Mueve: " + TurnoActual + "\n" +
                                         "Jugador1: ${evento.partida.getJugador(0).nombre}\n" +
                                         "Jugador2: ${evento.partida.getJugador(1).nombre}\n" +
                                         "Tablero String: ${tableroArray}\n" +
-                                        "Tablero: ${evento.partida.tablero}")
+                                        "Tablero Grafico: ${evento.partida.tablero}")
                             }
                         } catch (e: FileNotFoundException) {
                             e.printStackTrace()

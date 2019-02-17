@@ -8,6 +8,8 @@ import java.io.File
 
 fun main(args: Array<String>) {
     val jugadores = arrayListOf<Jugador>()
+    var stringTablero = ""
+    var flagCargar = 0
 
     println("Bienvenido a 4 en raya")
     println("En cualquier momento de la partida introduzca un 8 para guardar partida, 9 para salir sin guardar.")
@@ -36,6 +38,7 @@ fun main(args: Array<String>) {
 
         }
         3 -> {
+            flagCargar = 1
             val path = File("./saves")
             println("Estos son las partidas guardadas, elige el nombre para cargar esa partida\n")
             for (archivo in path.list()){
@@ -43,6 +46,37 @@ fun main(args: Array<String>) {
             }
             print("Fichero:")
             var fichero = readLine()!!.toString()
+            File("saves/$fichero.txt").forEachLine {
+                val linea = it
+                if(it.contains("Turno")){
+                    println("He pillado bien turno")
+                }else if(it.contains("NumJugadas")){
+                    println(it)
+                }else if((it.contains("Mueve"))){
+
+                }else if((it.contains("Jugador1"))){
+                    var splited = linea.split(":")
+                    var nombreJg1 = splited[1].trim()
+                    jugadores += JugadorConecta4(nombreJg1)
+
+                }else if((it.contains("Jugador2"))){
+                    var splited = linea.split(":")
+                    var nombreJg1 = splited[1].trim()
+                    if(nombreJg1 == "Maquina"){
+                        jugadores += JugadorAleatorio(nombreJg1)
+                    }else{
+                        jugadores += JugadorConecta4(nombreJg1)
+                    }
+
+                }else if((it.contains("Tablero String"))){
+                    var splited = linea.split(":")
+                    stringTablero = splited[1].trim()
+
+
+                }else if((it.contains("Tablero Grafico"))){
+
+                }
+            }
 
         }
         4 -> {
@@ -57,6 +91,9 @@ fun main(args: Array<String>) {
 
     val partida = Partida(TableroConecta4(), jugadores)
     partida.addObservador(ObservadorConecta4())
+    if(flagCargar == 1){
+        partida.tablero.stringToTablero(stringTablero)
+    }
     partida.comenzar()
 
 }

@@ -22,6 +22,7 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
                 arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1))
     }
 
+
     override fun esValido(m: Movimiento?): Boolean {
         if (m is MovimientoConecta4) {
             if (isFull(m.col) == true) {
@@ -66,22 +67,7 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
 
         }
     }
-    override fun stringToTablero(cadena: String?) {
-        if (cadena is String) {
-            val filas = cadena.split("\n")
-            var filaIndex = 0
-            var columnaIndex = 0
-            for (fil in filas){
-                var pos = fil.split(" ")
-                for (col in pos) {
-                    tablero[columnaIndex][filaIndex] = col.toInt()
-                    columnaIndex +=1
-                }
-                columnaIndex = 0
-                filaIndex +=1
-            }
-        }
-    }
+
 
     override fun tableroToString(): String {
         var tableroString = String()
@@ -243,4 +229,32 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
         }
         return tableroString
     }
+
+    fun cargaTablero(tablero: ArrayList<ArrayList<Int>>){
+        this.tablero = tablero
+    }
+
+    override fun stringToTablero(cadena: String?) {
+        cadena!!.toList()
+        var iterator = 0
+        var col = NUM_COL
+
+        while (col > 0 ){
+            var fil = NUM_FIL
+            while (fil > 0){
+                if(cadena[iterator] == '1'){
+                    tablero[col-1][fil-1] = 1
+                }else if(cadena[iterator] == '0'){
+                    tablero[col-1][fil-1] = 0
+                }else{
+                    tablero[col-1][fil-1] = -1
+                }
+                iterator++
+                fil--
+            }
+            col--
+
+        }
+    }
+
 }
