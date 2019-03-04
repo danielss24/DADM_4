@@ -8,4 +8,41 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="casillaTablero">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/casilla_vacia_24dp</item>
+    </style>
+
+    <style name="filaTablero">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <ImageButton style="@style/casillaTablero"/>
+        <ImageButton style="@style/casillaTablero"/>
+        <ImageButton style="@style/casillaTablero"/>
+        <ImageButton style="@style/casillaTablero"/>
+        <ImageButton style="@style/casillaTablero"/>
+        <ImageButton style="@style/casillaTablero"/>
+        <ImageButton style="@style/casillaTablero"/>
+    </style>
+
+    <style name="tablero">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_centerVertical">true</item>
+
+        <LinearLayout style="@style/filaTablero"></LinearLayout>
+        <LinearLayout style="@style/filaTablero"></LinearLayout>
+        <LinearLayout style="@style/filaTablero"></LinearLayout>
+        <LinearLayout style="@style/filaTablero"></LinearLayout>
+        <LinearLayout style="@style/filaTablero"></LinearLayout>
+        <LinearLayout style="@style/filaTablero"></LinearLayout>
+
+    </style>
+
+
+
+
 </resources>

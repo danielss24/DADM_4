@@ -36,44 +36,12 @@
             android:layout_centerVertical="true"
     >
             <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/casilla_vacia_24dp" />
-                <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/casilla_vacia_24dp" />
-                <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/casilla_vacia_24dp" />
-                <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/casilla_vacia_24dp" />
-                <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/casilla_vacia_24dp" />
-                <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/casilla_vacia_24dp" />
-                <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/casilla_vacia_24dp" />
+                    style="@style/filaTablero">
             </LinearLayout>
             <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-                <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/casilla_vacia_24dp" />
+                <ImageButton style="@style/casillaTablero"/>
                 <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
