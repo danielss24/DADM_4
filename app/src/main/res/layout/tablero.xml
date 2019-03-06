@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <LinearLayout style="@style/tablero" android:id="@+id/linearLayout">
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c11"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c12"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c13"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c14"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c15"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c16"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c17"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c21"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c22"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c23"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c24"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c25"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c26"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c27"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c31"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c32"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c33"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c34"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c35"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c36"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c37"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c41"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c42"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c43"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c44"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c45"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c46"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c47"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c51"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c52"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c53"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c54"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c55"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c56"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c57"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c61"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c62"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c63"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c64"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c65"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c66"/>
+            <ImageButton style="@style/casillaTablero"
+                         android:id="@+id/c67"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
