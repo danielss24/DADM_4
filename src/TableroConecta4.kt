@@ -6,19 +6,24 @@ import java.io.FileNotFoundException
 
 class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
 
-    var tablero = ArrayList<ArrayList<Int>>()
+
 
     val NUM_COL = 7
     val NUM_FIL = 6
     val IS_EMPTY = -1
 
+    var tablero = Array(NUM_COL){ arrayOfNulls<Int>(NUM_FIL) }
+
     init {
         this.name = name
         this.turno = (0..1).random()
         this.estado = EN_CURSO
-        this.tablero = arrayListOf(arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1),
-                arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1),
-                arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1))
+
+        for (col in 0..(NUM_COL-1)){
+            for(fil in 0..(NUM_FIL-1)){
+                this.tablero[col][fil] = IS_EMPTY
+            }
+        }
     }
 
 
