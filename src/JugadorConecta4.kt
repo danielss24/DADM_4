@@ -27,6 +27,7 @@ constructor(private val nombre: String) : Jugador {
                 }
             }
             Evento.EVENTO_TURNO -> {
+                println("\n Introduzca un 8 para guardar partida, 9 para salir sin guardar.")
                 println("\n Elige columna ${evento.partida.getJugador(evento.partida.tablero.turno).nombre}: ")
                 var flagOpcionCorrecta = 0
                 var opcion = 0
@@ -39,6 +40,7 @@ constructor(private val nombre: String) : Jugador {
                         }else{
                             println("<<$opcion>> no se encuentra entre las opciones correctas de ejecuión.")
                             println("Estado del tablero: ${evento.partida.tablero.tableroToString()}")
+                            println("Introduzca un 8 para guardar partida, 9 para salir sin guardar.")
                             println("Elige columna " +
                                     "${evento.partida.getJugador(evento.partida.tablero.turno).nombre}: ")
                         }
@@ -46,6 +48,7 @@ constructor(private val nombre: String) : Jugador {
                     }catch (e: java.lang.Exception){
                         println("La opción introducida no es correcta.")
                         println("Estado del tablero: ${evento.partida.tablero.tableroToString()}")
+                        println("Introduzca un 8 para guardar partida, 9 para salir sin guardar.")
                         println("Elige columna " +
                                 "${evento.partida.getJugador(evento.partida.tablero.turno).nombre}: ")
                     }
