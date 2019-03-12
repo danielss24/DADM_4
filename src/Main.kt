@@ -78,7 +78,6 @@ fun main(args: Array<String>) {
                     }else{
                         jugadores += JugadorConecta4(nombreJg1)
                     }
-
                 }
             }
         }
