@@ -4,7 +4,12 @@ import es.uam.eps.multij.JugadorAleatorio
 import es.uam.eps.multij.JugadorConecta4
 import es.uam.eps.multij.Partida
 import TableroConecta4
+import java.awt.Menu
 import java.io.File
+import java.lang.Exception
+
+val MENU_STRING = "\t(1)- Un solo jugador\n\t(2)- Multijugador\n\t" +
+        "(3)- Cargar ultima partida\n\t(4)- Salir\n\t(5)- Todo PC\nModo:"
 
 fun main(args: Array<String>) {
     val jugadores = arrayListOf<Jugador>()
@@ -14,29 +19,22 @@ fun main(args: Array<String>) {
 
     println("Bienvenido a 4 en raya")
     println("En cualquier momento de la partida introduzca un 8 para guardar partida, 9 para salir sin guardar.")
-    println("\t(1)- Un solo jugador")
-    println("\t(2)- Multijugador")
-    println("\t(3)- Cargar ultima partida")
-    println("\t(4)- Salir")
-    println("\t(5)- Todo PC")
-    print("Modo:")
-
-
+    println("$MENU_STRING")
 
     while(flagModo==0){
-        modo = readLine()!!.toInt()
-
-        if(modo in 1..5){
-            flagModo=1
-        }else{
-            println("<<$modo>> no se encuentra entre las opciones correctas de ejecuión.")
+        try {
+            modo = readLine()!!.toInt()
+            if(modo in 1..5){
+                flagModo=1
+            }else{
+                println("<<$modo>> no se encuentra entre las opciones correctas de ejecuión.")
+                println("Seleccione un modo")
+                println("$MENU_STRING")
+            }
+        }catch (e: Exception){
+            println("La opción introducida no es correcta.")
             println("Seleccione un modo")
-            println("\t(1)- Un solo jugador")
-            println("\t(2)- Multijugador")
-            println("\t(3)- Cargar ultima partida")
-            println("\t(4)- Salir")
-            println("\t(5)- Todo PC")
-            print("Modo:")
+            println("$MENU_STRING")
         }
     }
 
