@@ -54,16 +54,34 @@ fun main(args: Array<String>) {
         }
         3 -> {
             val path = File("./saves")
-            println("Estos son las partidas guardadas, elige el nombre para cargar esa partida\n")
+            println("Estos son las partidas guardadas, elige el nombre para cargar esa partida")
             for (archivo in path.list()){
                 println("\t-> $archivo")
             }
-            print("Fichero:")
-            val fichero = readLine()!!.toString()
-            val ficheroString = File("saves/$fichero.txt").readText()
+            print("Fichero a cargar:")
+            var fichero = readLine()!!.toString()
+            var ficheroString = ""
+            var flagFichero = 0
+            var fileToLoad =  File("src/Main.kt")
+
+            while (flagFichero==0){
+                if(File("saves/$fichero.txt").exists()){
+                    ficheroString = File("saves/$fichero.txt").readText()
+                    fileToLoad = File("saves/$fichero.txt")
+                    flagFichero = 1
+                }else if (File("saves/$fichero").exists()){
+                    ficheroString = File("saves/$fichero").readText()
+                    fileToLoad = File("saves/$fichero")
+                    flagFichero = 1
+                }else{
+                    println("Fichero no correcto")
+                    print("Introduzca el fichero a fichero a cargar:")
+                    fichero = readLine()!!.toString()
+                }
+            }
 
             tableroMain.stringToTablero(ficheroString)
-            File("saves/$fichero.txt").forEachLine {
+            fileToLoad.forEachLine {
                 val linea = it
                 if((it.contains("Jugador1"))){
                     val splited = linea.split(":")
