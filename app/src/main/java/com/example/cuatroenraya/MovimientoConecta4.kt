@@ -1,3 +1,5 @@
+package com.example.cuatroenraya
+
 import es.uam.eps.multij.Movimiento
 
 public class MovimientoConecta4(var col: Int) : Movimiento() {

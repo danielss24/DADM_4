@@ -1,6 +1,5 @@
-package es.uam.eps.multij
-import TableroConecta4
-import MovimientoConecta4
+package com.example.cuatroenraya
+import es.uam.eps.multij.*
 import java.io.File
 import java.io.FileNotFoundException
 
@@ -67,9 +66,9 @@ constructor(private val nombre: String) : Jugador {
                         } catch (e: FileNotFoundException) {
                             e.printStackTrace()
                         }
-                        evento.partida.tablero.estado = Tablero.FINALIZADA
+                        //evento.partida.tablero.estado = Tablero.FINALIZADA
                     } else if (r == 9){
-                        evento.partida.tablero.estado = Tablero.FINALIZADA
+                        //evento.partida.tablero.estado = Tablero.FINALIZADA
                         print("Hasta luego!")
                     } else {
                         evento.partida.realizaAccion(AccionMover(this, movimientoJugador))

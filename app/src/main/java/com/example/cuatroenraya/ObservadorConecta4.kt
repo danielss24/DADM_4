@@ -1,3 +1,5 @@
+package com.example.cuatroenraya
+
 import es.uam.eps.multij.Evento
 import es.uam.eps.multij.PartidaListener
 import es.uam.eps.multij.Tablero

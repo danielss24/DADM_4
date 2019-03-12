@@ -1,8 +1,6 @@
-package com.example.cuatroenraya.activities
+package com.example.cuatroenraya
 import android.support.design.widget.Snackbar
 import android.view.View
-import com.example.cuatroenraya.R
-import com.example.cuatroenraya.model.*
 import es.uam.eps.multij.*
 class LocalPlayer: View.OnClickListener, Jugador {
     val ids = arrayOf(intArrayOf(
@@ -53,24 +51,30 @@ class LocalPlayer: View.OnClickListener, Jugador {
             R.id.c65,
             R.id.c66
         )
-    );
+    )
     private lateinit var game: Partida
+
     fun setPartida(game: Partida) {
         this.game = game
     }
     override fun onClick(v: View) {
         try {
             if (game.tablero.estado != Tablero.EN_CURSO) {
-                Snackbar.make(v, R.string.round_already_finished,
-                    Snackbar.LENGTH_SHORT).show()
+                //TODO
+                // Comprobar la cadena
+                //Snackbar.make(v, R.string.round_already_finished,Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(v, "round_already_finished",Snackbar.LENGTH_SHORT).show()
                 return
             }
-            val m: Movimiento = MovimientoConecta4(fromViewToI(v), fromViewToJ(v))
+            //TODO
+            val m: Movimiento = MovimientoConecta4(fromViewToJ(v))
             val a = AccionMover(this, m)
             game.realizaAccion(a)
         } catch (e: Exception) {
-            Snackbar.make(v, R.string.invalid_movement,
-                Snackbar.LENGTH_SHORT).show()
+            //TODO
+            // Comprobar la cadena
+            //Snackbar.make(v, R.string.invalid_movement,Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(v, "invalid_movement",Snackbar.LENGTH_SHORT).show()
         }
     }
     override fun getNombre() = "ER local player"

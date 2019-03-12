@@ -1,18 +1,16 @@
-package com.example.cuatroenraya.activities
+package com.example.cuatroenraya
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
-import com.example.cuatroenraya.R
 import es.uam.eps.multij.*
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
-    private val SIZE = 3
     private lateinit var game: Partida
-    private lateinit var board: Tablero
+    private lateinit var board: TableroConecta4
 
     val ids = arrayOf(intArrayOf(
         R.id.c11,
@@ -84,14 +82,15 @@ class MainActivity : AppCompatActivity() {
     private fun startRound() {
         val players = ArrayList<Jugador>()
         val randomPlayer = JugadorAleatorio("Random player")
-        val localPlayer = LocalPlayer()
+        val localPlayer = JugadorConecta4("Local player")
         players.add(randomPlayer)
         players.add(localPlayer)
-        board = TableroCon(SIZE)
+        board = TableroConecta4()
         game = Partida(board, players)
         game.addObservador(this)
-        localPlayer.setPartida(game)
-        registerListeners(localPlayer)
+        //TODO
+        //localPlayer.setPartida(game)
+        //registerListeners(localPlayer)
         if (game.tablero.estado == Tablero.EN_CURSO)
             game.comenzar()
     }
@@ -102,12 +101,12 @@ class MainActivity : AppCompatActivity() {
                 button.update(board, i, j)
             }
     }
-    override fun onCambioEnPartida(evento: Evento) {
+    fun onCambioEnPartida(evento: Evento) {
         when (evento.tipo) {
             Evento.EVENTO_CAMBIO -> updateUI()
             Evento.EVENTO_FIN -> {
-                Snackbar.make(findViewById(R.id.round_title),
-                    "Game over", Snackbar.LENGTH_SHORT).show()
+                //TODO
+                //Snackbar.make(findViewById(R.id.round_title),"Game over", Snackbar.LENGTH_SHORT).show()
             }
         }
     }

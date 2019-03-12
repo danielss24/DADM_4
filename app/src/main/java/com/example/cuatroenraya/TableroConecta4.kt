@@ -1,16 +1,17 @@
+package com.example.cuatroenraya
+
 import es.uam.eps.multij.Movimiento
 import es.uam.eps.multij.Tablero
-import MovimientoConecta4
-import java.io.File
-import java.io.FileNotFoundException
 
-class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
+class TableroConecta4(var name: String = "com.example.cuatroenraya.TableroConecta4"): Tablero() {
 
     var tablero = ArrayList<ArrayList<Int>>()
 
     val NUM_COL = 7
     val NUM_FIL = 6
     val IS_EMPTY = -1
+
+    val JUGADOR1 = 1
 
     init {
         this.name = name
@@ -272,5 +273,8 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
 
     }
 
+    fun getTablero(fila: Int, columna: Int):Int{
+        return tablero[columna][fila]
+    }
 
 }

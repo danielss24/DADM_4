@@ -1,9 +1,7 @@
-
+package com.example.cuatroenraya
 import es.uam.eps.multij.Jugador
 import es.uam.eps.multij.JugadorAleatorio
-import es.uam.eps.multij.JugadorConecta4
 import es.uam.eps.multij.Partida
-import TableroConecta4
 import java.io.File
 
 fun main(args: Array<String>) {
