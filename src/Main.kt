@@ -3,8 +3,6 @@ import es.uam.eps.multij.Jugador
 import es.uam.eps.multij.JugadorAleatorio
 import es.uam.eps.multij.JugadorConecta4
 import es.uam.eps.multij.Partida
-import TableroConecta4
-import java.awt.Menu
 import java.io.File
 import java.lang.Exception
 
@@ -13,13 +11,13 @@ val MENU_STRING = "\t(1)- Un solo jugador\n\t(2)- Multijugador\n\t" +
 
 fun main(args: Array<String>) {
     val jugadores = arrayListOf<Jugador>()
-    var tableroMain = TableroConecta4()
+    val tableroMain = TableroConecta4()
     var flagModo = 0
-    var modo: Int = 0
+    var modo = 0
 
     println("Bienvenido a 4 en raya")
     println("En cualquier momento de la partida introduzca un 8 para guardar partida, 9 para salir sin guardar.")
-    println("$MENU_STRING")
+    println(MENU_STRING)
 
     while(flagModo==0){
         try {
@@ -29,12 +27,12 @@ fun main(args: Array<String>) {
             }else{
                 println("<<$modo>> no se encuentra entre las opciones correctas de ejecuión.")
                 println("Seleccione un modo")
-                println("$MENU_STRING")
+                println(MENU_STRING)
             }
         }catch (e: Exception){
             println("La opción introducida no es correcta.")
             println("Seleccione un modo")
-            println("$MENU_STRING")
+            println(MENU_STRING)
         }
     }
 
@@ -58,23 +56,23 @@ fun main(args: Array<String>) {
             val path = File("./saves")
             println("Estos son las partidas guardadas, elige el nombre para cargar esa partida\n")
             for (archivo in path.list()){
-                println("\t-> " + archivo)
+                println("\t-> $archivo")
             }
             print("Fichero:")
-            var fichero = readLine()!!.toString()
-            var ficheroString = File("saves/$fichero.txt").readText()
+            val fichero = readLine()!!.toString()
+            val ficheroString = File("saves/$fichero.txt").readText()
 
             tableroMain.stringToTablero(ficheroString)
             File("saves/$fichero.txt").forEachLine {
                 val linea = it
                 if((it.contains("Jugador1"))){
-                    var splited = linea.split(":")
-                    var nombreJg1 = splited[1].trim()
+                    val splited = linea.split(":")
+                    val nombreJg1 = splited[1].trim()
                     jugadores += JugadorConecta4(nombreJg1)
 
                 }else if((it.contains("Jugador2"))){
-                    var splited = linea.split(":")
-                    var nombreJg1 = splited[1].trim()
+                    val splited = linea.split(":")
+                    val nombreJg1 = splited[1].trim()
                     if(nombreJg1 == "Maquina"){
                         jugadores += JugadorAleatorio(nombreJg1)
                     }else{
