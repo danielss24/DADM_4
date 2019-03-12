@@ -8,9 +8,9 @@ import java.io.File
 
 fun main(args: Array<String>) {
     val jugadores = arrayListOf<Jugador>()
-    var stringTablero = ""
-    var flagCargar = 0
     var tableroMain = TableroConecta4()
+    var flagModo = 0
+    var modo: Int = 0
 
     println("Bienvenido a 4 en raya")
     println("En cualquier momento de la partida introduzca un 8 para guardar partida, 9 para salir sin guardar.")
@@ -20,7 +20,25 @@ fun main(args: Array<String>) {
     println("\t(4)- Salir")
     println("\t(5)- Todo PC")
     print("Modo:")
-    val modo = readLine()!!.toInt()
+
+
+
+    while(flagModo==0){
+        modo = readLine()!!.toInt()
+
+        if(modo in 1..5){
+            flagModo=1
+        }else{
+            println("<<$modo>> no se encuentra entre las opciones correctas de ejecuión.")
+            println("Seleccione un modo")
+            println("\t(1)- Un solo jugador")
+            println("\t(2)- Multijugador")
+            println("\t(3)- Cargar ultima partida")
+            println("\t(4)- Salir")
+            println("\t(5)- Todo PC")
+            print("Modo:")
+        }
+    }
 
     when (modo) {
         1 -> {
@@ -39,7 +57,6 @@ fun main(args: Array<String>) {
 
         }
         3 -> {
-            flagCargar = 1
             val path = File("./saves")
             println("Estos son las partidas guardadas, elige el nombre para cargar esa partida\n")
             for (archivo in path.list()){
@@ -76,6 +93,9 @@ fun main(args: Array<String>) {
             jugadores += JugadorAleatorio("Aleatorio1")
             jugadores += JugadorAleatorio("Aleatorio2")
 
+        }
+        else -> {
+            println("Se ha producido un error inesperado, lance de nuevo el programa")
         }
     }
 
