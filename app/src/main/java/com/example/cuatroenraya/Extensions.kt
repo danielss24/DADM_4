@@ -12,5 +12,5 @@ fun ImageButton.update(board: TableroConecta4, i: Int, j: Int) {
     else if (board.getTablero(i, j) == board.IS_EMPTY)
         setBackgroundResource(R.drawable.casilla_vacia_24dp)
     else
-        setBackgroundResource(R.drawable.casilla_vacia_24dpfilled)
+        setBackgroundResource(R.drawable.casilla_vacia_24dpfilled2)
 }

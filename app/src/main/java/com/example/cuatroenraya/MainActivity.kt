@@ -7,7 +7,7 @@ import android.widget.ImageButton
 import es.uam.eps.multij.*
 import java.util.ArrayList
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PartidaListener {
 
     private lateinit var game: Partida
     private lateinit var board: TableroConecta4
@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity() {
         R.id.c13,
         R.id.c14,
         R.id.c15,
-        R.id.c16
+        R.id.c16,
+        R.id.c17
     ),
         intArrayOf(
             R.id.c21,
@@ -26,7 +27,8 @@ class MainActivity : AppCompatActivity() {
             R.id.c23,
             R.id.c24,
             R.id.c25,
-            R.id.c26
+            R.id.c26,
+            R.id.c27
         ),
         intArrayOf(
             R.id.c31,
@@ -34,7 +36,8 @@ class MainActivity : AppCompatActivity() {
             R.id.c33,
             R.id.c34,
             R.id.c35,
-            R.id.c36
+            R.id.c36,
+            R.id.c37
         ),
         intArrayOf(
             R.id.c41,
@@ -42,7 +45,8 @@ class MainActivity : AppCompatActivity() {
             R.id.c43,
             R.id.c44,
             R.id.c45,
-            R.id.c46
+            R.id.c46,
+            R.id.c47
         ),
         intArrayOf(
             R.id.c51,
@@ -50,7 +54,8 @@ class MainActivity : AppCompatActivity() {
             R.id.c53,
             R.id.c54,
             R.id.c55,
-            R.id.c56
+            R.id.c56,
+            R.id.c57
         ),
         intArrayOf(
             R.id.c61,
@@ -58,9 +63,10 @@ class MainActivity : AppCompatActivity() {
             R.id.c63,
             R.id.c64,
             R.id.c65,
-            R.id.c66
+            R.id.c66,
+            R.id.c67
         )
-    );
+    )
 
     private val listener = View.OnClickListener {
             view -> view.setBackgroundResource(R.drawable.casilla_vacia_24dpfilled)
@@ -71,12 +77,12 @@ class MainActivity : AppCompatActivity() {
         //registerListeners()
         startRound()
     }
-    private fun registerListeners() {
+    private fun registerListeners(jugador: JugadorConecta4) {
         var button: ImageButton
         for (i in 0 until ids.size)
-            for (j in 0 until ids.size) {
+            for (j in 0 until ids[i].size) {
                 button = findViewById(ids[i][j])
-                button.setOnClickListener(listener)
+                button.setOnClickListener(jugador)
             }
     }
     private fun startRound() {
@@ -89,19 +95,20 @@ class MainActivity : AppCompatActivity() {
         game = Partida(board, players)
         game.addObservador(this)
         //TODO
-        //localPlayer.setPartida(game)
-        //registerListeners(localPlayer)
+        localPlayer.setPartida(game)
+        registerListeners(localPlayer)
         if (game.tablero.estado == Tablero.EN_CURSO)
             game.comenzar()
     }
+
     fun updateUI() {
         for (i in 0 until ids.size)
-            for (j in 0 until ids.size) {
+            for (j in 0 until ids[i].size) {
                 val button = findViewById(ids[i][j]) as ImageButton
                 button.update(board, i, j)
             }
     }
-    fun onCambioEnPartida(evento: Evento) {
+    override fun onCambioEnPartida(evento: Evento) {
         when (evento.tipo) {
             Evento.EVENTO_CAMBIO -> updateUI()
             Evento.EVENTO_FIN -> {
