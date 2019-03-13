@@ -13,7 +13,8 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
     var tablero = Array(NUM_COL) { arrayOfNulls<Int>(NUM_FIL) }
     init {
         this.name = name
-        this.turno = (0..1).random()
+        //this.turno = (0..1).random()
+        this.turno = 0
         this.estado = EN_CURSO
 
         for (col in 0..(NUM_COL-1)){
@@ -49,9 +50,9 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
         if (m is MovimientoConecta4){
 
             if (esValido(m)==true){
+                tablero[m.col][getFreePos(m.col)] = this.turno//m.playerId
                 when (comprobacionConecta4()) {
                     EN_CURSO -> {
-                        tablero[m.col][getFreePos(m.col)] = this.turno//m.playerId
                         this.cambiaTurno()
                         this.ultimoMovimiento = m
                     }
