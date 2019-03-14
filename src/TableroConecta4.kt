@@ -200,7 +200,7 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
             fil = 5
             while (fil > 2) {
                 if (tablero[col][fil] == 1 && tablero[col + 1][fil -1 ] == 1 &&
-                        tablero[col + 2][fil - 2] == 1 && tablero[col - 3][fil - 3] == 1) {
+                        tablero[col + 2][fil - 2] == 1 && tablero[col + 3][fil - 3] == 1) {
                     return FINALIZADA
                 } else if (tablero[col][fil] == 0 && tablero[col + 1][fil - 1] == 0
                         && tablero[col + 2][fil - 2] == 0 && tablero[col + 3][fil - 3] == 0) {
