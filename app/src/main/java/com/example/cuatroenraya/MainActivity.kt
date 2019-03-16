@@ -6,21 +6,25 @@ import android.view.View
 import android.widget.ImageButton
 import es.uam.eps.multij.*
 import java.util.ArrayList
+import android.util.Log
+
 
 class MainActivity : AppCompatActivity(), PartidaListener {
+    val BOARDSTRING = "es.uam.eps.dadm.er8.grid"
 
     private lateinit var game: Partida
     private lateinit var board: TableroConecta4
 
-    val ids = arrayOf(intArrayOf(
-        R.id.c11,
-        R.id.c12,
-        R.id.c13,
-        R.id.c14,
-        R.id.c15,
-        R.id.c16,
-        R.id.c17
-    ),
+    val ids = arrayOf(
+        intArrayOf(
+            R.id.c11,
+            R.id.c12,
+            R.id.c13,
+            R.id.c14,
+            R.id.c15,
+            R.id.c16,
+            R.id.c17
+        ),
         intArrayOf(
             R.id.c21,
             R.id.c22,
@@ -68,15 +72,27 @@ class MainActivity : AppCompatActivity(), PartidaListener {
         )
     )
 
-    private val listener = View.OnClickListener {
-            view -> view.setBackgroundResource(R.drawable.casilla_vacia_24dpfilled)
+    private val listener = View.OnClickListener { view ->
+        view.setBackgroundResource(R.drawable.casilla_vacia_24dpfilled)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ingame)
-        //registerListeners()
         startRound()
+        if (savedInstanceState != null) {
+            try {
+                board.stringToTablero(savedInstanceState?.getString(BOARDSTRING))
+                updateUI()
+            } catch (e: ExcepcionJuego) {
+                e.printStackTrace()
+                //Snackbar.make(findViewById(R.id.round_title), "ExcepcionJuego thrown.",
+                //Snackbar.LENGTH_SHORT).show()
+            }
+        }
     }
+
+
     private fun registerListeners(jugador: JugadorConecta4) {
         var button: ImageButton
         for (i in 0 until ids.size)
@@ -85,6 +101,7 @@ class MainActivity : AppCompatActivity(), PartidaListener {
                 button.setOnClickListener(jugador)
             }
     }
+
     private fun startRound() {
         val players = ArrayList<Jugador>()
         val randomPlayer = JugadorAleatorio("Random player")
@@ -108,6 +125,7 @@ class MainActivity : AppCompatActivity(), PartidaListener {
                 button.update(board, i, j)
             }
     }
+
     override fun onCambioEnPartida(evento: Evento) {
         when (evento.tipo) {
             Evento.EVENTO_CAMBIO -> updateUI()
@@ -117,4 +135,66 @@ class MainActivity : AppCompatActivity(), PartidaListener {
             }
         }
     }
+
+
+
+    // Pack diapos 8
+    private var numero: Int = 0
+
+    private fun log(text: String) {
+        Log.d(
+            "LifeCycleTest", Integer.toString(numero) + " : "
+                    + text
+        )
+        numero++
+    }
+
+    override fun onStart() {
+        super.onStart()
+        log("onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        log("onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        log("onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        log("onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        log("onDestroy")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        log("onRestart")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.putString(BOARDSTRING, board.tableroToString())
+        super.onSaveInstanceState(outState)
+    }
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        try {
+            if (savedInstanceState?.getString(BOARDSTRING) != null)
+                board.stringToTablero(savedInstanceState?.getString(BOARDSTRING))
+            updateUI()
+        } catch (e: ExcepcionJuego) {
+            e.printStackTrace()
+            //Snackbar.make(findViewById(R.id.round_title), "ExcepcionJuego thrown.",
+            //Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+
 }
