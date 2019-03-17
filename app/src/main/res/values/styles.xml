@@ -9,11 +9,11 @@
     </style>
 
     <style name="casillaTablero">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:src">@drawable/casilla_vacia_24dp</item>
+        <item name="android:layout_width">24pt</item>
+        <item name="android:layout_height">24pt</item>
+        <item name="android:src">@drawable/circle__empty_24dp</item>
         <item name="android:onClick">onButtonClicked</item>
-        <!--<item name="android:background"></item>-->
+        <item name="android:background">#00000000</item>
     </style>
 
     <style name="filaTablero">

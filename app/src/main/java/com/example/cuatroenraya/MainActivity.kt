@@ -10,7 +10,7 @@ import android.util.Log
 
 
 class MainActivity : AppCompatActivity(), PartidaListener {
-    val BOARDSTRING = "es.uam.eps.dadm.er8.grid"
+    val BOARDSTRING = "com.example.cuatroenraya.grid"
 
     private lateinit var game: Partida
     private lateinit var board: TableroConecta4
