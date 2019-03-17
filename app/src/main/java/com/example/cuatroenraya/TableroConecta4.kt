@@ -5,21 +5,23 @@ import es.uam.eps.multij.Tablero
 
 class TableroConecta4(var name: String = "com.example.cuatroenraya.TableroConecta4"): Tablero() {
 
-    var tablero = ArrayList<ArrayList<Int>>()
-
     val NUM_COL = 7
     val NUM_FIL = 6
     val IS_EMPTY = -1
 
     val JUGADOR1 = 1
+	
+	var tablero = Array(NUM_COL) { arrayOfNulls<Int>(NUM_FIL) }
 
     init {
         this.name = name
-        this.turno = (0..1).random()
+        this.turno = 0
         this.estado = EN_CURSO
-        this.tablero = arrayListOf(arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1),
-                arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1),
-                arrayListOf(-1,-1,-1,-1,-1,-1), arrayListOf(-1,-1,-1,-1,-1,-1))
+		for (col in 0..(NUM_COL-1)){
+            for(fil in 0 ..(NUM_FIL-1)){
+                tablero[col][fil] = IS_EMPTY
+            }
+        }
     }
 
 
@@ -48,9 +50,9 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.TableroConect
         if (m is MovimientoConecta4){
 
             if (esValido(m)==true){
+			    tablero[m.col][getFreePos(m.col)] = this.turno//m.playerId
                 when (comprobacionConecta4()) {
                     EN_CURSO -> {
-                        tablero[m.col][getFreePos(m.col)] = this.turno//m.playerId
                         this.cambiaTurno()
                         this.ultimoMovimiento = m
                     }
@@ -198,7 +200,7 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.TableroConect
             fil = 5
             while (fil > 2) {
                 if (tablero[col][fil] == 1 && tablero[col + 1][fil -1 ] == 1 &&
-                        tablero[col + 2][fil - 2] == 1 && tablero[col - 3][fil - 3] == 1) {
+                        tablero[col + 2][fil - 2] == 1 && tablero[col + 3][fil - 3] == 1) {
                     return FINALIZADA
                 } else if (tablero[col][fil] == 0 && tablero[col + 1][fil - 1] == 0
                         && tablero[col + 2][fil - 2] == 0 && tablero[col + 3][fil - 3] == 0) {
