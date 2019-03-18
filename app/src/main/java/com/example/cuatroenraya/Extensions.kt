@@ -5,6 +5,10 @@ import com.example.cuatroenraya.R
 import org.json.JSONObject
 
 fun ImageButton.update(board: TableroConecta4, i: Int, j: Int) {
+    var tableroTMP = board.tablero
+
+    //TODO
+    //FIXEAR ESTO
     if (board.getTablero(i, j) == board.JUGADOR1)
         setBackgroundResource(R.drawable.circle__red_24dp)
     else if (board.getTablero(i, j) == board.IS_EMPTY)

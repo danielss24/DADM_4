@@ -2,6 +2,9 @@ package com.example.cuatroenraya
 
 import es.uam.eps.multij.Movimiento
 import es.uam.eps.multij.Tablero
+import es.uam.eps.multij.Jugador
+import java.io.File
+
 
 class TableroConecta4(var name: String = "com.example.cuatroenraya.TableroConecta4"): Tablero() {
 
@@ -66,33 +69,7 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.TableroConect
             } else {
                 println("Error - Movimiento no valido")
             }
-
         }
-    }
-
-
-    override fun tableroToString(): String {
-        var tableroString = String()
-        var input = " "
-        tableroString += "\n\t--------------------------\n"
-        for (fil in (NUM_FIL-1) downTo 0){
-            for (col in 0..(NUM_COL-1)){
-                if (tablero[col][fil] == -1){
-                    input = " "
-                } else {
-                    input = tablero[col][fil].toString()
-                }
-                tableroString += ("\t" + input)
-            }
-            tableroString += " \n"
-        }
-        tableroString += "\t--------------------------\n"
-        tableroString += "\t0\t1\t2\t3\t4\t5\t6 \n"
-        return tableroString
-    }
-
-    override fun toString(): String {
-        return tableroToString()
     }
 
     fun isFull(columna: Int): Boolean{
@@ -213,7 +190,7 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.TableroConect
         return EN_CURSO
     }
 
-    fun imprimeTablero(): String {
+    override fun tableroToString(): String {
         var col = NUM_COL
         var tableroString = ""
 
@@ -232,26 +209,43 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.TableroConect
         return tableroString
     }
 
-
-    override fun stringToTablero(cadena: String?) {
-        //TODO futuro, poder cargar jugadores desde aquí
-        if(cadena is String) {
-            var iteradorFichero = cadena.split("\n")
-
-            //seteando turno
-            var turnoActual = iteradorFichero[0].split(":")[1].trim()
-            turno = turnoActual.toInt()
-
-            //seteando Num jugadas
-            numJugadas = iteradorFichero[1].split(":")[1].trim().toInt()
-
-            //seteando tablero
-            this.cargaTablero(iteradorFichero[5].split(":")[1].trim())
-
-        }
+    override fun toString(): String {
+        return tableroToString()
     }
 
-    fun cargaTablero(cadena: String?){
+    fun imprimeTablero(): String {
+        var tableroString = String()
+        var input = " "
+        tableroString += "\n\t--------------------------\n"
+        for (fil in (NUM_FIL-1) downTo 0){
+            for (col in 0..(NUM_COL-1)){
+                if (tablero[col][fil] == -1){
+                    input = " "
+                } else {
+                    input = tablero[col][fil].toString()
+                }
+                tableroString += ("\t" + input)
+            }
+            tableroString += " \n"
+        }
+        tableroString += "\t--------------------------\n"
+        tableroString += "\t0\t1\t2\t3\t4\t5\t6 \n"
+        return tableroString
+    }
+
+    fun guardaTablero(fichero: File, jugador1: String, jugador2: String, jugadorActivo: String){
+        var tableroArray = this.tableroToString()
+        fichero.writeText("Turno: ${this.turno}\n" +
+                "NumJugadas: ${this.numJugadas}\n" +
+                "Mueve: " + jugadorActivo + "\n" +
+                "Jugador1: ${jugador1}\n" +
+                "Jugador2: ${jugador2}\n" +
+                "Tablero String: ${tableroArray}\n" +
+                "Tablero Grafico: ${this.imprimeTablero()}")
+    }
+
+
+    override fun stringToTablero(cadena: String?) {
         if(cadena is String){
             cadena!!.toList()
             var iterator = 0
@@ -272,11 +266,21 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.TableroConect
                 col--
             }
         }
-
     }
 
-    fun getTablero(fila: Int, columna: Int):Int{
-        return tablero[columna][fila]
-    }
+    fun cargaTablero(cadena: String?){
+        if(cadena is String) {
+            var iteradorFichero = cadena.split("\n")
 
+            //seteando turno
+            var turnoActual = iteradorFichero[0].split(":")[1].trim()
+            turno = turnoActual.toInt()
+
+            //seteando Num jugadas
+            numJugadas = iteradorFichero[1].split(":")[1].trim().toInt()
+
+            //seteando tablero
+            this.stringToTablero(iteradorFichero[5].split(":")[1].trim())
+        }
+    }
 }
