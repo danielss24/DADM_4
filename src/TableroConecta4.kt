@@ -1,27 +1,27 @@
 import es.uam.eps.multij.Movimiento
 import es.uam.eps.multij.Tablero
 import MovimientoConecta4
+import es.uam.eps.multij.Jugador
+import es.uam.eps.multij.JugadorConecta4
 import java.io.File
 import java.io.FileNotFoundException
 
 class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
 
-
-
     val NUM_COL = 7
     val NUM_FIL = 6
     val IS_EMPTY = -1
 
-    var tablero = Array(NUM_COL){ arrayOfNulls<Int>(NUM_FIL) }
-
+    var tablero = Array(NUM_COL) { arrayOfNulls<Int>(NUM_FIL) }
     init {
         this.name = name
-        this.turno = (0..1).random()
+        //this.turno = (0..1).random()
+        this.turno = 0
         this.estado = EN_CURSO
 
         for (col in 0..(NUM_COL-1)){
-            for(fil in 0..(NUM_FIL-1)){
-                this.tablero[col][fil] = IS_EMPTY
+            for(fil in 0 ..(NUM_FIL-1)){
+                tablero[col][fil] = IS_EMPTY
             }
         }
     }
@@ -52,9 +52,9 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
         if (m is MovimientoConecta4){
 
             if (esValido(m)==true){
+                tablero[m.col][getFreePos(m.col)] = this.turno//m.playerId
                 when (comprobacionConecta4()) {
                     EN_CURSO -> {
-                        tablero[m.col][getFreePos(m.col)] = this.turno//m.playerId
                         this.cambiaTurno()
                         this.ultimoMovimiento = m
                     }
@@ -73,29 +73,7 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
     }
 
 
-    override fun tableroToString(): String {
-        var tableroString = String()
-        var input = " "
-        tableroString += "\n\t--------------------------\n"
-        for (fil in (NUM_FIL-1) downTo 0){
-            for (col in 0..(NUM_COL-1)){
-                if (tablero[col][fil] == -1){
-                    input = " "
-                } else {
-                    input = tablero[col][fil].toString()
-                }
-                tableroString += ("\t" + input)
-            }
-            tableroString += " \n"
-        }
-        tableroString += "\t--------------------------\n"
-        tableroString += "\t0\t1\t2\t3\t4\t5\t6 \n"
-        return tableroString
-    }
 
-    override fun toString(): String {
-        return tableroToString()
-    }
 
     fun isFull(columna: Int): Boolean{
         //Lo he cambiaod de 0 a -1 porque 0 era jugador 1 y 1 jugadopr dos ahora
@@ -202,7 +180,7 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
             fil = 5
             while (fil > 2) {
                 if (tablero[col][fil] == 1 && tablero[col + 1][fil -1 ] == 1 &&
-                        tablero[col + 2][fil - 2] == 1 && tablero[col - 3][fil - 3] == 1) {
+                        tablero[col + 2][fil - 2] == 1 && tablero[col + 3][fil - 3] == 1) {
                     return FINALIZADA
                 } else if (tablero[col][fil] == 0 && tablero[col + 1][fil - 1] == 0
                         && tablero[col + 2][fil - 2] == 0 && tablero[col + 3][fil - 3] == 0) {
@@ -215,7 +193,7 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
         return EN_CURSO
     }
 
-    fun imprimeTablero(): String {
+    override fun tableroToString(): String {
         var col = NUM_COL
         var tableroString = ""
 
@@ -234,26 +212,43 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
         return tableroString
     }
 
-
-    override fun stringToTablero(cadena: String?) {
-        //TODO futuro, poder cargar jugadores desde aquí
-        if(cadena is String) {
-            var iteradorFichero = cadena.split("\n")
-
-            //seteando turno
-            var turnoActual = iteradorFichero[0].split(":")[1].trim()
-            turno = turnoActual.toInt()
-
-            //seteando Num jugadas
-            numJugadas = iteradorFichero[1].split(":")[1].trim().toInt()
-
-            //seteando tablero
-            this.cargaTablero(iteradorFichero[5].split(":")[1].trim())
-
-        }
+    override fun toString(): String {
+        return tableroToString()
     }
 
-    fun cargaTablero(cadena: String?){
+    fun imprimeTablero(): String {
+        var tableroString = String()
+        var input = " "
+        tableroString += "\n\t--------------------------\n"
+        for (fil in (NUM_FIL-1) downTo 0){
+            for (col in 0..(NUM_COL-1)){
+                if (tablero[col][fil] == -1){
+                    input = " "
+                } else {
+                    input = tablero[col][fil].toString()
+                }
+                tableroString += ("\t" + input)
+            }
+            tableroString += " \n"
+        }
+        tableroString += "\t--------------------------\n"
+        tableroString += "\t0\t1\t2\t3\t4\t5\t6 \n"
+        return tableroString
+    }
+
+    fun guardaTablero(fichero: File, jugador1: String, jugador2: String, jugadorActivo: String){
+        var tableroArray = this.tableroToString()
+        fichero.writeText("Turno: ${this.turno}\n" +
+                "NumJugadas: ${this.numJugadas}\n" +
+                "Mueve: " + jugadorActivo + "\n" +
+                "Jugador1: ${jugador1}\n" +
+                "Jugador2: ${jugador2}\n" +
+                "Tablero String: ${tableroArray}\n" +
+                "Tablero Grafico: ${this.imprimeTablero()}")
+    }
+
+
+    override fun stringToTablero(cadena: String?) {
         if(cadena is String){
             cadena!!.toList()
             var iterator = 0
@@ -273,6 +268,22 @@ class TableroConecta4(var name: String = "TableroConecta4"): Tablero() {
                 }
                 col--
             }
+        }
+    }
+
+    fun cargaTablero(cadena: String?){
+        if(cadena is String) {
+            var iteradorFichero = cadena.split("\n")
+
+            //seteando turno
+            var turnoActual = iteradorFichero[0].split(":")[1].trim()
+            turno = turnoActual.toInt()
+
+            //seteando Num jugadas
+            numJugadas = iteradorFichero[1].split(":")[1].trim().toInt()
+
+            //seteando tablero
+            this.stringToTablero(iteradorFichero[5].split(":")[1].trim())
         }
 
     }

@@ -9,18 +9,19 @@ class ObservadorConecta4
     var turno : Int = 1
 
     override fun onCambioEnPartida(evento: Evento){
-        when(evento?.tipo){
-            Evento.EVENTO_CAMBIO, Evento.EVENTO_FIN -> {
-                //print("\n\nTurno: ${evento.partida.tablero.numJugadas} \n")
-                //print("Mueve el jugador ${evento.partida.getJugador(evento.partida.tablero.turno).nombre} \n")
-                print(evento.partida.tablero)
-                print(evento.descripcion)
-            }
-            Evento.EVENTO_ERROR -> {
-                print(evento.partida.tablero)
-                print(evento.descripcion)
-            }
+        var tableroTMP = evento.partida.tablero
+        if(tableroTMP is TableroConecta4){
+            when(evento?.tipo){
+                Evento.EVENTO_CAMBIO, Evento.EVENTO_FIN -> {
+                    print(tableroTMP.imprimeTablero())
+                    print(evento.descripcion)
+                }
+                Evento.EVENTO_ERROR -> {
+                    print(tableroTMP.imprimeTablero())
+                    print(evento.descripcion)
+                }
 
+            }
         }
     }
 }

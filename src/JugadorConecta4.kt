@@ -11,6 +11,7 @@ import java.io.FileNotFoundException
 class JugadorConecta4
 constructor(private val nombre: String) : Jugador {
 
+    val OPCIONES_CORRECTAS = arrayListOf<Int>(0,1,2,3,4,5,6,8,9)
 
     override fun onCambioEnPartida(evento: Evento) {
         when (evento.tipo) {
@@ -18,7 +19,6 @@ constructor(private val nombre: String) : Jugador {
                 return
             }
             Evento.EVENTO_CONFIRMA -> {
-                //TODO a lo mejor habría que pòner un finally en las exception para hacer algo siempre y que no se cuelgue
                 try {
                     evento.partida.confirmaAccion(
                             this, evento.causa, Math.random() > .5)
@@ -27,11 +27,37 @@ constructor(private val nombre: String) : Jugador {
                 }
             }
             Evento.EVENTO_TURNO -> {
-                print("\n Elige columna ${evento.partida.getJugador(evento.partida.tablero.turno).nombre}: \n")
-                val r = readLine()!!.toInt()
-                val movimientoJugador = MovimientoConecta4(r)
+                println("\n Introduzca un 8 para guardar partida, 9 para salir sin guardar.")
+                println("\n Elige columna ${evento.partida.getJugador(evento.partida.tablero.turno).nombre}: ")
+                var flagOpcionCorrecta = 0
+                var opcion = 0
+
+                while(flagOpcionCorrecta==0){
+                    try {
+                        opcion = readLine()!!.toInt()
+                        if(opcion in OPCIONES_CORRECTAS){
+                            flagOpcionCorrecta=1
+                        }else{
+                            println("<<$opcion>> no se encuentra entre las opciones correctas de ejecuión.")
+                            println("Estado del tablero: ${evento.partida.tablero.tableroToString()}")
+                            println("Introduzca un 8 para guardar partida, 9 para salir sin guardar.")
+                            println("Elige columna " +
+                                    "${evento.partida.getJugador(evento.partida.tablero.turno).nombre}: ")
+                        }
+
+                    }catch (e: java.lang.Exception){
+                        println("La opción introducida no es correcta.")
+                        println("Estado del tablero: ${evento.partida.tablero.tableroToString()}")
+                        println("Introduzca un 8 para guardar partida, 9 para salir sin guardar.")
+                        println("Elige columna " +
+                                "${evento.partida.getJugador(evento.partida.tablero.turno).nombre}: ")
+                    }
+                }
+
+                val movimientoJugador = MovimientoConecta4(opcion)
+
                 try {
-                    if (r == 8){
+                    if (opcion == 8){
                         val path = File("./saves")
                         println("Estos son las partidas guardadas, elige el nombre para guardar esta partida\n" +
                                 "Si ya existe, la partida se sobreecribirá.")
@@ -47,28 +73,22 @@ constructor(private val nombre: String) : Jugador {
                         }
                         val fichero = File(path, nombreFichero)
                         try {
-                            var TurnoActual : String
+                            var JugadorActivo : String
                             if (this.nombre.equals(evento.partida.getJugador(0))){
-                                TurnoActual = this.nombre
+                                JugadorActivo = this.nombre
                             } else  {
-                                TurnoActual = evento.partida.getJugador(0).nombre
+                                JugadorActivo = evento.partida.getJugador(0).nombre
                             }
                             var tableroTMP = evento.partida.tablero
                             if(tableroTMP is TableroConecta4){
-                                var tableroArray = tableroTMP.imprimeTablero()
-                                fichero.writeText("Turno: ${evento.partida.tablero.turno}\n" +
-                                        "NumJugadas: ${evento.partida.tablero.numJugadas}\n" +
-                                        "Mueve: " + TurnoActual + "\n" +
-                                        "Jugador1: ${evento.partida.getJugador(0).nombre}\n" +
-                                        "Jugador2: ${evento.partida.getJugador(1).nombre}\n" +
-                                        "Tablero String: ${tableroArray}\n" +
-                                        "Tablero Grafico: ${evento.partida.tablero}")
+                                tableroTMP.guardaTablero(fichero, evento.partida.getJugador(0).nombre,
+                                        evento.partida.getJugador(1).nombre, JugadorActivo)
                             }
                         } catch (e: FileNotFoundException) {
                             e.printStackTrace()
                         }
                         evento.partida.tablero.estado = Tablero.FINALIZADA
-                    } else if (r == 9){
+                    } else if (opcion == 9){
                         evento.partida.tablero.estado = Tablero.FINALIZADA
                         print("Hasta luego!")
                     } else {
