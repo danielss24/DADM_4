@@ -79,8 +79,7 @@ fun main(args: Array<String>) {
                     fichero = readLine()!!.toString()
                 }
             }
-
-            tableroMain.stringToTablero(ficheroString)
+            tableroMain.cargaTablero(ficheroString)
             fileToLoad.forEachLine {
                 val linea = it
                 if((it.contains("Jugador1"))){

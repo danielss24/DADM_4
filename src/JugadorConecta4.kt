@@ -73,22 +73,16 @@ constructor(private val nombre: String) : Jugador {
                         }
                         val fichero = File(path, nombreFichero)
                         try {
-                            var TurnoActual : String
+                            var JugadorActivo : String
                             if (this.nombre.equals(evento.partida.getJugador(0))){
-                                TurnoActual = this.nombre
+                                JugadorActivo = this.nombre
                             } else  {
-                                TurnoActual = evento.partida.getJugador(0).nombre
+                                JugadorActivo = evento.partida.getJugador(0).nombre
                             }
                             var tableroTMP = evento.partida.tablero
                             if(tableroTMP is TableroConecta4){
-                                var tableroArray = tableroTMP.imprimeTablero()
-                                fichero.writeText("Turno: ${evento.partida.tablero.turno}\n" +
-                                        "NumJugadas: ${evento.partida.tablero.numJugadas}\n" +
-                                        "Mueve: " + TurnoActual + "\n" +
-                                        "Jugador1: ${evento.partida.getJugador(0).nombre}\n" +
-                                        "Jugador2: ${evento.partida.getJugador(1).nombre}\n" +
-                                        "Tablero String: ${tableroArray}\n" +
-                                        "Tablero Grafico: ${evento.partida.tablero}")
+                                tableroTMP.guardaTablero(fichero, evento.partida.getJugador(0).nombre,
+                                        evento.partida.getJugador(1).nombre, JugadorActivo)
                             }
                         } catch (e: FileNotFoundException) {
                             e.printStackTrace()
