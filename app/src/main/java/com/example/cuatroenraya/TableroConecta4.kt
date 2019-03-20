@@ -190,6 +190,10 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.TableroConect
         return EN_CURSO
     }
 
+    fun getTablero(fila: Int, columna: Int):Int?{
+        return tablero[columna][fila]
+    }
+
     override fun tableroToString(): String {
         var col = NUM_COL
         var tableroString = ""
