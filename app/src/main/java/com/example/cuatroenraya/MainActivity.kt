@@ -2,6 +2,12 @@ package com.example.cuatroenraya
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.content.Intent
+import android.widget.Button
+import kotlinx.android.synthetic.main.principal.*
+
+
+
 import android.view.View
 import android.widget.ImageButton
 import es.uam.eps.multij.*
