@@ -1,9 +1,10 @@
-package com.example.cuatroenraya
+package com.example.cuatroenraya.activities
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import com.example.cuatroenraya.R
 
 class Options : AppCompatActivity() {
 
@@ -13,7 +14,7 @@ class Options : AppCompatActivity() {
 
         val buttonBack : ImageButton = findViewById(R.id.backButton)
         buttonBack.setOnClickListener{
-            val intent = Intent(this, MainActivity ::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

@@ -9,13 +9,13 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Options">
+        <activity android:name=".activities.Options">
         </activity>
-        <activity android:name=".SelectPlayer">
+        <activity android:name=".activities.SelectPlayer">
         </activity>
-        <activity android:name=".Ingame">
+        <activity android:name=".activities.Ingame">
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

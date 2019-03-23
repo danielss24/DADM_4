@@ -1,15 +1,10 @@
-package com.example.cuatroenraya
+package com.example.cuatroenraya.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
 import android.widget.Button
-import kotlinx.android.synthetic.main.principal.*
-import android.view.View
-import android.widget.ImageButton
-import es.uam.eps.multij.*
-import java.util.ArrayList
-import android.util.Log
+import com.example.cuatroenraya.R
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,13 +16,13 @@ class MainActivity : AppCompatActivity() {
         val buttonNewGame : Button = findViewById(R.id.buttonNewGame)
 
         buttonNewGame.setOnClickListener{
-            val intent = Intent(this, SelectPlayer ::class.java)
+            val intent = Intent(this, SelectPlayer::class.java)
             startActivity(intent)
         }
 
         val buttonoptions : Button = findViewById(R.id.buttonOptions)
         buttonoptions.setOnClickListener{
-            val intent = Intent(this, Options ::class.java)
+            val intent = Intent(this, Options::class.java)
             startActivity(intent)
         }
 

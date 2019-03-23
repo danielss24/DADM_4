@@ -1,4 +1,4 @@
-package com.example.cuatroenraya
+package com.example.cuatroenraya.model
 import es.uam.eps.multij.Jugador
 import es.uam.eps.multij.JugadorAleatorio
 import es.uam.eps.multij.Partida

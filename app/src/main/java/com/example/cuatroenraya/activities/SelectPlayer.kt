@@ -1,10 +1,11 @@
-package com.example.cuatroenraya
+package com.example.cuatroenraya.activities
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import com.example.cuatroenraya.R
 
 class SelectPlayer : AppCompatActivity() {
 
@@ -14,14 +15,14 @@ class SelectPlayer : AppCompatActivity() {
 
         val buttonBack : ImageButton = findViewById(R.id.backButton)
         buttonBack.setOnClickListener{
-            val intent = Intent(this, MainActivity ::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
         val buttonOnePlayer : Button = findViewById(R.id.onePlayerButton)
 
         buttonOnePlayer.setOnClickListener{
-            val intent = Intent(this, Ingame ::class.java)
+            val intent = Intent(this, Ingame::class.java)
             startActivity(intent)
         }
 

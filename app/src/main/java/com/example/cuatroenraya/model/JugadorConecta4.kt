@@ -1,9 +1,8 @@
-package com.example.cuatroenraya
+package com.example.cuatroenraya.model
 import android.support.design.widget.Snackbar
 import android.view.View
+import com.example.cuatroenraya.R
 import es.uam.eps.multij.*
-import java.io.File
-import java.io.FileNotFoundException
 
 /**
  *

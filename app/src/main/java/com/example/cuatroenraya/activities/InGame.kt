@@ -1,14 +1,15 @@
-package com.example.cuatroenraya
+package com.example.cuatroenraya.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.content.Intent
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
+import com.example.cuatroenraya.model.JugadorConecta4
+import com.example.cuatroenraya.R
+import com.example.cuatroenraya.model.TableroConecta4
+import com.example.cuatroenraya.utility.update
 import es.uam.eps.multij.*
-import kotlinx.android.synthetic.main.ingame.*
 import java.util.ArrayList
 
 

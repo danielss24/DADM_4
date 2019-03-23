@@ -1,9 +1,7 @@
-package com.example.cuatroenraya
+package com.example.cuatroenraya.model
 
 import es.uam.eps.multij.Evento
 import es.uam.eps.multij.PartidaListener
-import es.uam.eps.multij.Tablero
-import es.uam.eps.multij.Jugador
 
 class ObservadorConecta4
 @JvmOverloads constructor() : PartidaListener {

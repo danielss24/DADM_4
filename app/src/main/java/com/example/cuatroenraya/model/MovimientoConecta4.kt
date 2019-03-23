@@ -1,4 +1,4 @@
-package com.example.cuatroenraya
+package com.example.cuatroenraya.model
 
 import es.uam.eps.multij.Movimiento
 

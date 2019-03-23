@@ -1,10 +1,9 @@
-package com.example.cuatroenraya
+package com.example.cuatroenraya.utility
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import com.example.cuatroenraya.R
-import com.example.cuatroenraya.RoundRepository
 import kotlinx.android.synthetic.main.activity_round_list.*
 
 
@@ -24,7 +23,8 @@ class RoundListActivity: AppCompatActivity() {
     fun updateUI() {
         recyclerView.apply {
             if (adapter == null)
-                adapter = RoundAdapter(RoundRepository.rounds)
+                adapter =
+                    RoundAdapter(RoundRepository.rounds)
             //else
             //adapter.notifyDataSetChanged()
         }

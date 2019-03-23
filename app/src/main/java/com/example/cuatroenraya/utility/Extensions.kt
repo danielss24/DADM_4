@@ -1,8 +1,8 @@
-package com.example.cuatroenraya
+package com.example.cuatroenraya.utility
 
 import android.widget.ImageButton
 import com.example.cuatroenraya.R
-import org.json.JSONObject
+import com.example.cuatroenraya.model.TableroConecta4
 
 fun ImageButton.update(board: TableroConecta4, i: Int, j: Int) {
     var tableroTMP = board.tablero

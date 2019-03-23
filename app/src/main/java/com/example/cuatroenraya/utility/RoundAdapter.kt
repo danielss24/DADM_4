@@ -1,8 +1,7 @@
-package com.example.cuatroenraya
+package com.example.cuatroenraya.utility
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.cuatroenraya.Round
 
 class RoundHolder(val textView: TextView): RecyclerView.ViewHolder(textView) {}
 

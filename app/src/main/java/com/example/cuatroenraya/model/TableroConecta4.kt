@@ -1,12 +1,11 @@
-package com.example.cuatroenraya
+package com.example.cuatroenraya.model
 
 import es.uam.eps.multij.Movimiento
 import es.uam.eps.multij.Tablero
-import es.uam.eps.multij.Jugador
 import java.io.File
 
 
-class TableroConecta4(var name: String = "com.example.cuatroenraya.TableroConecta4"): Tablero() {
+class TableroConecta4(var name: String = "com.example.cuatroenraya.model.TableroConecta4"): Tablero() {
 
     val NUM_COL = 7
     val NUM_FIL = 6

@@ -1,5 +1,5 @@
-package com.example.cuatroenraya
-import com.example.cuatroenraya.TableroConecta4
+package com.example.cuatroenraya.utility
+import com.example.cuatroenraya.model.TableroConecta4
 
 import java.util.*
 class Round(val size: Int) {
