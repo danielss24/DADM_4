@@ -33,9 +33,12 @@ class MainActivity : AppCompatActivity() {
 
         val buttonExit : Button =  findViewById(R.id.buttonExit)
         buttonExit.setOnClickListener{
-            finish()
-            System.exit(0)
-        }
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_HOME)
+            startActivity(intent)
+    }
+
+
 
     }
 

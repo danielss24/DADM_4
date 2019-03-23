@@ -185,6 +185,7 @@ class Ingame : AppCompatActivity(), PartidaListener {
         outState?.putString(BOARDSTRING, board.tableroToString())
         super.onSaveInstanceState(outState)
     }
+
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         try {
