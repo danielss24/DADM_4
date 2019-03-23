@@ -36,7 +36,7 @@
                 android:orientation="vertical">
 
             <Button
-                    android:id="@+id/onePlayer"
+                    android:id="@+id/onePlayerButton"
                     android:text="1 Jugador"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             />
 
             <Button
-                    android:id="@+id/twoPlayers"
+                    android:id="@+id/twoPlayersButton"
                     android:text="2 Jugadores"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

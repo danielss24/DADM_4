@@ -18,5 +18,12 @@ class SelectPlayer : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val buttonOnePlayer : Button = findViewById(R.id.onePlayerButton)
+
+        buttonOnePlayer.setOnClickListener{
+            val intent = Intent(this, Ingame ::class.java)
+            startActivity(intent)
+        }
+
     }
 }
