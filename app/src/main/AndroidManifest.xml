@@ -13,8 +13,6 @@
         </activity>
         <activity android:name=".SelectPlayer">
         </activity>
-        <activity android:name=".SampleText">
-        </activity>
         <activity android:name=".Ingame">
         </activity>
         <activity android:name=".MainActivity">

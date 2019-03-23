@@ -25,6 +25,18 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val buttonoptions : Button = findViewById(R.id.buttonOptions)
+        buttonoptions.setOnClickListener{
+            val intent = Intent(this, Options ::class.java)
+            startActivity(intent)
+        }
+
+        val buttonExit : Button =  findViewById(R.id.buttonExit)
+        buttonExit.setOnClickListener{
+            finish()
+            System.exit(0)
+        }
+
     }
 
 
