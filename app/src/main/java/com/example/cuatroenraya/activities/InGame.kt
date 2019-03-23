@@ -1,5 +1,6 @@
 package com.example.cuatroenraya.activities
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -109,8 +110,8 @@ class Ingame : AppCompatActivity(), PartidaListener {
         val players = ArrayList<Jugador>()
         val randomPlayer = JugadorAleatorio("Random player")
         val localPlayer = JugadorConecta4("Local player")
-        players.add(randomPlayer)
         players.add(localPlayer)
+        players.add(randomPlayer)
         board = TableroConecta4()
         game = Partida(board, players)
         game.addObservador(this)
@@ -133,6 +134,8 @@ class Ingame : AppCompatActivity(), PartidaListener {
         when (evento.tipo) {
             Evento.EVENTO_CAMBIO -> updateUI()
             Evento.EVENTO_FIN -> {
+                val intent = Intent(this, GameOver::class.java)
+                startActivity(intent)
                 //TODO
                 //Snackbar.make(findViewById(R.id.round_title),"Game over", Snackbar.LENGTH_SHORT).show()
             }
