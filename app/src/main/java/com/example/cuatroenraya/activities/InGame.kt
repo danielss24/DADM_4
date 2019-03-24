@@ -136,13 +136,11 @@ class Ingame : AppCompatActivity(), PartidaListener {
             Evento.EVENTO_CAMBIO -> updateUI()
             Evento.EVENTO_FIN -> {
                 val intent = Intent(this, GameOver::class.java)
-                startActivity(intent)
-
                 //Esto es para pasar info entre activities
                 val bundle = Bundle()
                 bundle.putString("ganador", game.getJugador(game.tablero.turno).nombre)
                 intent.putExtras(bundle)
-
+                startActivity(intent)
             }
         }
     }

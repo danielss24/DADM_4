@@ -22,7 +22,7 @@ class GameOver : Activity() {
         windowManager.defaultDisplay.getMetrics(dm)
         var width = dm.widthPixels
         var height = dm.heightPixels
-        window.setLayout((width * 0.7).toInt(), (height * 0.3).toInt())
+        window.setLayout((width * 0.8).toInt(), (height * 0.4).toInt())
 
         val buttonMnu: Button = findViewById(R.id.backMenuButton)
         buttonMnu.setOnClickListener {
@@ -40,11 +40,11 @@ class GameOver : Activity() {
         val intent = getIntent()
         val bundle = intent.extras
 
+        bundle.getString("ganador")
         val winner = bundle.getString("ganador")
 
-
-        val texttView: TextView = findViewById(R.id.mensajeFinPartida)
-        texttView.append(winner)
+        val texttView: TextView = findViewById(R.id.mensanjeGanador)
+        texttView.append("Gana: "+ winner)
     }
 
 }

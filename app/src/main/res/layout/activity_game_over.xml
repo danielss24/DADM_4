@@ -21,8 +21,19 @@
                 android:ems="10"
                 android:id="@+id/mensajeFinPartida"/>
         <Space
+                android:layout_width="10dp"
+                android:layout_height="10dp"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/mensanjeGanador"/>
+        <Space
                 android:layout_width="20dp"
                 android:layout_height="20dp"/>
+
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
