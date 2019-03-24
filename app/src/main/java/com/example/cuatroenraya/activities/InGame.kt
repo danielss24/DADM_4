@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
+import android.widget.TextView
 import com.example.cuatroenraya.model.JugadorConecta4
 import com.example.cuatroenraya.R
 import com.example.cuatroenraya.model.TableroConecta4
@@ -136,8 +137,12 @@ class Ingame : AppCompatActivity(), PartidaListener {
             Evento.EVENTO_FIN -> {
                 val intent = Intent(this, GameOver::class.java)
                 startActivity(intent)
-                //TODO
-                //Snackbar.make(findViewById(R.id.round_title),"Game over", Snackbar.LENGTH_SHORT).show()
+
+                //Esto es para pasar info entre activities
+                val bundle = Bundle()
+                bundle.putString("ganador", game.getJugador(game.tablero.turno).nombre)
+                intent.putExtras(bundle)
+
             }
         }
     }

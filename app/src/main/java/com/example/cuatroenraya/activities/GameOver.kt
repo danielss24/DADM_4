@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import com.example.cuatroenraya.R
 import kotlinx.android.synthetic.main.principal.view.*
 
@@ -35,6 +36,15 @@ class GameOver : Activity() {
             intent.addCategory(Intent.CATEGORY_HOME)
             startActivity(intent)
         }
+
+        val intent = getIntent()
+        val bundle = intent.extras
+
+        val winner = bundle.getString("ganador")
+
+
+        val texttView: TextView = findViewById(R.id.mensajeFinPartida)
+        texttView.append(winner)
     }
 
 }
