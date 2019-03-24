@@ -25,11 +25,6 @@ class SelectPlayer : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val buttonTwoPlayer : Button = findViewById(R.id.twoPlayersButton)
-        buttonTwoPlayer.setOnClickListener{
-            val intent = Intent(this, RoundListActivity::class.java)
-            startActivity(intent)
-        }
 
     }
 }

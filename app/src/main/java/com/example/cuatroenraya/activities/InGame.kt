@@ -142,8 +142,6 @@ class Ingame : AppCompatActivity(), PartidaListener {
     }
 
 
-
-    // Pack diapos 8
     private var numero: Int = 0
 
     private fun log(text: String) {
