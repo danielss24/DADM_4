@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_MAIN)
             intent.addCategory(Intent.CATEGORY_HOME)
             startActivity(intent)
-    }
+        }
 
 
 

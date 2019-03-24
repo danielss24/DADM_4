@@ -25,7 +25,14 @@ class RoundListActivity : AppCompatActivity() {
         recyclerView.apply {
             layoutManager = LinearLayoutManager(applicationContext)
             itemAnimator = DefaultItemAnimator()
+            if (adapter == null)
+                adapter = RoundAdapter(RoundRepository.rounds)
+                { round -> onRoundSelected(round) }
+            else
+                adapter?.notifyDataSetChanged()
         }
+
+
     }
 
     override fun onResume() {

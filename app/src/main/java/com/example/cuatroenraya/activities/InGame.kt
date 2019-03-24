@@ -97,6 +97,8 @@ class Ingame : AppCompatActivity(), PartidaListener {
         }
     }
 
+
+
     private fun registerListeners(jugador: JugadorConecta4) {
         var button: ImageButton
         for (i in 0 until ids.size)

@@ -9,7 +9,7 @@ object RoundRepository {
     init {
 
         for (i in 0..100)
-            rounds.add(Round(stringTablero = "111110111110111110111110111110111110111110", nombrePartida = "nombrePartida"))
+            rounds.add(Round(stringTablero = "X11110111110111110111110111110111110111110", nombrePartida = "nombrePartida"))
 
         val jugadores = arrayListOf<Jugador>()
         val tableroMain = TableroConecta4()
