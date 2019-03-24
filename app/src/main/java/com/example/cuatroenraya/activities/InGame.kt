@@ -85,10 +85,10 @@ class Ingame : AppCompatActivity(), PartidaListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ingame)
         startRound()
+        updateUI()
         if (savedInstanceState != null) {
             try {
                 board.stringToTablero(savedInstanceState?.getString(BOARDSTRING))
-                updateUI()
             } catch (e: ExcepcionJuego) {
                 e.printStackTrace()
                 //Snackbar.make(findViewById(R.id.round_title), "ExcepcionJuego thrown.",
@@ -115,7 +115,6 @@ class Ingame : AppCompatActivity(), PartidaListener {
         board = TableroConecta4()
         game = Partida(board, players)
         game.addObservador(this)
-        //TODO
         localPlayer.setPartida(game)
         registerListeners(localPlayer)
         if (game.tablero.estado == Tablero.EN_CURSO)

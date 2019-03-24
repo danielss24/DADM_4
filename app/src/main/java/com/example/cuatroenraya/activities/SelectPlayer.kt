@@ -20,9 +20,14 @@ class SelectPlayer : AppCompatActivity() {
         }
 
         val buttonOnePlayer : Button = findViewById(R.id.onePlayerButton)
-
         buttonOnePlayer.setOnClickListener{
             val intent = Intent(this, Ingame::class.java)
+            startActivity(intent)
+        }
+
+        val buttonTwoPlayer : Button = findViewById(R.id.twoPlayersButton)
+        buttonTwoPlayer.setOnClickListener{
+            val intent = Intent(this, RoundListActivity::class.java)
             startActivity(intent)
         }
 

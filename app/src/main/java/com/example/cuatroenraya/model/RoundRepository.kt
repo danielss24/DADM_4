@@ -1,4 +1,4 @@
-package com.example.cuatroenraya.utility
+package com.example.cuatroenraya.model
 
 object RoundRepository {
     val rounds = ArrayList<Round>()

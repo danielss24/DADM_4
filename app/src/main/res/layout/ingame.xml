@@ -12,7 +12,7 @@
             android:paddingTop="20dp"
     >
         <TextView
-                android:text="Conecta 4"
+                android:text="@string/title"
                 android:textSize="@dimen/title_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
