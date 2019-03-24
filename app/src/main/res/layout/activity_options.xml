@@ -45,7 +45,7 @@
                     android:id="@+id/editText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Nombre actual"/>
+                    android:hint="@string/nombreActual"/>
             <Space
                     android:layout_width="10dp"
                     android:layout_height="10dp" />
@@ -53,7 +53,7 @@
                     android:id="@+id/button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cambiar"/>
+                    android:text="@string/cambiar"/>
         </LinearLayout>
 
     </LinearLayout>

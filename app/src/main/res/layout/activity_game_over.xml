@@ -17,7 +17,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:inputType="textPersonName"
-                android:text="Fin de partida"
+                android:text="@string/finPartida"
                 android:ems="10"
                 android:id="@+id/mensajeFinPartida"/>
         <Space
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content">
             <Button
                     android:id="@+id/backMenuButton"
-                    android:text="Menu"
+                    android:text="@string/menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -39,7 +39,7 @@
                     android:layout_height="20dp"/>
             <Button
                     android:id="@+id/exitButton"
-                    android:text="Salir"
+                    android:text="@string/salir"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"

@@ -37,7 +37,7 @@
 
             <Button
                     android:id="@+id/onePlayerButton"
-                    android:text="1 Jugador"
+                    android:text="@string/unJugador"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -45,7 +45,7 @@
 
             <Button
                     android:id="@+id/twoPlayersButton"
-                    android:text="2 Jugadores"
+                    android:text="@string/dosJugadores"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
