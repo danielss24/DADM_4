@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/GuardarTest"
                 android:text="Guardar Test"
-                tools:text="Guardar Test"
+                tools:text="Guardar Partida"
                 android:onClick="guardarPartida"/>
 
     </LinearLayout>
