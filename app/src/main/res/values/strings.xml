@@ -11,7 +11,11 @@
     <string name="opciones">Opciones</string>
     <string name="cargar">Cargar</string>
     <string name="nuevaPartida">Nueva Partida</string>
-
+    <string name="chengePlayerChip">Cambiar de ficha</string>
+    <string name="player1">Jugador 1</string>
+    <string name="player2">Jugador 2</string>
+    <string name="micropagos">Desbloquear más fichas</string>
+    <string name="title_activity_chip_selector">ChipSelector</string>
 
 
 </resources>

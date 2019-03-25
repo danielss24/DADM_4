@@ -33,6 +33,78 @@
             />
         </RelativeLayout>
 
+        <Space
+                style="@style/bigSpace" />
+
+        <TextView
+                android:text="@string/player1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/subtitle_size"
+                android:id="@+id/player1" />
+        <Space
+                style="@style/mediumSpace" />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="0dp">
+
+
+            <EditText
+                    android:id="@+id/editTextPlayer1Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/nombreActual"/>
+            <Space
+                    android:layout_width="10dp"
+                    android:layout_height="10dp" />
+            <Button
+                    android:id="@+id/changePlayer1Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cambiar"/>
+        </LinearLayout>
+
+        <Space
+                style="@style/smallSpace" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="0dp">
+
+        <Button
+                android:id="@+id/changePlayer1Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chengePlayerChip"/>
+    </LinearLayout>
+
+
+
+        <Space
+                style="@style/bigSpace" />
+
+        <TextView
+                android:text="@string/player2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/subtitle_size"
+                android:id="@+id/player2" />
+        <Space
+                style="@style/mediumSpace" />
+
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,19 +114,53 @@
                 tools:layout_editor_absoluteX="0dp">
 
             <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/editTextPlayer2Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/nombreActual"/>
             <Space
-                    android:layout_width="10dp"
-                    android:layout_height="10dp" />
+                    style="@style/smallSpace" />
             <Button
-                    android:id="@+id/button"
+                    android:id="@+id/changePlayer2Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/cambiar"/>
         </LinearLayout>
+
+        <Space
+                style="@style/smallSpace" />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="0dp">
+
+            <Button
+                    android:id="@+id/changePlayer2Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chengePlayerChip"/>
+        </LinearLayout>
+        <Space
+                style="@style/bigSpace" />
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="0dp">
+
+            <Button
+                    android:id="@+id/micropagos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/micropagos"/>
+        </LinearLayout>
+
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
