@@ -7,12 +7,13 @@ import java.io.File
 object RoundRepository {
     val rounds = ArrayList<Round>()
     init {
+//TODO
+// CARGA DE PARTIDAS PERSISTENTES
+//        for (i in 0..100)
+//            rounds.add(Round(stringTablero = "X11110111110111110111110111110111110111110", nombrePartida = "nombrePartida"))
 
-        for (i in 0..100)
-            rounds.add(Round(stringTablero = "X11110111110111110111110111110111110111110", nombrePartida = "nombrePartida"))
-
-        val jugadores = arrayListOf<Jugador>()
-        val tableroMain = TableroConecta4()
+//        val jugadores = arrayListOf<Jugador>()
+//        val tableroMain = TableroConecta4()
 
 //        val path = File("./saves")
 //        println("Estos son las partidas guardadas, elige el nombre para cargar esa partida")
@@ -64,6 +65,18 @@ object RoundRepository {
     }
     fun getRound(id: String): Round {
         val round = rounds.find { it.id == id }
+        return round ?: throw Exception("Round not found.")
+    }
+    fun addRound(round: Round): Round {
+        var i = 0
+        for (roundF in rounds){
+            if (roundF.nombrePartida == round.nombrePartida){
+                roundF.board = round.board
+                return roundF
+            }
+            i++
+        }
+        rounds.add(round)
         return round ?: throw Exception("Round not found.")
     }
 }

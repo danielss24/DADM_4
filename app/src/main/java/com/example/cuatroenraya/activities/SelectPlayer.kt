@@ -22,6 +22,7 @@ class SelectPlayer : AppCompatActivity() {
         val buttonOnePlayer : Button = findViewById(R.id.onePlayerButton)
         buttonOnePlayer.setOnClickListener{
             val intent = Intent(this, Ingame::class.java)
+            intent.putExtra("TABLEROSTRING","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
             startActivity(intent)
         }
 

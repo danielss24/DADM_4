@@ -5,16 +5,24 @@ import java.io.File
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.support.design.widget.Snackbar
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import com.example.cuatroenraya.model.JugadorConecta4
 import com.example.cuatroenraya.R
+import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.model.TableroConecta4
 import com.example.cuatroenraya.utility.update
 import es.uam.eps.multij.*
-import java.util.ArrayList
+import com.example.cuatroenraya.model.RoundRepository
+import java.nio.file.Files
+import java.util.*
+import android.widget.EditText
+
+
 
 
 class Ingame : AppCompatActivity(), PartidaListener {
@@ -115,7 +123,9 @@ class Ingame : AppCompatActivity(), PartidaListener {
         val localPlayer = JugadorConecta4("Local player")
         players.add(localPlayer)
         players.add(randomPlayer)
+        val cargarIntent = intent.extras.getString("STRINGTABLERO")
         board = TableroConecta4()
+        board.stringToTablero(cargarIntent)
         game = Partida(board, players)
         game.addObservador(this)
         localPlayer.setPartida(game)
@@ -205,33 +215,12 @@ class Ingame : AppCompatActivity(), PartidaListener {
     }
 
     fun guardarPartida(View: View){
-        try {
-
-            val path = File("./saves")
-
-            if (path.mkdirs()) {
-                println("Se ha creado")
-            } else {
-                println("Ya esta creado")
-            }
-            val nombreFichero = "Test.txt"
-            val fichero = File(nombreFichero)
-
-
-            fichero.writeText(
-                "Turno: "+game.tablero.turno+"\n" +
-                        "NumJugadas: "+game.tablero.numJugadas+"\n" +
-                        "Mueve: "+game.tablero.turno+"\n" +
-                        "Jugador1: "+game.getJugador(0)+"\n" +
-                        "Jugador2: "+game.getJugador(1)+"\n" +
-                        "Tablero String: "+ board.tableroToString() +"\n"
-            )
-
-        } catch (e: ExcepcionJuego) {
-            e.printStackTrace()
-            //Snackbar.make(findViewById(R.id.round_title), "ExcepcionJuego thrown.",
-            //Snackbar.LENGTH_SHORT).show()
-        }
+        val mEdit: EditText
+        mEdit = findViewById(R.id.textoPartida) as EditText
+        RoundRepository.addRound(Round(board.tableroToString(), mEdit.text.toString()))
+        Snackbar.make(View,"Guardado", Snackbar.LENGTH_LONG).show()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.cuatroenraya.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
@@ -10,13 +11,13 @@ import kotlinx.android.synthetic.main.activity_round_list.*
 import android.support.design.widget.Snackbar
 import com.example.cuatroenraya.model.Round
 
-
 class RoundListActivity : AppCompatActivity() {
     fun onRoundSelected(round: Round) {
-        Snackbar.make(
-            recyclerView, "${round.title} selected",
-            Snackbar.LENGTH_SHORT
-        ).show()
+        val intent = Intent(this, Ingame::class.java)
+        intent.putExtra("STRINGTABLERO",round.stringTablero)
+        Snackbar.make(recyclerView, "${round.title} selected",Snackbar.LENGTH_SHORT).show()
+        startActivity(intent)
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,8 +32,6 @@ class RoundListActivity : AppCompatActivity() {
             else
                 adapter?.notifyDataSetChanged()
         }
-
-
     }
 
     override fun onResume() {
