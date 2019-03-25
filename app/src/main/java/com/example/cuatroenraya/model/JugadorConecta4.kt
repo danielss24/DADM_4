@@ -1,4 +1,6 @@
 package com.example.cuatroenraya.model
+
+import java.io.File
 import android.support.design.widget.Snackbar
 import android.view.View
 import com.example.cuatroenraya.R
@@ -13,7 +15,8 @@ constructor(private val nombre: String) : View.OnClickListener, Jugador {
 
 	val OPCIONES_CORRECTAS = arrayListOf<Int>(0,1,2,3,4,5,6,8,9)
 
-    val ids = arrayOf(intArrayOf(
+    val ids = arrayOf(
+        intArrayOf(
         R.id.c11,
         R.id.c12,
         R.id.c13,
@@ -77,20 +80,13 @@ constructor(private val nombre: String) : View.OnClickListener, Jugador {
     override fun onClick(v: View) {
         try {
             if (game.tablero.estado != Tablero.EN_CURSO) {
-                //TODO
-                // Comprobar la cadena
-                //Snackbar.make(v, R.string.round_already_finished,Snackbar.LENGTH_SHORT).show()
                 Snackbar.make(v, "round_already_finished", Snackbar.LENGTH_SHORT).show()
                 return
             }
-            //TODO
             val m: Movimiento = MovimientoConecta4(fromViewToJ(v))
             val a = AccionMover(this, m)
             game.realizaAccion(a)
         } catch (e: Exception) {
-            //TODO
-            // Comprobar la cadena
-            //Snackbar.make(v, R.string.invalid_movement,Snackbar.LENGTH_SHORT).show()
             Snackbar.make(v, "invalid_movement", Snackbar.LENGTH_SHORT).show()
         }
     }

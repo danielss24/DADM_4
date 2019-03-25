@@ -1,5 +1,7 @@
 package com.example.cuatroenraya.activities
 
+import java.io.FileNotFoundException
+import java.io.File
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -97,8 +99,6 @@ class Ingame : AppCompatActivity(), PartidaListener {
         }
     }
 
-
-
     private fun registerListeners(jugador: JugadorConecta4) {
         var button: ImageButton
         for (i in 0 until ids.size)
@@ -142,7 +142,6 @@ class Ingame : AppCompatActivity(), PartidaListener {
             }
         }
     }
-
 
     private var numero: Int = 0
 
@@ -202,8 +201,35 @@ class Ingame : AppCompatActivity(), PartidaListener {
         }
     }
 
+    fun guardarPartida(View: View){
+        try {
+
+            val path = File("./saves")
+
+            if (path.mkdirs()) {
+                println("Se ha creado")
+            } else {
+                println("Ya esta creado")
+            }
+            val nombreFichero = "Test.txt"
+            val fichero = File(nombreFichero)
 
 
+            fichero.writeText(
+                "Turno: "+game.tablero.turno+"\n" +
+                        "NumJugadas: "+game.tablero.numJugadas+"\n" +
+                        "Mueve: "+game.tablero.turno+"\n" +
+                        "Jugador1: "+game.getJugador(0)+"\n" +
+                        "Jugador2: "+game.getJugador(1)+"\n" +
+                        "Tablero String: "+ board.tableroToString() +"\n"
+            )
+
+        } catch (e: ExcepcionJuego) {
+            e.printStackTrace()
+            //Snackbar.make(findViewById(R.id.round_title), "ExcepcionJuego thrown.",
+            //Snackbar.LENGTH_SHORT).show()
+        }
+    }
 
 }
 
