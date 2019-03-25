@@ -18,7 +18,7 @@
 
             <Button
                     android:id="@+id/buttonNewGame"
-                    android:text="Nueva Partida"
+                    android:text="@string/nuevaPartida"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -26,7 +26,7 @@
 
             <Button
                     android:id="@+id/buttonLoadGame"
-                    android:text="Cargar"
+                    android:text="@string/cargar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -34,14 +34,14 @@
             />
             <Button
                     android:id="@+id/buttonOptions"
-                    android:text="Opciones"
+                    android:text="@string/opciones"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
             />
             <Button
                     android:id="@+id/buttonExit"
-                    android:text="Salir"
+                    android:text="@string/salir"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"

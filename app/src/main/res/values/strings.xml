@@ -1,4 +1,21 @@
 <resources>
     <string name="app_name">cuatroenraya</string>
     <string name="title">Conecta 4</string>
+    <string name="finPartida">Fin de partida</string>
+    <string name="menu">Menu</string>
+    <string name="salir">Salir</string>
+    <string name="nombreActual">Nombre actual</string>
+    <string name="cambiar">Cambiar</string>
+    <string name="unJugador">1 Jugador</string>
+    <string name="dosJugadores">2 Jugadores</string>
+    <string name="opciones">Opciones</string>
+    <string name="cargar">Cargar</string>
+    <string name="nuevaPartida">Nueva Partida</string>
+    <string name="chengePlayerChip">Cambiar de ficha</string>
+    <string name="player1">Jugador 1</string>
+    <string name="player2">Jugador 2</string>
+    <string name="micropagos">Desbloquear más fichas</string>
+    <string name="title_activity_chip_selector">ChipSelector</string>
+
+
 </resources>

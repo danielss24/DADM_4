@@ -11,18 +11,18 @@ import android.widget.TextView
 import com.example.cuatroenraya.R
 import kotlinx.android.synthetic.main.principal.view.*
 
-class GameOver : Activity() {
+
+class ChipSelector : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game_over)
-
+        setContentView(R.layout.activity_chip_selector)
 
         var dm = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(dm)
         var width = dm.widthPixels
         var height = dm.heightPixels
-        window.setLayout((width * 0.8).toInt(), (height * 0.4).toInt())
+        window.setLayout((width * 0.8).toInt(), (height * 0.8).toInt())
 
         val buttonMnu: Button = findViewById(R.id.backMenuButton)
         buttonMnu.setOnClickListener {
@@ -45,6 +45,7 @@ class GameOver : Activity() {
 
         val texttView: TextView = findViewById(R.id.mensanjeGanador)
         texttView.append("Gana: "+ winner)
-    }
 
+
+    }
 }
