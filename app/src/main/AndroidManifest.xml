@@ -25,6 +25,10 @@
         </activity>
         <activity android:name=".activities.Ingame">
         </activity>
+        <activity android:name=".activities.MainActivityFragment">
+        </activity>
+        <activity android:name=".activities.DetailActivity">
+        </activity>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

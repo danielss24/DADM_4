@@ -17,5 +17,8 @@
     <string name="micropagos">Desbloquear más fichas</string>
     <string name="title_activity_chip_selector">ChipSelector</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
