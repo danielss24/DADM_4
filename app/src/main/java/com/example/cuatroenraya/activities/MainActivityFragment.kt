@@ -1,4 +1,5 @@
 package com.example.cuatroenraya.activities
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -12,8 +13,15 @@ class MainActivityFragment : AppCompatActivity(), LeftFragment.OnFragmentInterac
             val rightFragment = RightFragment.newInstance("Button pressed")
             fm.beginTransaction().add(R.id.fragment_detail_container,
                 rightFragment).commit()
+        }else if (fragment_detail_container == null){
+            val intent = DetailActivity.newIntent(this, "Button pressed")
+            //Esto es para funcionar con el otro
+            //val intent = Intent(this, DetailActivity::class.java)
+            startActivity(intent)
         }
     }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment)

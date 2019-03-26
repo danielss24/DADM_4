@@ -34,6 +34,11 @@ class LeftFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_left, container, false)
     }
 
+
+    // TODO: Rename method, update argument and hook method into UI event
+    fun onButtonPressed(string: String) {
+        listener?.onFragmentInteraction(string)
+    }
     override fun onStart() {
         super.onStart()
         buttonFR.setOnClickListener { listener?.onFragmentInteraction("Button pressed") }
