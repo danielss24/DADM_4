@@ -1,5 +1,6 @@
 package com.example.cuatroenraya.activities
 
+import android.content.Context
 import java.io.FileNotFoundException
 import java.io.File
 import android.content.Intent
@@ -221,6 +222,15 @@ class Ingame : AppCompatActivity(), PartidaListener {
         Snackbar.make(View,"Guardado", Snackbar.LENGTH_LONG).show()
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+    }
+
+    companion object {
+        val EXTRA_ROUND_ID = "com.example.cuatroenraya.activities.round_id"
+        fun newIntent(packageContext: Context, roundId: String): Intent {
+            val intent = Intent(packageContext, Ingame::class.java)
+            intent.putExtra(EXTRA_ROUND_ID, roundId)
+            return intent
+        }
     }
 
 }

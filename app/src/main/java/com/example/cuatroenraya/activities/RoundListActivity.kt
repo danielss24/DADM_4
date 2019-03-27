@@ -10,6 +10,7 @@ import com.example.cuatroenraya.model.RoundRepository
 import kotlinx.android.synthetic.main.activity_round_list.*
 import android.support.design.widget.Snackbar
 import com.example.cuatroenraya.model.Round
+import com.example.cuatroenraya.utility.executeTransaction
 
 class RoundListActivity : AppCompatActivity() {
     fun onRoundSelected(round: Round) {
@@ -17,20 +18,14 @@ class RoundListActivity : AppCompatActivity() {
         intent.putExtra("STRINGTABLERO",round.stringTablero)
         Snackbar.make(recyclerView, "${round.title} selected",Snackbar.LENGTH_SHORT).show()
         startActivity(intent)
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_round_list)
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(applicationContext)
-            itemAnimator = DefaultItemAnimator()
-            if (adapter == null)
-                adapter = RoundAdapter(RoundRepository.rounds)
-                { round -> onRoundSelected(round) }
-            else
-                adapter?.notifyDataSetChanged()
+        setContentView(R.layout.activity_fragment)
+        val fm = supportFragmentManager
+        if (fm.findFragmentById(R.id.fragment_container) == null) {
+            fm.executeTransaction { add(R.id.fragment_container, RoundListFragment()) }
         }
     }
 

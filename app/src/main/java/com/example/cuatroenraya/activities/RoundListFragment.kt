@@ -1,30 +1,49 @@
 package com.example.cuatroenraya.activities
 
-import android.support.v7.app.AppCompatActivity
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_fragment.*
-import android.content.Intent
+import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import com.example.cuatroenraya.R
-import com.example.cuatroenraya.model.RoundRepository
-import kotlinx.android.synthetic.main.activity_round_list.*
-import android.support.design.widget.Snackbar
-import com.example.cuatroenraya.model.*
-import com.example.cuatroenraya.activities.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 
-//TODO PAQUETE 13 DE PDFS
-/*
+import com.example.cuatroenraya.R
+import com.example.cuatroenraya.model.Round
+import com.example.cuatroenraya.utility.update
+import kotlinx.android.synthetic.main.fragment_round_list.*
+
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
+
+/**
+ * A simple [Fragment] subclass.
+ * Activities that contain this fragment must implement the
+ * [RoundListFragment.OnFragmentInteractionListener] interface
+ * to handle interaction events.
+ *
+ */
 class RoundListFragment : Fragment() {
+    private var listener: OnFragmentInteractionListener? = null
+
     fun onRoundSelected(round: Round) {
-        val intent = RoundActivity.newIntent(context!!, round.id)
+        val intent = Ingame.newIntent(context!!, round.id)
         startActivity(intent)
     }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_round_list, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         round_recycler_view.apply {
@@ -33,4 +52,41 @@ class RoundListFragment : Fragment() {
             update { round -> onRoundSelected(round) }
         }
     }
-}*/
+
+
+    // TODO: Rename method, update argument and hook method into UI event
+    fun onButtonPressed(uri: Uri) {
+        listener?.onFragmentInteraction(uri)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnFragmentInteractionListener) {
+            listener = context
+        } else {
+            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     *
+     *
+     * See the Android Training lesson [Communicating with Other Fragments]
+     * (http://developer.android.com/training/basics/fragments/communicating.html)
+     * for more information.
+     */
+    interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        fun onFragmentInteraction(uri: Uri)
+    }
+
+}
