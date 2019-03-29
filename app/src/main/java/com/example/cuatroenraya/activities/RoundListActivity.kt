@@ -39,6 +39,8 @@ class RoundListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_games_list)
         val fm = supportFragmentManager
+        //val fragment = RoundListFragment()
+        //fm.beginTransaction().add(R.id.fragment_container, fragment).commit()
         if (fm.findFragmentById(R.id.fragment_container) == null) {
             fm.executeTransaction { add(R.id.fragment_container, RoundListFragment()) }
         }

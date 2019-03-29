@@ -27,6 +27,7 @@ fun RecyclerView.update(onClickListener: (Round) -> Unit) {
     }else{
         adapter!!.notifyDataSetChanged()
     }
+
 }
 fun FragmentManager.executeTransaction(operations: (FragmentTransaction.() -> Unit)) {
     val transaction = beginTransaction()
