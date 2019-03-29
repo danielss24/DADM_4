@@ -110,7 +110,7 @@ class Ingame : AppCompatActivity(), PartidaListener {
     }
 
     companion object {
-        val TABLEROSTRING = "com.example.cuatroenraya"
+        val TABLEROSTRING = "TABLEROSTRING"
         fun newIntent(package_context: Context, tablero: String): Intent {
             val intent = Intent(package_context, Ingame::class.java)
             intent.putExtra(TABLEROSTRING, tablero)
@@ -133,7 +133,7 @@ class Ingame : AppCompatActivity(), PartidaListener {
         val localPlayer = JugadorConecta4("Local player")
         players.add(localPlayer)
         players.add(randomPlayer)
-        val cargarIntent = intent.extras.getString("STRINGTABLERO")
+        val cargarIntent = intent.extras.getString("TABLEROSTRING")
         board = TableroConecta4()
         board.stringToTablero(cargarIntent)
         game = Partida(board, players)
