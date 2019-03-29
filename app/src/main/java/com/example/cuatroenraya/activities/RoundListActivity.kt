@@ -12,9 +12,15 @@ import android.support.design.widget.Snackbar
 import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.utility.executeTransaction
 import kotlinx.android.synthetic.main.activity_games_list.*
+import kotlinx.android.synthetic.main.fragment_round_list.*
 
-class RoundListActivity : AppCompatActivity(),RoundListFragment.OnRoundListFragmentInteractionListener {
+class RoundListActivity : AppCompatActivity(),
+    RoundListFragment.OnRoundListFragmentInteractionListener,
+    RoundFragment.OnRoundFragmentInteractionListener {
 
+    override fun onRoundUpdated() {
+        recyclerView.adapter!!.notifyDataSetChanged()
+    }
     override fun onRoundSelected(round: Round) {
         val fm = supportFragmentManager
         if (fragment_detail_container == null) {
@@ -35,7 +41,7 @@ class RoundListActivity : AppCompatActivity(),RoundListFragment.OnRoundListFragm
     }
 
 
-    override fun onResume() {
+    /*override fun onResume() {
         super.onResume()
         updateUI()
     }
@@ -50,5 +56,5 @@ class RoundListActivity : AppCompatActivity(),RoundListFragment.OnRoundListFragm
                 adapter?.notifyDataSetChanged()
             }
         }
-    }
+    }*/
 }

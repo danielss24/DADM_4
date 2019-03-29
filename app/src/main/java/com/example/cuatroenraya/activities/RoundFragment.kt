@@ -19,11 +19,6 @@ import com.example.cuatroenraya.utility.update
 import es.uam.eps.multij.*
 import kotlinx.android.synthetic.main.fragment_round.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
@@ -35,7 +30,10 @@ class RoundFragment : Fragment(), PartidaListener {
     private lateinit var game: Partida
     private lateinit var round: Round
     private lateinit var board: TableroConecta4
-
+    var listener: OnRoundFragmentInteractionListener? = null
+    interface OnRoundFragmentInteractionListener {
+        fun onRoundUpdated()
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +43,20 @@ class RoundFragment : Fragment(), PartidaListener {
             board = round.board
         }
     }
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is OnRoundFragmentInteractionListener)
+            listener = context
+        else {
+            throw RuntimeException(context.toString() +
+                    " must implement OnRoundFragmentInteractionListener")
+        }
+    }
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -83,9 +95,12 @@ class RoundFragment : Fragment(), PartidaListener {
         when (evento.tipo) {
             Evento.EVENTO_CAMBIO -> {
                 view?.update(round)
+                listener?.onRoundUpdated()
+
             }
             Evento.EVENTO_FIN -> {
                 view?.update(round)
+                listener?.onRoundUpdated()
                 Snackbar.make(view!!, "Game over", Snackbar.LENGTH_SHORT).show()
             }
         }

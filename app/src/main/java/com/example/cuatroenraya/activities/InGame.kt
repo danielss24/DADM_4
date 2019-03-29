@@ -22,11 +22,10 @@ import com.example.cuatroenraya.model.RoundRepository
 import java.nio.file.Files
 import java.util.*
 import android.widget.EditText
+import com.example.cuatroenraya.utility.executeTransaction
 
 
-
-
-class Ingame : AppCompatActivity(), PartidaListener {
+class Ingame : AppCompatActivity(), PartidaListener, RoundFragment.OnRoundFragmentInteractionListener {
     val BOARDSTRING = "com.example.cuatroenraya.grid"
 
     private lateinit var game: Partida
@@ -96,6 +95,13 @@ class Ingame : AppCompatActivity(), PartidaListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ingame)
+        val fm = supportFragmentManager
+        if (fm.findFragmentById(R.id.fragment_container) == null) {
+            val fragment =
+                RoundFragment.newInstance(intent.getStringExtra(TABLEROSTRING))
+            fm.executeTransaction { add(R.id.fragment_container, fragment) }
+        }
+        /*
         startRound()
         updateUI()
         if (savedInstanceState != null) {
@@ -106,7 +112,7 @@ class Ingame : AppCompatActivity(), PartidaListener {
                 //Snackbar.make(findViewById(R.id.round_title), "ExcepcionJuego thrown.",
                 //Snackbar.LENGTH_SHORT).show()
             }
-        }
+        }*/
     }
 
     companion object {
@@ -180,6 +186,9 @@ class Ingame : AppCompatActivity(), PartidaListener {
                     + text
         )
         numero++
+    }
+
+    override fun onRoundUpdated() {
     }
 
     override fun onStart() {
