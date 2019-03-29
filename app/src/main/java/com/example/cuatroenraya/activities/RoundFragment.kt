@@ -3,12 +3,21 @@ package com.example.cuatroenraya.activities
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.example.cuatroenraya.R
+import com.example.cuatroenraya.model.JugadorConecta4
+import com.example.cuatroenraya.model.Round
+import com.example.cuatroenraya.model.RoundRepository
+import com.example.cuatroenraya.model.TableroConecta4
+import com.example.cuatroenraya.utility.setPlayerAsOnClickListener
+import com.example.cuatroenraya.utility.update
+import es.uam.eps.multij.*
+import kotlinx.android.synthetic.main.fragment_round.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,20 +31,77 @@ private const val ARG_PARAM2 = "param2"
  * to handle interaction events.
  *
  */
-class RoundFragment : Fragment() {
+class RoundFragment : Fragment(), PartidaListener {
     private var listener: OnFragmentInteractionListener? = null
+    private lateinit var game: Partida
+    private lateinit var round: Round
+    private lateinit var board: TableroConecta4
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            round = RoundRepository.getRound(it.getString(ARG_ROUND_ID))
+            board = round.board
+        }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_round, container, false)
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        round_title.text = round.title
+    }
+
+    override fun onStart() {
+        super.onStart()
+        startRound()
+    }
+    override fun onResume() {
+        super.onResume()
+        view?.update(round)
+    }
+
+    internal fun startRound() {
+        val players = ArrayList<Jugador>()
+        val randomPlayer = JugadorConecta4("Random player")
+        val localPlayer = JugadorConecta4("Local player")
+        players.add(randomPlayer)
+        players.add(localPlayer)
+        game = Partida(round.board, players)
+        game.addObservador(this)
+        localPlayer.setPartida(game)
+        view?.setPlayerAsOnClickListener(localPlayer)
+        if (game.tablero.estado == Tablero.EN_CURSO)
+            game.comenzar()
+    }
+
+    override fun onCambioEnPartida(evento: Evento) {
+        when (evento.tipo) {
+            Evento.EVENTO_CAMBIO -> {
+                view?.update(round)
+            }
+            Evento.EVENTO_FIN -> {
+                view?.update(round)
+                Snackbar.make(view!!, "Game over", Snackbar.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
+
+    companion object {
+        val ARG_ROUND_ID = "es.uam.eps.dadm.er13.roundid"
+        @JvmStatic
+        fun newInstance(round_id: String) =
+            RoundFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_ROUND_ID, round_id)
+                }
+            }
     }
 
     override fun onAttach(context: Context) {
