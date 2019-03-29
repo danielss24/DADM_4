@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,11 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class RoundListFragment : Fragment() {
-    private var listener: OnFragmentInteractionListener? = null
+    lateinit var recyclerView: RecyclerView
+    var listener: OnRoundListFragmentInteractionListener? = null
+    interface OnRoundListFragmentInteractionListener {
+        fun onRoundSelected(round: Round)
+    }
 
     fun onRoundSelected(round: Round) {
         val intent = Ingame.newIntent(context!!, round.id)
@@ -54,39 +59,18 @@ class RoundListFragment : Fragment() {
     }
 
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
 
-    override fun onAttach(context: Context) {
+    override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
+        if (context is OnRoundListFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+            throw RuntimeException(context.toString() +
+                    " must implement OnRoundListFragmentInteractionListener")
         }
     }
-
     override fun onDetach() {
         super.onDetach()
         listener = null
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
-
 }

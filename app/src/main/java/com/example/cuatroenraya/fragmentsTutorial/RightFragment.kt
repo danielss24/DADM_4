@@ -1,4 +1,4 @@
-package com.example.cuatroenraya.activities
+package com.example.cuatroenraya.fragmentsTutorial
 
 
 import android.os.Bundle

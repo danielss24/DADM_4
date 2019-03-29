@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import com.example.cuatroenraya.R
 import com.example.cuatroenraya.model.JugadorConecta4
 import com.example.cuatroenraya.model.Round
@@ -17,6 +18,7 @@ import com.example.cuatroenraya.model.TableroConecta4
 import com.example.cuatroenraya.utility.setPlayerAsOnClickListener
 import com.example.cuatroenraya.utility.update
 import es.uam.eps.multij.*
+import kotlinx.android.synthetic.*
 
 import kotlinx.android.synthetic.main.ingame.*
 
@@ -41,9 +43,25 @@ class RoundFragment : Fragment(), PartidaListener  {
 
     private lateinit var board: TableroConecta4
 
+    var listener: OnRoundFragmentInteractionListener? = null
+    interface OnRoundFragmentInteractionListener {
+        fun onRoundUpdated()
+    }
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is OnRoundFragmentInteractionListener)
+            listener = context
+        else {
+            throw RuntimeException(context.toString() +
+                    " must implement OnRoundFragmentInteractionListener")
+        }
+    }
 
-    private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +101,8 @@ class RoundFragment : Fragment(), PartidaListener  {
         view?.update(round)
     }
 
+
+
     internal fun startRound() {
         val players = java.util.ArrayList<Jugador>()
         val randomPlayer = JugadorAleatorio("Random player")
@@ -103,49 +123,17 @@ class RoundFragment : Fragment(), PartidaListener  {
     override fun onCambioEnPartida(evento: Evento) {
         when (evento.tipo) {
             Evento.EVENTO_CAMBIO -> {
-                view?.update(round)
+                //updateUI()
+                listener?.onRoundUpdated()
             }
             Evento.EVENTO_FIN -> {
-                view?.update(round)
-                //Aquí no puedo llamar al Intent no se por que
+                //updateUI()
+                listener?.onRoundUpdated()
                 Snackbar.make(view!!, "Game over", Snackbar.LENGTH_SHORT).show()
             }
         }
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
 
 }

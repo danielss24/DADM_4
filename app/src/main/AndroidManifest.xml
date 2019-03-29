@@ -25,9 +25,9 @@
         </activity>
         <activity android:name=".activities.Ingame">
         </activity>
-        <activity android:name=".activities.MainActivityFragment">
+        <activity android:name=".fragmentsTutorial.MainActivityFragment">
         </activity>
-        <activity android:name=".activities.DetailActivity">
+        <activity android:name=".fragmentsTutorial.DetailActivity">
         </activity>
         <activity android:name=".activities.MainActivity">
             <intent-filter>

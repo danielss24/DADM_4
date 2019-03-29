@@ -22,11 +22,10 @@ import com.example.cuatroenraya.model.RoundRepository
 import java.nio.file.Files
 import java.util.*
 import android.widget.EditText
+import com.example.cuatroenraya.utility.executeTransaction
 
 
-
-
-class Ingame : AppCompatActivity(), PartidaListener {
+class Ingame : AppCompatActivity(), PartidaListener, RoundFragment.OnRoundFragmentInteractionListener {
     val BOARDSTRING = "com.example.cuatroenraya.grid"
 
     private lateinit var game: Partida
@@ -92,8 +91,20 @@ class Ingame : AppCompatActivity(), PartidaListener {
     private val listener = View.OnClickListener { view ->
         view.setBackgroundResource(R.drawable.casilla_vacia_24dpfilled)
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_fragment)
+        val fm = supportFragmentManager
+        if (fm.findFragmentById(R.id.fragment_container) == null) {
+            val fragment =
+                RoundFragment.newInstance(intent.getStringExtra(EXTRA_ROUND_ID))
+            fm.executeTransaction { add(R.id.fragment_container, fragment) }
+        }
+    }
+    override fun onRoundUpdated() {
+    }
+
+    /*override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ingame)
         startRound()
@@ -107,7 +118,7 @@ class Ingame : AppCompatActivity(), PartidaListener {
                 //Snackbar.LENGTH_SHORT).show()
             }
         }
-    }
+    }*/
 
     private fun registerListeners(jugador: JugadorConecta4) {
         var button: ImageButton
@@ -147,6 +158,7 @@ class Ingame : AppCompatActivity(), PartidaListener {
         when (evento.tipo) {
             Evento.EVENTO_CAMBIO -> updateUI()
             Evento.EVENTO_FIN -> {
+                updateUI()
                 val intent = Intent(this, GameOver::class.java)
                 //Esto es para pasar info entre activities
                 val bundle = Bundle()

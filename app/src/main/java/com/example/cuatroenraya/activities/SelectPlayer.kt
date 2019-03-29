@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import com.example.cuatroenraya.R
+import com.example.cuatroenraya.fragmentsTutorial.MainActivityFragment
 
 class SelectPlayer : AppCompatActivity() {
 
