@@ -22,10 +22,11 @@ import com.example.cuatroenraya.model.RoundRepository
 import java.nio.file.Files
 import java.util.*
 import android.widget.EditText
-import com.example.cuatroenraya.utility.executeTransaction
 
 
-class Ingame : AppCompatActivity(), PartidaListener, RoundFragment.OnRoundFragmentInteractionListener {
+
+
+class Ingame : AppCompatActivity(), PartidaListener {
     val BOARDSTRING = "com.example.cuatroenraya.grid"
 
     private lateinit var game: Partida
@@ -91,20 +92,8 @@ class Ingame : AppCompatActivity(), PartidaListener, RoundFragment.OnRoundFragme
     private val listener = View.OnClickListener { view ->
         view.setBackgroundResource(R.drawable.casilla_vacia_24dpfilled)
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_fragment)
-        val fm = supportFragmentManager
-        if (fm.findFragmentById(R.id.fragment_container) == null) {
-            val fragment =
-                RoundFragment.newInstance(intent.getStringExtra(EXTRA_ROUND_ID))
-            fm.executeTransaction { add(R.id.fragment_container, fragment) }
-        }
-    }
-    override fun onRoundUpdated() {
-    }
 
-    /*override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ingame)
         startRound()
@@ -118,7 +107,16 @@ class Ingame : AppCompatActivity(), PartidaListener, RoundFragment.OnRoundFragme
                 //Snackbar.LENGTH_SHORT).show()
             }
         }
-    }*/
+    }
+
+    companion object {
+        val TABLEROSTRING = "com.example.cuatroenraya"
+        fun newIntent(package_context: Context, tablero: String): Intent {
+            val intent = Intent(package_context, Ingame::class.java)
+            intent.putExtra(TABLEROSTRING, tablero)
+            return intent
+        }
+    }
 
     private fun registerListeners(jugador: JugadorConecta4) {
         var button: ImageButton
@@ -131,7 +129,7 @@ class Ingame : AppCompatActivity(), PartidaListener, RoundFragment.OnRoundFragme
 
     private fun startRound() {
         val players = ArrayList<Jugador>()
-        val randomPlayer = JugadorAleatorio("Random player")
+        val randomPlayer = JugadorConecta4("Random player")
         val localPlayer = JugadorConecta4("Local player")
         players.add(localPlayer)
         players.add(randomPlayer)
@@ -158,13 +156,18 @@ class Ingame : AppCompatActivity(), PartidaListener, RoundFragment.OnRoundFragme
         when (evento.tipo) {
             Evento.EVENTO_CAMBIO -> updateUI()
             Evento.EVENTO_FIN -> {
-                updateUI()
-                val intent = Intent(this, GameOver::class.java)
-                //Esto es para pasar info entre activities
-                val bundle = Bundle()
-                bundle.putString("ganador", game.getJugador(game.tablero.turno).nombre)
-                intent.putExtras(bundle)
-                startActivity(intent)
+                if(this.board.estado == Tablero.FINALIZADA){
+                    val intent = Intent(this, GameOver::class.java)
+                    //Esto es para pasar info entre activities
+                    val bundle = Bundle()
+                    bundle.putString("ganador", game.getJugador(game.tablero.turno).nombre)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
+                }else if (this.board.estado == Tablero.TABLAS){
+                    val intent = Intent(this, GameOver::class.java)
+                    startActivity(intent)
+                }
+
             }
         }
     }
@@ -234,15 +237,6 @@ class Ingame : AppCompatActivity(), PartidaListener, RoundFragment.OnRoundFragme
         Snackbar.make(View,"Guardado", Snackbar.LENGTH_LONG).show()
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-    }
-
-    companion object {
-        val EXTRA_ROUND_ID = "com.example.cuatroenraya.activities.round_id"
-        fun newIntent(packageContext: Context, roundId: String): Intent {
-            val intent = Intent(packageContext, Ingame::class.java)
-            intent.putExtra(EXTRA_ROUND_ID, roundId)
-            return intent
-        }
     }
 
 }

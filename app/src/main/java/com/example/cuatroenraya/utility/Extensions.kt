@@ -162,13 +162,6 @@ fun View.update(round: Round) {
     for (i in 0 until ids.size)
         for (j in 0 until ids[i].size) {
             val button = findViewById(ids[i][j]) as ImageButton
-            with(button) {
-                if (round.board.getTablero(i, j) == round.board.JUGADOR1)
-                    setBackgroundResource(R.drawable.circle__red_24dp)
-                else if (round.board.getTablero(i, j) == round.board.IS_EMPTY)
-                    setBackgroundResource(R.drawable.circle__empty_24dp)
-                else
-                    setBackgroundResource(R.drawable.circle__black_24dp)
-            }
+            button.update(round.board, i, j)
         }
 }

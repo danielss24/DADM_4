@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import com.example.cuatroenraya.R
-import com.example.cuatroenraya.fragmentsTutorial.MainActivityFragment
+import com.example.cuatroenraya.model.Round
 
 class SelectPlayer : AppCompatActivity() {
 
@@ -22,14 +22,7 @@ class SelectPlayer : AppCompatActivity() {
 
         val buttonOnePlayer : Button = findViewById(R.id.onePlayerButton)
         buttonOnePlayer.setOnClickListener{
-            val intent = Intent(this, Ingame::class.java)
-            intent.putExtra("TABLEROSTRING","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-            startActivity(intent)
-        }
-
-        val buttonTwoPlayers : Button = findViewById(R.id.twoPlayersButton)
-        buttonTwoPlayers .setOnClickListener{
-            val intent = Intent(this, MainActivityFragment::class.java)
+            val intent = Ingame.newIntent(this, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
             startActivity(intent)
         }
 
