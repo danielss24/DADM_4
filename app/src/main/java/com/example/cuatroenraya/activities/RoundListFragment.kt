@@ -7,6 +7,7 @@ import android.provider.SyncStateContract.Helpers.update
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,8 +30,28 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class RoundListFragment : Fragment() {
+    //lateinit var recyclerView: RecyclerView
+    var listener: OnRoundListFragmentInteractionListener? = null
+
+    interface OnRoundListFragmentInteractionListener {
+        fun onRoundSelected(round: Round)
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is OnRoundListFragmentInteractionListener) {
+            listener = context
+        } else {
+            throw RuntimeException(context.toString() +
+                    " must implement OnRoundListFragmentInteractionListener")
+        }
+    }
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
+
     fun onRoundSelected(round: Round) {
-        //TODO ese round.id pasa a ser stringTablero
         val intent = Ingame.newIntent(context!!, round.stringTablero)
         startActivity(intent)
     }
@@ -46,6 +67,5 @@ class RoundListFragment : Fragment() {
             update { round -> onRoundSelected(round) }
         }
     }
-
 
 }

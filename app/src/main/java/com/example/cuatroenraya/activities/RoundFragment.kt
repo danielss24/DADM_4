@@ -41,7 +41,7 @@ class RoundFragment : Fragment(), PartidaListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            round = RoundRepository.getRound(it.getString(ARG_ROUND_ID))
+            round = Round(it.getString(TABLEROSTRING), "NombrePartida")
             board = round.board
         }
     }
@@ -67,8 +67,8 @@ class RoundFragment : Fragment(), PartidaListener {
 
     internal fun startRound() {
         val players = ArrayList<Jugador>()
-        val randomPlayer = JugadorConecta4("Random player")
         val localPlayer = JugadorConecta4("Local player")
+        val randomPlayer = JugadorConecta4("Random player")
         players.add(randomPlayer)
         players.add(localPlayer)
         game = Partida(round.board, players)
@@ -91,15 +91,13 @@ class RoundFragment : Fragment(), PartidaListener {
         }
     }
 
-
-
     companion object {
-        val ARG_ROUND_ID = "es.uam.eps.dadm.er13.roundid"
+        val TABLEROSTRING = "TABLEROSTRING"
         @JvmStatic
         fun newInstance(round_id: String) =
             RoundFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_ROUND_ID, round_id)
+                    putString(TABLEROSTRING, round_id)
                 }
             }
     }

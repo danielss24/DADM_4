@@ -129,8 +129,8 @@ class Ingame : AppCompatActivity(), PartidaListener {
 
     private fun startRound() {
         val players = ArrayList<Jugador>()
-        val randomPlayer = JugadorConecta4("Random player")
         val localPlayer = JugadorConecta4("Local player")
+        val randomPlayer = JugadorConecta4("Random player")
         players.add(localPlayer)
         players.add(randomPlayer)
         val cargarIntent = intent.extras.getString("TABLEROSTRING")
