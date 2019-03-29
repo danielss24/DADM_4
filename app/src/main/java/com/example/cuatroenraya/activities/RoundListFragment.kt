@@ -64,7 +64,7 @@ class RoundListFragment : Fragment() {
         recyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
             itemAnimator = DefaultItemAnimator()
-            update { round -> onRoundSelected(round) }
+            update { round ->  listener?.onRoundSelected(round) }
         }
     }
 
