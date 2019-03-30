@@ -19,5 +19,7 @@
     <string name="title_activity_chip_selector">ChipSelector</string>
     <string name="new_round">Nueva Partida</string>
     <string name="game_over_message">¿Quieres jugar otra partida?</string>
+    <string name="round_already_finished">Partida finalizada</string>
+    <string name="round_restarted">Partida reiniciada</string>
 
 </resources>
