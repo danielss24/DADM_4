@@ -241,7 +241,6 @@ class RoundFragment : Fragment(), PartidaListener {
                 listener?.onRoundUpdated()
                 //Snackbar.make(view!!, "Game over", Snackbar.LENGTH_SHORT).show()
                 AlertDialogFragment().show(activity?.supportFragmentManager,"ALERT_DIALOG")
-
             }
         }
     }
