@@ -7,22 +7,18 @@ import java.io.File
 object RoundRepository {
     val rounds = ArrayList<Round>()
     init {
-
     }
     fun getRound(id: String): Round {
         val round = rounds.find { it.id == id }
         return round ?: throw Exception("Round not found.")
     }
-    fun addRound(round: Round): Round {
-        var i = 0
-        for (roundF in rounds){
-            if (roundF.nombrePartida == round.nombrePartida){
-                roundF.board = round.board
-                return roundF
-            }
-            i++
-        }
+    fun addRound():String{
+        var round = Round()
         rounds.add(round)
-        return round ?: throw Exception("Round not found.")
+        return round.id
+    }
+
+    fun saveRound(round: Round){
+        rounds.add(round)
     }
 }

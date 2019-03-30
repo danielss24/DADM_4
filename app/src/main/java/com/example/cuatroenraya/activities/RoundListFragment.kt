@@ -52,7 +52,7 @@ class RoundListFragment : Fragment() {
     }
 
     fun onRoundSelected(round: Round) {
-        val intent = Ingame.newIntent(context!!, round.stringTablero)
+        val intent = Ingame.newIntent(context!!, round.board.tableroToString())
         startActivity(intent)
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

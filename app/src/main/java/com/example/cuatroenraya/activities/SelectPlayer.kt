@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import com.example.cuatroenraya.R
-import com.example.cuatroenraya.model.Round
+import com.example.cuatroenraya.model.RoundRepository
+import com.example.cuatroenraya.utility.executeTransaction
+import kotlinx.android.synthetic.main.activity_twopane.*
 
 class SelectPlayer : AppCompatActivity() {
 
@@ -22,8 +24,16 @@ class SelectPlayer : AppCompatActivity() {
 
         val buttonOnePlayer : Button = findViewById(R.id.onePlayerButton)
         buttonOnePlayer.setOnClickListener{
-            val intent = Ingame.newIntent(this, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-            startActivity(intent)
+            setContentView(R.layout.activity_masterdetail)
+            val round_id = RoundRepository.addRound()
+            val fm = supportFragmentManager
+            if (detail_fragment_container == null) {
+                startActivity(Ingame.newIntent(this, round_id))
+
+            } else {
+                fm.executeTransaction { replace(R.id.detail_fragment_container,
+                    RoundFragment.newInstance(round_id)) }
+            }
         }
 
 
