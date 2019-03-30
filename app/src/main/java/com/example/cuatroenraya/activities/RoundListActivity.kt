@@ -1,5 +1,6 @@
 package com.example.cuatroenraya.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -10,7 +11,13 @@ import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.utility.executeTransaction
 import kotlinx.android.synthetic.main.activity_twopane.*
 
-class RoundListActivity : AppCompatActivity(),RoundListFragment.OnRoundListFragmentInteractionListener {
+class RoundListActivity : AppCompatActivity(),
+    RoundListFragment.OnRoundListFragmentInteractionListener,
+    RoundFragment.OnRoundFragmentInteractionListener{
+
+    override fun onRoundUpdated() {
+        recyclerView.adapter!!.notifyDataSetChanged()
+    }
 
     override fun onRoundSelected(round: Round) {
         val fm = supportFragmentManager
@@ -30,7 +37,6 @@ class RoundListActivity : AppCompatActivity(),RoundListFragment.OnRoundListFragm
             fm.executeTransaction { add(R.id.fragment_container, RoundListFragment()) }
         }
     }
-
 
     override fun onResume() {
         super.onResume()

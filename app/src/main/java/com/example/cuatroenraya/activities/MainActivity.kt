@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.content.Intent
 import android.widget.Button
 import com.example.cuatroenraya.R
+import com.example.cuatroenraya.model.RoundRepository
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +23,16 @@ class MainActivity : AppCompatActivity() {
 
         val buttonCargar : Button = findViewById(R.id.buttonLoadGame)
         buttonCargar.setOnClickListener{
+            //TEST//
+            RoundRepository.addRound()
+            RoundRepository.addRound()
+            RoundRepository.addRound()
+
+
+
+
+
+            ////
             val intent = Intent(this, RoundListActivity::class.java)
             startActivity(intent)
         }

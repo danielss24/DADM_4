@@ -25,11 +25,7 @@ import android.widget.EditText
 import com.example.cuatroenraya.utility.executeTransaction
 
 
-class Ingame : AppCompatActivity() {
-    val BOARDSTRING = "com.example.cuatroenraya.grid"
-
-    private lateinit var game: Partida
-    private lateinit var board: TableroConecta4
+class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +45,8 @@ class Ingame : AppCompatActivity() {
             intent.putExtra(ROUND_ID, round_id)
             return intent
         }
+    }
+    override fun onRoundUpdated() {
     }
 
 

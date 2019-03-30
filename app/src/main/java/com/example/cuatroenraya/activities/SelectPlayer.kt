@@ -24,6 +24,7 @@ class SelectPlayer : AppCompatActivity() {
 
         val buttonOnePlayer : Button = findViewById(R.id.onePlayerButton)
         buttonOnePlayer.setOnClickListener{
+
             setContentView(R.layout.activity_masterdetail)
             val round_id = RoundRepository.addRound()
             val fm = supportFragmentManager
