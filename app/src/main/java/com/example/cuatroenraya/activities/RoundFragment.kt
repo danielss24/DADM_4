@@ -110,7 +110,9 @@ class RoundFragment : Fragment(), PartidaListener {
             Evento.EVENTO_FIN -> {
                 view?.update(round)
                 listener?.onRoundUpdated()
-                Snackbar.make(view!!, "Game over", Snackbar.LENGTH_SHORT).show()
+                //Snackbar.make(view!!, "Game over", Snackbar.LENGTH_SHORT).show()
+                AlertDialogFragment().show(activity?.supportFragmentManager,"ALERT_DIALOG")
+
             }
         }
     }

@@ -8,9 +8,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 
 import com.example.cuatroenraya.R
 import com.example.cuatroenraya.model.Round
@@ -35,7 +33,33 @@ class RoundListFragment : Fragment() {
 
     interface OnRoundListFragmentInteractionListener {
         fun onRoundSelected(round: Round)
+        fun onRoundAdded()
+
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?)
+    {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menu_item_new_round -> {
+                listener?.onRoundAdded()
+                recyclerView.update { round ->
+                    listener?.onRoundSelected(round) }
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
