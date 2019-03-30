@@ -153,7 +153,7 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         while (colRecorrer < NUM_COL - 3) {
             colComprobacion = colRecorrer
             fil = 0
-            while (fil < NUM_FIL - 2) {
+            while (fil < NUM_FIL - 3) {
                 if (tablero[colComprobacion][fil] == 1 && tablero[colComprobacion + 1][fil + 1] == 1 &&
                         tablero[colComprobacion + 2][fil + 2] == 1 && tablero[colComprobacion + 3][fil + 3] == 1) {
                     return FINALIZADA

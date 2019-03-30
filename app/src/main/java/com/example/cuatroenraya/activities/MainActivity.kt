@@ -23,16 +23,6 @@ class MainActivity : AppCompatActivity() {
 
         val buttonCargar : Button = findViewById(R.id.buttonLoadGame)
         buttonCargar.setOnClickListener{
-            //TEST//
-            RoundRepository.addRound()
-            RoundRepository.addRound()
-            RoundRepository.addRound()
-
-
-
-
-
-            ////
             val intent = Intent(this, RoundListActivity::class.java)
             startActivity(intent)
         }
