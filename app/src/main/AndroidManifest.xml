@@ -10,18 +10,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".activities.ChipSelector"
-                  android:theme="@style/chipSelector">
-        </activity>
-        <activity
-                android:name=".activities.GameOver"
-                android:theme="@style/gameOver">
-        </activity>
         <activity android:name=".activities.Options">
         </activity>
         <activity android:name=".activities.RoundListActivity">
-        </activity>
-        <activity android:name=".activities.SelectPlayer">
         </activity>
         <activity android:name=".activities.Ingame"
             android:parentActivityName=".activities.RoundListActivity">

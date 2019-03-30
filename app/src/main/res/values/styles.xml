@@ -24,12 +24,6 @@
     <style name="gameOver">
         <item name="android:windowIsTranslucent">true</item>
     </style>
-x
-    <style name="chipSelector">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowCloseOnTouchOutside">true</item>
-    </style>
-
 
     <style name="tablero">
         <item name="android:layout_width">wrap_content</item>

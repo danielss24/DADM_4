@@ -17,27 +17,12 @@
                 android:orientation="vertical">
 
             <Button
-                    android:id="@+id/buttonNewGame"
-                    android:text="@string/nuevaPartida"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-            />
-
-            <Button
                     android:id="@+id/buttonLoadGame"
-                    android:text="@string/cargar"
+                    android:text="@string/jugar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
 
-            />
-            <Button
-                    android:id="@+id/buttonOptions"
-                    android:text="@string/opciones"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
             />
             <Button
                     android:id="@+id/buttonExit"

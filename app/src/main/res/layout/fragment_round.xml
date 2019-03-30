@@ -20,13 +20,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
         />
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/settings_24dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-        />
     </RelativeLayout>
     <LinearLayout
             android:layout_width="match_parent"
@@ -35,20 +28,6 @@
             android:gravity="center"
     >
         <include layout="@layout/tablero"></include>
-        <EditText
-                android:text="NombrePartida"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textoPartida"/>
-
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/GuardarTest"
-                android:text="Guardar Test"
-                tools:text="Guardar Partida"
-                android:onClick="guardarPartida"/>
-
     </LinearLayout>
 
 </RelativeLayout>

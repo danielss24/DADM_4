@@ -14,23 +14,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.principal)
 
-        val buttonNewGame : Button = findViewById(R.id.buttonNewGame)
-
-        buttonNewGame.setOnClickListener{
-            val intent = Intent(this, SelectPlayer::class.java)
-            startActivity(intent)
-        }
-
-        val buttonCargar : Button = findViewById(R.id.buttonLoadGame)
-        buttonCargar.setOnClickListener{
+        val buttonPlay : Button = findViewById(R.id.buttonLoadGame)
+        buttonPlay.setOnClickListener{
             val intent = Intent(this, RoundListActivity::class.java)
-            RoundRepository.addRound()
-            startActivity(intent)
-        }
-
-        val buttonoptions : Button = findViewById(R.id.buttonOptions)
-        buttonoptions.setOnClickListener{
-            val intent = Intent(this, Options::class.java)
             startActivity(intent)
         }
 

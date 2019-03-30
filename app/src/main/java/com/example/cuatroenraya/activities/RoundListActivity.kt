@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
+import android.widget.Toolbar
 import com.example.cuatroenraya.R
 import com.example.cuatroenraya.model.RoundRepository
 import kotlinx.android.synthetic.main.activity_round_list.*
@@ -42,7 +43,8 @@ class RoundListActivity : AppCompatActivity(),
         if (fm.findFragmentById(R.id.fragment_container) == null) {
             fm.executeTransaction { add(R.id.fragment_container, RoundListFragment()) }
         }
-        setSupportActionBar(my_toolbar)
+        val toolbar = findViewById<android.support.v7.widget.Toolbar>(R.id.my_toolbar)
+        setSupportActionBar(toolbar)
     }
 
     override fun onResume() {
