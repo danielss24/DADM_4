@@ -8,9 +8,14 @@ import com.example.cuatroenraya.R
 import com.example.cuatroenraya.utility.executeTransaction
 import kotlinx.android.synthetic.main.activity_fragment.*
 
-
+/**
+ * @brief Clase de vista tablero
+ */
 class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListener {
-
+    /**
+     * @brief funcion creadora de vista/controlador
+     * @param savedInstanceState vista
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_masterdetail)
@@ -23,6 +28,8 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
         // my_toolbar is defined in the layout file
         setSupportActionBar(my_toolbar)
         // Enable the Up button from the support ActionBar corresponding to this toolbar
+
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     }

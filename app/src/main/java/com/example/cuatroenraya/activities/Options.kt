@@ -6,8 +6,14 @@ import android.os.Bundle
 import android.widget.ImageButton
 import com.example.cuatroenraya.R
 
+/**
+ * @brief objeto de opciones
+ */
 class Options : AppCompatActivity() {
-
+    /**
+     * @brief funcion creadora de vista/controlador
+     * @param savedInstanceState vista
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_options)

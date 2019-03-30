@@ -4,7 +4,10 @@ import es.uam.eps.multij.Movimiento
 import es.uam.eps.multij.Tablero
 import java.io.File
 
-
+/**
+ * @brief Clase de tablero conecta 4
+ * @param nombre tablero con valor predefinido
+ */
 class TableroConecta4(var name: String = "com.example.cuatroenraya.model.TableroConecta4"): Tablero() {
 
     val NUM_COL = 7
@@ -12,7 +15,7 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
     val IS_EMPTY = -1
 
     val JUGADOR1 = 1
-	
+
 	var tablero = Array(NUM_COL) { arrayOfNulls<Int>(NUM_FIL) }
 
     init {
@@ -26,7 +29,10 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         }
     }
 
-
+    /**
+     * @brief funcion validadora de movimientos
+     * @param m movimiento a confirmar
+     */
     override fun esValido(m: Movimiento?): Boolean {
         if (m is MovimientoConecta4) {
             if (isFull(m.col) == true) {
@@ -38,6 +44,10 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         return false
     }
 
+    /**
+     * @brief devuelve lista de movimientos validos
+     * @return lista de movimientos validos
+     */
     override fun movimientosValidos(): ArrayList<Movimiento> {
         var MovimientosValidos = ArrayList<Movimiento>()
         for (col in 0..6) {
@@ -48,11 +58,15 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         return MovimientosValidos
     }
 
+    /**
+     * @brief funcion que mueve ficha comprobando si es valido
+     * @param m movimiento a realizar
+     */
     override fun mueve(m: Movimiento?) {
         if (m is MovimientoConecta4){
 
             if (esValido(m)==true){
-			    tablero[m.col][getFreePos(m.col)] = this.turno//m.playerId
+                tablero[m.col][getFreePos(m.col)] = this.turno//m.playerId
                 when (comprobacionConecta4()) {
                     EN_CURSO -> {
                         this.cambiaTurno()
@@ -71,9 +85,12 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         }
     }
 
+    /**
+     * @brief funcion comprobadora de si columna esta llena
+     * @param columna columna a comprobar
+     * @return false o true si esta llena o no
+     */
     fun isFull(columna: Int): Boolean{
-        //Lo he cambiaod de 0 a -1 porque 0 era jugador 1 y 1 jugadopr dos ahora
-        //Also cambiado que aquí iban -1 porque contamos desde 0
         if (this.tablero[columna][NUM_FIL - 1] != -1) {
             return true
         } else {
@@ -81,6 +98,11 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         }
     }
 
+    /**
+     * @brief devuelve la fila libre donde insertar la ficha
+     * @param columna columna a comprobar
+     * @return fila a introducir o -1 si no hay sitio
+     */
     fun getFreePos(columna: Int): Int{
         for (fil in 0..(NUM_FIL-1)){
             if (tablero[columna][fil]== IS_EMPTY ){
@@ -90,6 +112,10 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         return -1
     }
 
+    /**
+     * @brief funcion que comprueba todas las posibles formas de ganar
+     * @return devuelve estado de la partida
+     */
     fun comprobacionConecta4(): Int {
         this.estado = EN_CURSO
         if (FINALIZADA == comprobacionConecta4_Horizontal()) {
@@ -106,6 +132,10 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         return this.estado
     }
 
+    /**
+     * @brief funcion comprobadora de lineas horizontales
+     * @return devuelve estado de partida
+     */
     fun comprobacionConecta4_Horizontal(): Int {
         var col = 0
         var fil = 0
@@ -126,6 +156,10 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         return EN_CURSO
     }
 
+    /**
+     * @brief funcion comprobadora de lineas verticales
+     * @return devuelve estado de partida
+     */
     fun comprobacionConecta4_Vertical(): Int {
         var col = 0
         var fil = 0
@@ -146,6 +180,10 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         return EN_CURSO
     }
 
+    /**
+     * @brief funcion comprobadora de diagonal superior
+     * @return devuelve estado de partida
+     */
     fun comprobacionConecta4_DiagonalSup(): Int {
         var colRecorrer = 0
         var colComprobacion = 0
@@ -169,6 +207,10 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         return EN_CURSO
     }
 
+    /**
+     * @brief funcion comprobadora de diagonal inferior
+     * @return devuelve estado de la partida
+     */
     fun comprobacionConecta4_DiagonalInf(): Int {
         var col= 0
         var fil = 5
@@ -189,10 +231,20 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         return EN_CURSO
     }
 
+    /**
+     * @brief devuelve estado del tablero en una posicion exacta
+     * @param fila fila de tablero
+     * @param columna columna de tablero
+     * @return valor de la posicion
+     */
     fun getTablero(fila: Int, columna: Int):Int?{
         return tablero[columna][fila]
     }
 
+    /**
+     * @brief convierte tablero a string
+     * @return tableroString
+     */
     override fun tableroToString(): String {
         var col = NUM_COL
         var tableroString = ""
@@ -212,10 +264,18 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         return tableroString
     }
 
+    /**
+     * @brief funcion to string de tablero
+     * @return tablero string
+     */
     override fun toString(): String {
         return tableroToString()
     }
 
+    /**
+     * @brief impresion de tablero grafico
+     * @return cadena de tablero grafico
+     */
     fun imprimeTablero(): String {
         var tableroString = String()
         var input = " "
@@ -236,6 +296,13 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         return tableroString
     }
 
+    /**
+     * @brief guarda el tablero en un fichero
+     * @param fichero fichero donde guardar
+     * @param jugador1 jugador1 de la partida
+     * @param jugador2 jugador2 de la partida
+     * @param jugadorActivo jugador que tiene el turno
+     */
     fun guardaTablero(fichero: File, jugador1: String, jugador2: String, jugadorActivo: String){
         var tableroArray = this.tableroToString()
         fichero.writeText("Turno: ${this.turno}\n" +
@@ -247,7 +314,10 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
                 "Tablero Grafico: ${this.imprimeTablero()}")
     }
 
-
+    /**
+     * @brief convierte string a tablero objeto
+     * @param cadena cadena a convertir
+     */
     override fun stringToTablero(cadena: String?) {
         if(cadena is String){
             cadena!!.toList()
@@ -271,6 +341,10 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         }
     }
 
+    /**
+     * @brief funcion cargadora de tableros por string
+     * @param cadena cadena a convertir
+     */
     fun cargaTablero(cadena: String?){
         if(cadena is String) {
             var iteradorFichero = cadena.split("\n")

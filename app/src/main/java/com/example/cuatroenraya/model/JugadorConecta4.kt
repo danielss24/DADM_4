@@ -7,8 +7,8 @@ import com.example.cuatroenraya.R
 import es.uam.eps.multij.*
 
 /**
- *
- * @author mfreire
+ * @brief Jugador conecta 4
+ * @param nombre jugador
  */
 class JugadorConecta4
 constructor(private val nombre: String) : View.OnClickListener, Jugador {
@@ -73,10 +73,18 @@ constructor(private val nombre: String) : View.OnClickListener, Jugador {
     )
 
     private lateinit var game: Partida
-
+    /**
+     * @brief establece la partida
+     * @param game partida
+     */
     fun setPartida(game: Partida) {
         this.game = game
     }
+
+    /**
+     * @brief onclick register
+     * @param v vista de partida
+     */
     override fun onClick(v: View) {
         try {
             if (game.tablero.estado != Tablero.EN_CURSO) {
@@ -97,15 +105,25 @@ constructor(private val nombre: String) : View.OnClickListener, Jugador {
     }
 
     /**
-     * Devuelve el nombre del jugador
+     * @brief Devuelve el nombre del jugador
      */
     override fun getNombre() = nombre
 
     /**
-     * Este jugador juega *todos* los juegos
+     * @brief Este jugador juega *todos* los juegos
      */
     override fun puedeJugar(p0: Tablero?) = true
+
+    /**
+     * @brief oncambio partida
+     * @param p0 evento
+     */
     override fun onCambioEnPartida(p0: Evento) {}
+
+    /**
+     * @brief devuelve la columna
+     * @param view vista
+     */
     private fun fromViewToI(view: View): Int {
         for (i in 0 until ids.size)
             for (j in 0 until ids[i].size) {
@@ -114,6 +132,11 @@ constructor(private val nombre: String) : View.OnClickListener, Jugador {
             }
         return -1
     }
+
+    /**
+     * @brief devuelve la fila
+     * @param view vista
+     */
     private fun fromViewToJ(view: View): Int {
         for (i in 0 until ids.size)
             for (j in 0 until ids[i].size)

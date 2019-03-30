@@ -14,18 +14,30 @@ import com.example.cuatroenraya.utility.executeTransaction
 import kotlinx.android.synthetic.main.activity_fragment.*
 import kotlinx.android.synthetic.main.activity_twopane.*
 
+/**
+ * @brief objeto de partidas guardadas
+ */
 class RoundListActivity : AppCompatActivity(),
     RoundListFragment.OnRoundListFragmentInteractionListener,
     RoundFragment.OnRoundFragmentInteractionListener{
-
+    /**
+     * @brief añadir partidas guardadas
+     */
     override fun onRoundAdded() {
         RoundRepository.addRound()
     }
 
+    /**
+     * @brief actualizar partidas guardadas
+     */
     override fun onRoundUpdated() {
         recyclerView.adapter!!.notifyDataSetChanged()
     }
 
+    /**
+     * @brief seleccion de partidas
+     * @param round partidas guardadas
+     */
     override fun onRoundSelected(round: Round) {
         val fm = supportFragmentManager
         if (detail_fragment_container == null) {
@@ -36,6 +48,10 @@ class RoundListActivity : AppCompatActivity(),
         }
     }
 
+    /**
+     * @brief funcion creadora de vista/controlador
+     * @param savedInstanceState vista
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_masterdetail)
@@ -47,11 +63,17 @@ class RoundListActivity : AppCompatActivity(),
         setSupportActionBar(toolbar)
     }
 
+    /**
+     * @brief funcion reanudar de vista
+     */
     override fun onResume() {
         super.onResume()
         updateUI()
     }
 
+    /**
+     * @brief actualiza vista de partidas
+     */
     fun updateUI() {
         recyclerView.apply {
             if (adapter == null) {

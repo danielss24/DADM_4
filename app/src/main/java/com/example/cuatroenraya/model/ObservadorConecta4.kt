@@ -3,11 +3,16 @@ package com.example.cuatroenraya.model
 import es.uam.eps.multij.Evento
 import es.uam.eps.multij.PartidaListener
 
-class ObservadorConecta4
-@JvmOverloads constructor() : PartidaListener {
+/**
+ * @brief Observador de la partida
+ */
+class ObservadorConecta4 @JvmOverloads constructor() : PartidaListener {
 
     var turno: Int = 1
-
+    /**
+     * @brief cambio de partida
+     * @param evento evento sobre partida
+     */
     override fun onCambioEnPartida(evento: Evento) {
         var tableroTMP = evento.partida.tablero
         if (tableroTMP is TableroConecta4) {

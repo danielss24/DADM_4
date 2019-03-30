@@ -7,9 +7,14 @@ import android.widget.Button
 import com.example.cuatroenraya.R
 import com.example.cuatroenraya.model.RoundRepository
 
-
+/**
+ * @brief Clase principal de aplicacion
+ */
 class MainActivity : AppCompatActivity() {
-
+    /**
+     * @brief funcion creadora de vista/controlador
+     * @param savedInstanceState vista
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.principal)

@@ -8,17 +8,21 @@ import java.lang.Exception
 val MENU_STRING = "\t(1)- Un solo jugador\n\t(2)- Multijugador\n\t" +
         "(3)- Cargar ultima partida\n\t(4)- Salir\n\t(5)- Todo PC\nModo:"
 
+/**
+ * @brief main de cuatro en raya kotlin
+ * @param args parametros
+ */
 fun main(args: Array<String>) {
     val jugadores = arrayListOf<Jugador>()
     val tableroMain = TableroConecta4()
-	var flagModo = 0
+    var flagModo = 0
     var modo = 0
 
     println("Bienvenido a 4 en raya")
     println("En cualquier momento de la partida introduzca un 8 para guardar partida, 9 para salir sin guardar.")
-	println(MENU_STRING)
-	
-	while(flagModo==0){
+    println(MENU_STRING)
+
+    while(flagModo==0){
         try {
             modo = readLine()!!.toInt()
             if(modo in 1..5){
@@ -30,8 +34,8 @@ fun main(args: Array<String>) {
             }
         }catch (e: Exception){
             println("La opción introducida no es correcta.")
-			println(MENU_STRING)
-		}	
+            println(MENU_STRING)
+        }
     }
 
     when (modo) {
@@ -56,7 +60,7 @@ fun main(args: Array<String>) {
             for (archivo in path.list()){
                 println("\t-> $archivo")
             }
-			
+
             print("Fichero a cargar:")
             var fichero = readLine()!!.toString()
             var ficheroString = ""
@@ -107,7 +111,7 @@ fun main(args: Array<String>) {
             jugadores += JugadorAleatorio("Aleatorio2")
 
         }
-		else -> {
+        else -> {
             println("Se ha producido un error inesperado, lance de nuevo el programa")
         }
     }

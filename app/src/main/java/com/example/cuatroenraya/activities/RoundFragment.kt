@@ -27,14 +27,23 @@ import kotlinx.android.synthetic.main.fragment_round.*
  * to handle interaction events.
  *
  */
+/**
+ * @brief fragmento de partidas guardadas
+ */
 class RoundFragment : Fragment(), PartidaListener {
     private lateinit var game: Partida
     private lateinit var round: Round
 
     var listener: OnRoundFragmentInteractionListener? = null
+
     interface OnRoundFragmentInteractionListener {
         fun onRoundUpdated()
     }
+
+    /**
+     * @brief base function
+     * @param context contesto
+     */
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is OnRoundFragmentInteractionListener)
@@ -44,11 +53,19 @@ class RoundFragment : Fragment(), PartidaListener {
                     " must implement OnRoundFragmentInteractionListener")
         }
     }
+
+    /**
+     * @brief base function
+     */
     override fun onDetach() {
         super.onDetach()
         listener = null
     }
 
+    /**
+     * @brief funcion creadora de vista/controlador
+     * @param savedInstanceState vista
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -67,26 +84,46 @@ class RoundFragment : Fragment(), PartidaListener {
             }
     }
 
+    /**
+     * @brief funcion creadora de vista
+     * @param inflater inflater
+     * @param container contenedor de la vista
+     * @param savedInstanceState vista
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_round, container, false)
     }
 
+    /**
+     * @brief vista creadora
+     * @param view vista creada
+     * @param savedInstanceState vista
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         round_title.text = round.title
     }
 
+    /**
+     * @brief funcion iniciadora de partidas guardadas
+     */
     override fun onStart() {
         super.onStart()
         startRound()
     }
 
+    /**
+     * @brief funcion reanudadora
+     */
     override fun onResume() {
         super.onResume()
         view?.update(round)
     }
 
+    /**
+     * @brief inicia la vista con todos los jugadores, tablero y clickers
+     */
     internal fun startRound() {
         val players = ArrayList<Jugador>()
         val localPlayer = JugadorConecta4("Local player")
@@ -101,6 +138,10 @@ class RoundFragment : Fragment(), PartidaListener {
             game.comenzar()
     }
 
+    /**
+     * @brief funcion modificadora de partida
+     * @param evento evento de cambio
+     */
     override fun onCambioEnPartida(evento: Evento) {
         when (evento.tipo) {
             Evento.EVENTO_CAMBIO -> {
@@ -116,8 +157,6 @@ class RoundFragment : Fragment(), PartidaListener {
             }
         }
     }
-
-
 
 
 }

@@ -9,7 +9,14 @@ import android.support.v7.app.AppCompatActivity
 import com.example.cuatroenraya.R
 import com.example.cuatroenraya.model.RoundRepository
 
+/**
+ * @brief Clase de alert para fragmentos
+ */
 class AlertDialogFragment : DialogFragment() {
+    /**
+     * @brief funcion creadora de vista/controlador
+     * @param savedInstanceState vista
+     */
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val activity = activity as AppCompatActivity?
         val alertDialogBuilder = AlertDialog.Builder(getActivity())

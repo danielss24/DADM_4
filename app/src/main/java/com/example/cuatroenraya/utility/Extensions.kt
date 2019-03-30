@@ -11,6 +11,12 @@ import com.example.cuatroenraya.model.TableroConecta4
 import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.model.RoundRepository
 
+/**
+ * @brief Actualiza las imagenes en funcion de su esado
+ * @param board tablero
+ * @param i columna del tablero
+ * @param j fila del tablero
+ */
 fun ImageButton.update(board: TableroConecta4, i: Int, j: Int) {
 
     if (board.getTablero(i, j) == board.JUGADOR1)
@@ -21,6 +27,10 @@ fun ImageButton.update(board: TableroConecta4, i: Int, j: Int) {
         setBackgroundResource(R.drawable.circle__black_24dp)
 }
 
+/**
+ * @brief addon para la vista recicladora
+ * @param onClickListener clickable para la vista recicladora
+ */
 fun RecyclerView.update(onClickListener: (Round) -> Unit) {
     if (adapter == null){
         adapter = RoundAdapter(RoundRepository.rounds, onClickListener)
@@ -29,13 +39,21 @@ fun RecyclerView.update(onClickListener: (Round) -> Unit) {
     }
 
 }
+
+/**
+ * @brief addon para fragmentos
+ * @param operations transaccion entre fragmentos
+ */
 fun FragmentManager.executeTransaction(operations: (FragmentTransaction.() -> Unit)) {
     val transaction = beginTransaction()
     transaction.operations()
     transaction.commit()
 }
 
-
+/**
+ * @brief registra clickers para fragmentos
+ * @param jugador jugador local
+ */
 fun View.setPlayerAsOnClickListener(jugador: View.OnClickListener) {
     val ids = arrayOf(
         intArrayOf(
@@ -101,6 +119,10 @@ fun View.setPlayerAsOnClickListener(jugador: View.OnClickListener) {
         }
 }
 
+/**
+ * @brief actualiza la lista de partidas en la vista recicladora
+ * @param round partidas en la lista de partidas guardadas
+ */
 fun View.update(round: Round) {
 
     val ids = arrayOf(
