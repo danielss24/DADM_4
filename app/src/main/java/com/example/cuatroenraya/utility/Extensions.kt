@@ -1,33 +1,17 @@
 package com.example.cuatroenraya.utility
 
-import android.graphics.Color
+import android.content.Context
 import android.graphics.Paint
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
-import android.view.View
-import android.widget.ImageButton
 import com.example.cuatroenraya.R
 import com.example.cuatroenraya.activities.RoundAdapter
 import com.example.cuatroenraya.model.TableroConecta4
 import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.model.RoundRepository
 
-/**
- * @brief Actualiza las imagenes en funcion de su esado
- * @param board tablero
- * @param i columna del tablero
- * @param j fila del tablero
- */
-fun ImageButton.update(board: TableroConecta4, i: Int, j: Int) {
-
-    if (board.getTablero(i, j) == board.JUGADOR1)
-        setBackgroundResource(R.drawable.circle__red_24dp)
-    else if (board.getTablero(i, j) == board.IS_EMPTY)
-        setBackgroundResource(R.drawable.circle__empty_24dp)
-    else
-        setBackgroundResource(R.drawable.circle__black_24dp)
-}
 
 /**
  * @brief Pinta los botones
@@ -35,13 +19,13 @@ fun ImageButton.update(board: TableroConecta4, i: Int, j: Int) {
  * @param i columna del tablero
  * @param j fila del tablero
  */
-fun Paint.setColor(board: TableroConecta4, i: Int, j: Int) {
+fun Paint.setColor(board: TableroConecta4, i: Int, j: Int, context: Context) {
     if (board.getTablero(i, j) === board.JUGADOR1)
-        setColor(Color.parseColor("#00574B"))
+        setColor(ContextCompat.getColor(context, R.color.colorPlayerOneChip))
     else if (board.getTablero(i, j) === board.IS_EMPTY)
-        setColor(Color.GRAY)
+        setColor(ContextCompat.getColor(context, R.color.colorNoPlayer))
     else
-        setColor(Color.parseColor("#D81B60"))
+        setColor(ContextCompat.getColor(context, R.color.colorPlayerTwoChip))
 }
 
 /**

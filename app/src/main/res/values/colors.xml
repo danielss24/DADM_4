@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#CD4870</color>
+    <color name="colorPrimaryDark">#8c0032</color>
+    <color name="colorAccent">#707070</color>
+    <color name="colorPlayerOneChip">#253C71</color>
+    <color name="colorPlayerTwoChip">#CA2B31</color>
+    <color name="colorNoPlayer">#E1E8CB</color>
+    <color name="colorTablero">#E1AE56</color>
+
 </resources>

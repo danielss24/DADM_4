@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -29,7 +30,7 @@ class ERView(context: Context, attrs: AttributeSet? = null) : View(context, attr
     }
 
     init {
-        backgroundPaint.color = Color.BLACK
+        backgroundPaint.color = ContextCompat.getColor(context, R.color.colorTablero)
         linePaint.strokeWidth = 2f
     }
 
@@ -78,7 +79,7 @@ class ERView(context: Context, attrs: AttributeSet? = null) : View(context, attr
             centerRaw = heightOfTile * (1 + 2 * pos) / 2f
             for (j in 0 until NUM_COL) {
                 centerColumn = widthOfTile * (1 + 2 * j) / 2f
-                paint.setColor(board!!, i, j)
+                paint.setColor(board!!, i, j, this.context)
                 canvas.drawCircle(centerColumn, centerRaw, radio, paint)
             }
         }
