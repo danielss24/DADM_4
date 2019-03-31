@@ -15,7 +15,6 @@ import es.uam.eps.multij.Tablero
 import kotlinx.android.synthetic.main.fragment_round.view.*
 
 class ERView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
-    private val DEBUG = "ERView"
     private val backgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val linePaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var heightOfTile: Float = 0.toFloat()
@@ -34,6 +33,14 @@ class ERView(context: Context, attrs: AttributeSet? = null) : View(context, attr
         linePaint.strokeWidth = 2f
     }
 
+    /**
+     * @brief funcion para controlar el tamanio de las cosas en funcion de la pantalla
+     * @param w anchura
+     * @param h altura
+     * @param oldw antigua anchura
+     * @param oldh antigua altura
+     *
+     */
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         widthOfTile = (w / NUM_COL).toFloat()
         heightOfTile = (h / NUM_FIL).toFloat()
@@ -44,6 +51,11 @@ class ERView(context: Context, attrs: AttributeSet? = null) : View(context, attr
         super.onSizeChanged(w, h, oldw, oldh)
     }
 
+    /**
+     * @brief dibuja el tablero
+     * @param canvas el canvas donde pintar
+     *
+     */
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         val boardWidth = width.toFloat()
@@ -52,6 +64,12 @@ class ERView(context: Context, attrs: AttributeSet? = null) : View(context, attr
         drawCircles(canvas, linePaint)
     }
 
+    /**
+     * @brief dibuja las fichas
+     * @param canvas el canvas donde pintar
+     * @param paint el canvas donde pintar
+     *
+     */
     private fun drawCircles(canvas: Canvas, paint: Paint) {
         var centerRaw: Float
         var centerColumn: Float
@@ -66,6 +84,12 @@ class ERView(context: Context, attrs: AttributeSet? = null) : View(context, attr
         }
     }
 
+    /**
+     * @brief calcula el tamanio de la pantalla
+     * @param widthMeasureSpec anchura
+     * @param heightMeasureSpec altura
+     *
+     */
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val desiredWidth = 500
         val wMode: String
@@ -88,10 +112,20 @@ class ERView(context: Context, attrs: AttributeSet? = null) : View(context, attr
         setMeasuredDimension(width,height)
     }
 
+    /**
+     * @brief calculamos el espacio en anchura
+     * @param event evento
+     *
+     */
     private fun fromEventToJ(event: MotionEvent): Int {
         return (event.x / widthOfTile).toInt()
     }
 
+    /**
+     * @brief se reproduce cuando detecta un click
+     * @param event evento que la triggerea
+     *
+     */
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if (onPlayListener == null)
             return super.onTouchEvent(event)
@@ -110,9 +144,20 @@ class ERView(context: Context, attrs: AttributeSet? = null) : View(context, attr
         return true
     }
 
+    /**
+     * @brief settea el listener
+     * @param listener evento que la triggerea
+     *
+     */
     fun setOnPlayListener(listener: OnPlayListener) {
         this.onPlayListener = listener
     }
+
+    /**
+     * @brief settea el tablero
+     * @param board tablero a setear
+     *
+     */
     fun setBoard(board: TableroConecta4) {
         this.board = board
     }

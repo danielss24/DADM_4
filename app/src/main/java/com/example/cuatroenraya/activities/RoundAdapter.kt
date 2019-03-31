@@ -16,9 +16,9 @@ import android.widget.RelativeLayout
  * @param itemView vista de partidas guardadas
  */
 class RoundHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClickListener {
-    lateinit var idTextView: TextView
-    lateinit var boardTextView: TextView
-    lateinit var dateTextView: TextView
+    var idTextView: TextView
+    var boardTextView: TextView
+    var dateTextView: TextView
     var layoutId: RelativeLayout
     init {
         idTextView = itemView.findViewById(R.id.list_item_id) as TextView

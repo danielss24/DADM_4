@@ -16,7 +16,6 @@ import com.example.cuatroenraya.model.JugadorConecta4
 import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.model.RoundRepository
 import com.example.cuatroenraya.model.TableroConecta4
-import com.example.cuatroenraya.utility.setPlayerAsOnClickListener
 import com.example.cuatroenraya.utility.update
 import com.example.cuatroenraya.views.ERView
 import es.uam.eps.multij.*
@@ -140,7 +139,7 @@ class RoundFragment : Fragment(), PartidaListener {
             var tableroTMP = TableroConecta4()
             round.board.stringToTablero(tableroTMP.tableroToString())
             listener?.onRoundUpdated()
-            view?.update(round)
+            board_erview.invalidate()
             Snackbar.make(view as View, R.string.round_restarted,
                 Snackbar.LENGTH_SHORT).show()
         })
