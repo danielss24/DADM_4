@@ -18,6 +18,7 @@ import com.example.cuatroenraya.model.RoundRepository
 import com.example.cuatroenraya.model.TableroConecta4
 import com.example.cuatroenraya.utility.setPlayerAsOnClickListener
 import com.example.cuatroenraya.utility.update
+import com.example.cuatroenraya.views.ERView
 import es.uam.eps.multij.*
 import kotlinx.android.synthetic.main.fragment_round.*
 
@@ -35,7 +36,7 @@ import kotlinx.android.synthetic.main.fragment_round.*
 class RoundFragment : Fragment(), PartidaListener {
     private lateinit var game: Partida
     private lateinit var round: Round
-
+    private lateinit var board_erview: ERView
     var listener: OnRoundFragmentInteractionListener? = null
 
     interface OnRoundFragmentInteractionListener {
@@ -104,6 +105,7 @@ class RoundFragment : Fragment(), PartidaListener {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        registerResetButton()
         round_title.text = round.title
     }
 
@@ -120,77 +122,14 @@ class RoundFragment : Fragment(), PartidaListener {
      */
     override fun onResume() {
         super.onResume()
-        view?.update(round)
+        board_erview.invalidate()
     }
 
     /**
      * @brief registra clickers para fragmentos
      * @param jugador jugador local
      */
-    private fun registerListeners(jugador: View.OnClickListener) {
-        val ids = arrayOf(
-            intArrayOf(
-                R.id.c11,
-                R.id.c12,
-                R.id.c13,
-                R.id.c14,
-                R.id.c15,
-                R.id.c16,
-                R.id.c17
-            ),
-            intArrayOf(
-                R.id.c21,
-                R.id.c22,
-                R.id.c23,
-                R.id.c24,
-                R.id.c25,
-                R.id.c26,
-                R.id.c27
-            ),
-            intArrayOf(
-                R.id.c31,
-                R.id.c32,
-                R.id.c33,
-                R.id.c34,
-                R.id.c35,
-                R.id.c36,
-                R.id.c37
-            ),
-            intArrayOf(
-                R.id.c41,
-                R.id.c42,
-                R.id.c43,
-                R.id.c44,
-                R.id.c45,
-                R.id.c46,
-                R.id.c47
-            ),
-            intArrayOf(
-                R.id.c51,
-                R.id.c52,
-                R.id.c53,
-                R.id.c54,
-                R.id.c55,
-                R.id.c56,
-                R.id.c57
-            ),
-            intArrayOf(
-                R.id.c61,
-                R.id.c62,
-                R.id.c63,
-                R.id.c64,
-                R.id.c65,
-                R.id.c66,
-                R.id.c67
-            )
-        )
-        var button: ImageButton
-        for (i in 0 until ids.size)
-            for (j in 0 until ids[i].size) {
-                button = view!!.findViewById<View>(ids[i][j]) as ImageButton
-                button.setOnClickListener(jugador)
-            }
-
+    private fun registerResetButton() {
         val resetButton = view!!.findViewById(R.id.reset_round_fab) as FloatingActionButton
         resetButton.setOnClickListener(View.OnClickListener {
             if (round.board.getEstado() !== Tablero.EN_CURSO) {
@@ -200,12 +139,12 @@ class RoundFragment : Fragment(), PartidaListener {
             }
             var tableroTMP = TableroConecta4()
             round.board.stringToTablero(tableroTMP.tableroToString())
-            //startRound()
             listener?.onRoundUpdated()
             view?.update(round)
             Snackbar.make(view as View, R.string.round_restarted,
                 Snackbar.LENGTH_SHORT).show()
         })
+
     }
 
     /**
@@ -220,8 +159,11 @@ class RoundFragment : Fragment(), PartidaListener {
         game = Partida(round.board, players)
         game.addObservador(this)
         localPlayer.setPartida(game)
-        //view?.setPlayerAsOnClickListener(localPlayer)
-        registerListeners(localPlayer)
+
+        board_erview = view!!.findViewById(R.id.board_erview) as ERView
+        board_erview.setBoard(round.board)
+        board_erview.setOnPlayListener(localPlayer)
+
         if (game.tablero.estado == Tablero.EN_CURSO)
             game.comenzar()
     }
@@ -233,11 +175,13 @@ class RoundFragment : Fragment(), PartidaListener {
     override fun onCambioEnPartida(evento: Evento) {
         when (evento.tipo) {
             Evento.EVENTO_CAMBIO -> {
-                view?.update(round)
+                board_erview.invalidate()
+                //view?.update(round)
                 listener?.onRoundUpdated()
             }
             Evento.EVENTO_FIN -> {
-                view?.update(round)
+                board_erview.invalidate()
+                //view?.update(round)
                 listener?.onRoundUpdated()
                 //Snackbar.make(view!!, "Game over", Snackbar.LENGTH_SHORT).show()
                 AlertDialogFragment().show(activity?.supportFragmentManager,"ALERT_DIALOG")

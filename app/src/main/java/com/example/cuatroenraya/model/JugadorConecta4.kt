@@ -4,6 +4,7 @@ import java.io.File
 import android.support.design.widget.Snackbar
 import android.view.View
 import com.example.cuatroenraya.R
+import com.example.cuatroenraya.views.ERView
 import es.uam.eps.multij.*
 
 /**
@@ -11,7 +12,7 @@ import es.uam.eps.multij.*
  * @param nombre jugador
  */
 class JugadorConecta4
-constructor(private val nombre: String) : View.OnClickListener, Jugador {
+constructor(private val nombre: String) : ERView.OnPlayListener, Jugador {
 
 	val OPCIONES_CORRECTAS = arrayListOf<Int>(0,1,2,3,4,5,6,8,9)
 
@@ -80,28 +81,18 @@ constructor(private val nombre: String) : View.OnClickListener, Jugador {
     fun setPartida(game: Partida) {
         this.game = game
     }
-
     /**
      * @brief onclick register
-     * @param v vista de partida
+     * @param column columna donmde poner la ficha
      */
-    override fun onClick(v: View) {
-        try {
-            if (game.tablero.estado != Tablero.EN_CURSO) {
-                Snackbar.make(v, "round_already_finished", Snackbar.LENGTH_SHORT).show()
-                return
-            }
-            val m: Movimiento = MovimientoConecta4(fromViewToJ(v))
-            val a = AccionMover(this, m)
-            if (false != game.tablero.esValido(m)) {
-                game.realizaAccion(a)
-            } else {
-                throw Exception("Columna llena")
-            }
-        } catch (e: Exception) {
-            var errorString = e.message
-            Snackbar.make(v, errorString.toString(), Snackbar.LENGTH_SHORT).show()
+    override fun onPlay(column: Int) {
+        if (game.tablero.estado != Tablero.EN_CURSO) {
+            return
         }
+        val m: MovimientoConecta4
+        m = MovimientoConecta4(column)
+        10
+        game.realizaAccion(AccionMover(this, m))
     }
 
     /**

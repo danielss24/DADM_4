@@ -8,6 +8,8 @@ import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.R
 import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 
 /**
  * @brief clase contenedora de partidas guardadas
@@ -17,10 +19,12 @@ class RoundHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClic
     lateinit var idTextView: TextView
     lateinit var boardTextView: TextView
     lateinit var dateTextView: TextView
+    var layoutId: RelativeLayout
     init {
         idTextView = itemView.findViewById(R.id.list_item_id) as TextView
         boardTextView = itemView.findViewById(R.id.list_item_board) as TextView
         dateTextView = itemView.findViewById(R.id.list_item_date) as TextView
+        layoutId = itemView.findViewById(R.id.list_item_layout) as RelativeLayout
         itemView.setOnClickListener(this)
     }
 
@@ -33,7 +37,11 @@ class RoundHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClic
         idTextView.text = round.title
         boardTextView.text = round.board?.imprimeTablero()
         dateTextView.text = round.date.toString().substring(0,19)
-        itemView.setOnClickListener { listener(round) }
+        idTextView.setOnClickListener { listener(round) }
+        boardTextView.setOnClickListener { listener(round) }
+        dateTextView.setOnClickListener { listener(round) }
+        layoutId.setOnClickListener { listener(round) }
+
     }
 
     /**
