@@ -8,8 +8,8 @@ import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.R
 import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
+import com.example.cuatroenraya.views.ERView
 
 /**
  * @brief clase contenedora de partidas guardadas
@@ -17,12 +17,13 @@ import android.widget.RelativeLayout
  */
 class RoundHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClickListener {
     var idTextView: TextView
-    var boardTextView: TextView
+    var board_erview: ERView
     var dateTextView: TextView
     var layoutId: RelativeLayout
     init {
         idTextView = itemView.findViewById(R.id.list_item_id) as TextView
-        boardTextView = itemView.findViewById(R.id.list_item_board) as TextView
+        //boardTextView = itemView.findViewById(R.id.list_item_board) as TextView
+        board_erview = itemView.findViewById(R.id.board_erview_list) as ERView
         dateTextView = itemView.findViewById(R.id.list_item_date) as TextView
         layoutId = itemView.findViewById(R.id.list_item_layout) as RelativeLayout
         itemView.setOnClickListener(this)
@@ -35,10 +36,9 @@ class RoundHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClic
      */
     fun bindRound(round: Round, listener: (Round) -> Unit) {
         idTextView.text = round.title
-        boardTextView.text = round.board?.imprimeTablero()
+        board_erview.setBoard(round.board)
         dateTextView.text = round.date.toString().substring(0,19)
         idTextView.setOnClickListener { listener(round) }
-        boardTextView.setOnClickListener { listener(round) }
         dateTextView.setOnClickListener { listener(round) }
         layoutId.setOnClickListener { listener(round) }
 
