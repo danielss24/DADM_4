@@ -91,8 +91,11 @@ constructor(private val nombre: String) : ERView.OnPlayListener, Jugador {
         }
         val m: MovimientoConecta4
         m = MovimientoConecta4(column)
-        10
+        if (game.tablero.esValido(m)==false){
+            Snackbar.make(this as View,"Columna llena", Snackbar.LENGTH_SHORT).show()
+        }
         game.realizaAccion(AccionMover(this, m))
+
     }
 
     /**

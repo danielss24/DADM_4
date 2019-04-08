@@ -139,6 +139,7 @@ class ERView(context: Context, attrs: AttributeSet? = null) : View(context, attr
             try {
                 onPlayListener?.onPlay(fromEventToJ(event))
             } catch (e: Exception) {
+                print(e)
                 Snackbar.make(board_erview, "Jugada inválida", Snackbar.LENGTH_SHORT).show()
             }
         }

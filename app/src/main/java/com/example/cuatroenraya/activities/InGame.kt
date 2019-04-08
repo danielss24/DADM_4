@@ -18,7 +18,7 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_masterdetail)
+        setContentView(R.layout.activity_fragment)
         val fm = supportFragmentManager
         if (fm.findFragmentById(R.id.fragment_container) == null) {
             val fragment =
