@@ -64,8 +64,8 @@ class RoundListActivity : AppCompatActivity(),
         if (fm.findFragmentById(R.id.fragment_container) == null) {
             fm.executeTransaction { add(R.id.fragment_container, RoundListFragment()) }
         }
-        //val toolbar = findViewById<android.support.v7.widget.Toolbar>(R.id.my_toolbar)
-        //setSupportActionBar(toolbar)
+        val toolbar = findViewById<android.support.v7.widget.Toolbar>(R.id.my_toolbar)
+        setSupportActionBar(toolbar)
 
         PreferenceManager.setDefaultValues(this, R.xml.pref_general, false)
     }
