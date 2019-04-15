@@ -3,6 +3,7 @@ package com.example.cuatroenraya.activities
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.preference.PreferenceManager
 import android.widget.Button
 import com.example.cuatroenraya.R
 import com.example.cuatroenraya.model.RoundRepository
@@ -31,6 +32,8 @@ class MainActivity : AppCompatActivity() {
             intent.addCategory(Intent.CATEGORY_HOME)
             startActivity(intent)
         }
+
+        PreferenceManager.setDefaultValues(this, R.xml.pref_general, false)
 
 
 

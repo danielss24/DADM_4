@@ -3,6 +3,7 @@ package com.example.cuatroenraya.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.widget.Toolbar
@@ -48,6 +49,10 @@ class RoundListActivity : AppCompatActivity(),
         }
     }
 
+    override fun onPreferenceSelected() {
+        startActivity(Intent(this, SettingsActivity::class.java))
+    }
+
     /**
      * @brief funcion creadora de vista/controlador
      * @param savedInstanceState vista
@@ -59,8 +64,10 @@ class RoundListActivity : AppCompatActivity(),
         if (fm.findFragmentById(R.id.fragment_container) == null) {
             fm.executeTransaction { add(R.id.fragment_container, RoundListFragment()) }
         }
-        val toolbar = findViewById<android.support.v7.widget.Toolbar>(R.id.my_toolbar)
-        setSupportActionBar(toolbar)
+        //val toolbar = findViewById<android.support.v7.widget.Toolbar>(R.id.my_toolbar)
+        //setSupportActionBar(toolbar)
+
+        PreferenceManager.setDefaultValues(this, R.xml.pref_general, false)
     }
 
     /**
