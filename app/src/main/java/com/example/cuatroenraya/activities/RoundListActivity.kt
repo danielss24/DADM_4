@@ -66,7 +66,6 @@ class RoundListActivity : AppCompatActivity(),
         }
         val toolbar = findViewById<android.support.v7.widget.Toolbar>(R.id.my_toolbar)
         setSupportActionBar(toolbar)
-
         PreferenceManager.setDefaultValues(this, R.xml.pref_general, false)
     }
 
