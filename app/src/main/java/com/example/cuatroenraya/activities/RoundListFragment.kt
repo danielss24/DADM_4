@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.SyncStateContract.Helpers.update
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -12,6 +13,7 @@ import android.view.*
 
 import com.example.cuatroenraya.R
 import com.example.cuatroenraya.model.Round
+import com.example.cuatroenraya.utility.executeTransaction
 import com.example.cuatroenraya.utility.update
 import kotlinx.android.synthetic.main.fragment_round_list.*
 
@@ -30,106 +32,35 @@ private const val ARG_PARAM2 = "param2"
 /**
  * @brief objeto de partidas guardadas
  */
-class RoundListFragment : Fragment() {
-    //lateinit var recyclerView: RecyclerView
-    var listener: OnRoundListFragmentInteractionListener? = null
-
-    interface OnRoundListFragmentInteractionListener {
-        fun onRoundSelected(round: Round)
-        fun onRoundAdded()
-
-    }
-
-    /**
-     * @brief funcion creadora de opciones
-     * @param menu menu del fragmento
-     * @param inflater menu inflater
-     */
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.menu, menu)
-    }
-
-    /**
-     * @brief funcion selectora de opciones
-     * @param item item del menu
-     * @return true o false
-     */
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.menu_item_new_round -> {
-                listener?.onRoundAdded()
-                recyclerView.update { round ->
-                    listener?.onRoundSelected(round) }
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
-
-    /**
-     * @brief funcion creadora de vista/controlador
-     * @param savedInstanceState vista
-     */
+class RoundListActivity : AppCompatActivity(),
+    RoundListFragment.OnRoundListFragmentInteractionListener,
+    RoundFragment.OnRoudFragmentInteractionListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+        setContentView(R.layout.activity_masterdetail)
+        val fm = supportFragmentManager
+        if (fm.findFragmentById(R.id.fragment_container) == null) {
+            fm.executeTransaction { add(R.id.fragment_container, RoundListFragment()) }
+        }
+        PreferenceManager.setDefaultValues(this, R.xml.pref_general, false)
     }
-
-    /**
-     * @brief base function
-     * @param context cambio de vista
-     */
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        if (context is OnRoundListFragmentInteractionListener) {
-            listener = context
+    override fun onRoundUpdated() {
+        round_recycler_view.adapter.notifyDataSetChanged()
+    }
+    override fun onRoundSelected(round: Round) {
+        val fm = supportFragmentManager
+        if (detail_fragment_container == null) {
+            startActivity(RoundActivity.newIntent(this, round.id))
         } else {
-            throw RuntimeException(context.toString() +
-                    " must implement OnRoundListFragmentInteractionListener")
+            fm.executeTransaction { replace(R.id.detail_fragment_container,
+                RoundFragment.newInstance(round.id)) }
         }
     }
-
-    /**
-     * @brief base function
-     */
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
+    override fun onPreferenceSelected() {
+        startActivity(Intent(this, ERSettingsActivity::class.java))
     }
-
-    /**
-     * @brief seleccion de partidas guardadas
-     * @param round partida guardada
-     */
-    fun onRoundSelected(round: Round) {
-        val intent = Ingame.newIntent(context!!, round.board.tableroToString())
-        startActivity(intent)
+    override fun onNewRoundAdded() {
+        val round = Round(ERSettingsActivity.getBoardSize(this).toInt())
+        RoundRepository.addRound(round)
     }
-
-    /**
-     * @brief creadora de vista
-     * @param inflater inflater layout
-     * @param container contenedor de vista
-     * @param savedInstanceState vista
-     */
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_round_list, container, false)
-    }
-
-    /**
-     * @brief creadora de vistas
-     * @param view vista
-     * @param savedInstanceState vista
-     */
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(activity)
-            itemAnimator = DefaultItemAnimator()
-            update { round ->  listener?.onRoundSelected(round) }
-        }
-    }
-
 }
