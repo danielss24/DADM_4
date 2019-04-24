@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,32 +71,48 @@ class RoundFragment : Fragment(), PartidaListener {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            round = RoundRepository.getRound(it.getString((ROUND_ID)))
+        try {
+            16
+            arguments?.let {
+                round = Round.fromJSONString(it.getString(ARG_ROUND))
+            }
+        } catch (e: Exception) {
+            Log.d("DEBUG", e.message)
+            activity?.finish()
         }
     }
-
-    companion object {
-        val ROUND_ID = "ROUND_ID"
-        @JvmStatic
-        fun newInstance(round_id: String) =
-            RoundFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ROUND_ID, round_id)
-                }
-            }
-    }
-
     /**
      * @brief funcion creadora de vista
      * @param inflater inflater
      * @param container contenedor de la vista
      * @param savedInstanceState vista
      */
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_round, container, false)
     }
+
+    companion object {
+        val ARG_ROUND = "es.uam.eps.dadm.er20.round"
+        val BOARDSTRING = "es.uam.eps.dadm.er20.boardstring"
+        @JvmStatic
+        fun newInstance(round: String) =
+            RoundFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_ROUND, round)
+                }
+            }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString(BOARDSTRING, round.board.tableroToString())
+        super.onSaveInstanceState(outState)
+    }
+
+
+
+
 
     /**
      * @brief vista creadora
@@ -104,8 +121,10 @@ class RoundFragment : Fragment(), PartidaListener {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        registerResetButton()
-        round_title.text = round.title
+        round_title.text = "${round.title}"
+        if (savedInstanceState != null) {
+            round.board.stringToTablero(savedInstanceState.getString(BOARDSTRING))
+        }
     }
 
     /**

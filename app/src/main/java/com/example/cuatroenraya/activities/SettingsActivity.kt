@@ -14,6 +14,7 @@ import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
 import android.preference.PreferenceManager
 import android.preference.RingtonePreference
+import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.Toast
@@ -190,7 +191,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
                 // using RingtoneManager.
                 if (TextUtils.isEmpty(stringValue)) {
                     // Empty values correspond to 'silent' (no ringtone).
-                    preference.setSummary(R.string.pref_ringtone_silent)
+                    preference.setSummary("R.string.pref_ringtone_silent")
 
                 } else {
                     val ringtone = RingtoneManager.getRingtone(
@@ -260,5 +261,22 @@ class SettingsActivity : AppCompatPreferenceActivity() {
                     .getString(preference.key, "")
             )
         }
+
+        fun setPlayerUUID(activity: AppCompatActivity, playerUuid: String) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        fun setPlayerName(activity: AppCompatActivity, toString: String) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        fun getPlayerUUID(context: Context?): String {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        fun getPlayerName(activity: AppCompatActivity): String {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
     }
 }

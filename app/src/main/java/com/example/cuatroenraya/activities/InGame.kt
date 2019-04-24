@@ -20,9 +20,11 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment)
         val fm = supportFragmentManager
+        /*
+         * Esto es un solo fragmento
+         */
         if (fm.findFragmentById(R.id.fragment_container) == null) {
-            val fragment =
-                RoundFragment.newInstance(intent.getStringExtra(ROUND_ID))
+            val fragment = RoundFragment.newInstance(intent.getStringExtra(ROUND_ID))
             fm.executeTransaction { add(R.id.fragment_container, fragment) }
         }
         // my_toolbar is defined in the layout file
