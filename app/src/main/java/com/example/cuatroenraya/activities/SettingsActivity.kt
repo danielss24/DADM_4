@@ -19,6 +19,9 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.example.cuatroenraya.R
 
+
+
+
 /**
  * A [PreferenceActivity] that presents a set of application settings. On
  * handset devices, settings are presented as a single list. On tablets,
@@ -87,13 +90,28 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             // updated to reflect the new value, per the Android Design
             // guidelines.
             bindPreferenceSummaryToValue(findPreference("display_name_text"))
-            bindPreferenceSummaryToValue(findPreference("boardsize_list"))
+            //bindPreferenceSummaryToValue(findPreference("boardsize_list"))
+
+            var themeSwitch = findPreference("theme_switch"); //Preference Key
             val preference = findPreference("prueba")
             preference.onPreferenceClickListener = Preference.OnPreferenceClickListener{
                 Toast.makeText(activity, "Preferencia pulsada", Toast.LENGTH_LONG).show()
                 true
             }
+
+
+            themeSwitch.onPreferenceClickListener = Preference.OnPreferenceClickListener{
+                Toast.makeText(activity, "theme_switch pulsada", Toast.LENGTH_LONG).show()
+                true
+            }
+
+            //You can read preference value anywhere in the app like following.
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity)
+            val isChecked = sharedPreferences.getBoolean("theme_switch", false)
+            Toast.makeText(activity, "isChecked : $isChecked", Toast.LENGTH_LONG).show()
+
         }
+
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
             val id = item.itemId
@@ -222,20 +240,6 @@ class SettingsActivity : AppCompatPreferenceActivity() {
          */
         private fun isXLargeTablet(context: Context): Boolean {
             return context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK >= Configuration.SCREENLAYOUT_SIZE_XLARGE
-        }
-
-        val BOARDSIZE_KEY = "boardsize_list"
-        val BOARDSIZE_DEFAULT = "3"
-        fun getBoardSize(context: Context): String {
-            return PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(BOARDSIZE_KEY, BOARDSIZE_DEFAULT)
-        }
-        fun setBoardsize(context: Context, size: Int) {
-            val sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(context)
-            val editor = sharedPreferences.edit()
-            editor.putInt(SettingsActivity.BOARDSIZE_KEY, size)
-            editor.commit()
         }
 
         /**

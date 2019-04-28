@@ -8,4 +8,9 @@
     <color name="colorNoPlayer">#E1E8CB</color>
     <color name="colorTablero">#E1AE56</color>
 
+    <color name="colorPrimary_Blue">#1C9AB6</color>
+    <color name="colorPrimaryDark_Blue">#0F0C8C </color>
+    <color name="colorAccent_Blue">#E7BB20</color>
+
+
 </resources>

@@ -8,6 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme_Bl" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary_Blue</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_Blue</item>
+        <item name="colorAccent">@color/colorAccent_Blue</item>
+    </style>
+
     <style name="casillaTablero">
         <item name="android:layout_width">24pt</item>
         <item name="android:layout_height">24pt</item>

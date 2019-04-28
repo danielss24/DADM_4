@@ -15,8 +15,6 @@
                 android:name=".activities.SettingsActivity"
                 android:label="@string/title_activity_settings">
         </activity>
-        <activity android:name=".activities.Options">
-        </activity>
         <activity android:name=".activities.RoundListActivity">
         </activity>
         <activity
