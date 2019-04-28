@@ -27,11 +27,14 @@ class RoundListActivity : AppCompatActivity(),
     RoundListFragment.OnRoundListFragmentInteractionListener,
     RoundFragment.OnRoundFragmentInteractionListener{
     override fun onRoundAdded() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        print("not implemented") //To change body of created functions use File | Settings | File Templates.
+        onNewRoundAdded()
     }
 
     override fun onPreferenceSelected() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        print("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
     }
 
     /**
@@ -40,10 +43,10 @@ class RoundListActivity : AppCompatActivity(),
 //    override fun onRoundAdded() {
 //        RoundRepository.addRound()
 //    }
-    override fun onRoundUpdated() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
+    override fun onRoundUpdated() {
+        print("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     /**
      * @brief actualizar partidas guardadas
@@ -146,22 +149,13 @@ class RoundListActivity : AppCompatActivity(),
         val repository = RoundRepositoryFactory.createRepository(this)
         val callback = object : RoundRepository.BooleanCallback {
             override fun onResponse(response: Boolean) {
-                if (response == false)
-                    Snackbar.make(
-                        findViewById(R.id.recyclerView),
-                        "R.string.error_adding_round", Snackbar.LENGTH_LONG
-                    ).show()
-                else {
-                    Snackbar.make(
-                        findViewById(R.id.recyclerView),
-                        "New " + round.title + " added", Snackbar.LENGTH_LONG
-                    ).show()
+                if (response == false) {
+                    Snackbar.make(findViewById(R.id.recyclerView),"R.string.error_adding_round", Snackbar.LENGTH_LONG).show()
+                } else {
+                    Snackbar.make(findViewById(R.id.recyclerView),"New " + round.title + " added", Snackbar.LENGTH_LONG).show()
                     val fragmentManager = supportFragmentManager
-                    val roundListFragment =
-                        fragmentManager.findFragmentById(R.id.fragment_container)
-                                as RoundListFragment
-                    roundListFragment.recyclerView.update(
-                        SettingsActivity.getPlayerUUID(baseContext), { round -> onRoundSelected(round) }
+                    val roundListFragment =fragmentManager.findFragmentById(R.id.fragment_container)as RoundListFragment
+                    roundListFragment.recyclerView.update(SettingsActivity.getPlayerUUID(baseContext), { round -> onRoundSelected(round) }
                     )
                 }
             }

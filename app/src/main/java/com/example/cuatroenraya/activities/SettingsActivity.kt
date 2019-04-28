@@ -3,6 +3,7 @@ package com.example.cuatroenraya.activities
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.media.RingtoneManager
 import android.net.Uri
@@ -263,19 +264,19 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         }
 
         fun setPlayerUUID(activity: AppCompatActivity, playerUuid: String) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            PreferenceManager.setDefaultValues(activity, R.xml.pref_general,false)
         }
 
         fun setPlayerName(activity: AppCompatActivity, toString: String) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            PreferenceManager.setDefaultValues(activity, R.xml.pref_general, false)
         }
 
         fun getPlayerUUID(context: Context?): String {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            return PreferenceManager.getDefaultSharedPreferences(context).getString("display_name_text","")
         }
 
         fun getPlayerName(activity: AppCompatActivity): String {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            return PreferenceManager.getDefaultSharedPreferences(activity).getString("display_name_text","")
         }
 
     }

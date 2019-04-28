@@ -2,6 +2,7 @@ package com.example.cuatroenraya.utility
 
 import android.content.Context
 import android.graphics.Paint
+import android.support.design.widget.Snackbar
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
@@ -47,6 +48,7 @@ fun RecyclerView.update(userName: String, onClickListener: (Round) -> Unit) {
         }
 
         override fun onError(error: String) {
+            Snackbar.make(findViewById(R.id.recyclerView),error, Snackbar.LENGTH_LONG).show()
         }
     }
     repository?.getRounds(userName, "", "", roundsCallback)

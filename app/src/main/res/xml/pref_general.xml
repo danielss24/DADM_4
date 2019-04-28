@@ -9,7 +9,9 @@
                 android:maxLines="1"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
-                android:title="Nombre del jugador" />
+                android:title="Nombre del jugador"
+                android:id="@+id/display_name_textID"
+        />
         <Preference
         android:key="prueba"
         android:summary="Pulsa para mostrar un Toast"
