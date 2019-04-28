@@ -4,6 +4,7 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
@@ -89,26 +90,15 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference("display_name_text"))
-            //bindPreferenceSummaryToValue(findPreference("boardsize_list"))
+            bindPreferenceSummaryToValue(findPreference("playerName"))
+            bindPreferenceSummaryToValue(findPreference("themes_list"))
 
-            var themeSwitch = findPreference("theme_switch"); //Preference Key
             val preference = findPreference("prueba")
             preference.onPreferenceClickListener = Preference.OnPreferenceClickListener{
                 Toast.makeText(activity, "Preferencia pulsada", Toast.LENGTH_LONG).show()
                 true
             }
 
-
-            themeSwitch.onPreferenceClickListener = Preference.OnPreferenceClickListener{
-                Toast.makeText(activity, "theme_switch pulsada", Toast.LENGTH_LONG).show()
-                true
-            }
-
-            //You can read preference value anywhere in the app like following.
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity)
-            val isChecked = sharedPreferences.getBoolean("theme_switch", false)
-            Toast.makeText(activity, "isChecked : $isChecked", Toast.LENGTH_LONG).show()
 
         }
 
@@ -264,5 +254,25 @@ class SettingsActivity : AppCompatPreferenceActivity() {
                     .getString(preference.key, "")
             )
         }
+    }
+    /**
+     * @brief carga el tema correcto
+     */
+    override fun getTheme(): Resources.Theme {
+        val theme = super.getTheme()
+
+        /*Preferencias*/
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val themeVal = sharedPreferences.getString("themes_list", "1")
+        if(themeVal.toInt() == 1){
+            theme.applyStyle(R.style.AppTheme, true)
+        }else if(themeVal.toInt() == 2){
+            theme.applyStyle(R.style.AppTheme_Blue, true)
+        }else if (themeVal.toInt() == 3){
+            theme.applyStyle(R.style.AppTheme_Green,true )
+        }
+        /*Preferencias*/
+
+        return theme
     }
 }

@@ -8,11 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme_Bl" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme_Blue" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary_Blue</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark_Blue</item>
         <item name="colorAccent">@color/colorAccent_Blue</item>
+    </style>
+
+    <style name="AppTheme_Green" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary_Green</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_Green</item>
+        <item name="colorAccent">@color/colorAccent_Green</item>
     </style>
 
     <style name="casillaTablero">

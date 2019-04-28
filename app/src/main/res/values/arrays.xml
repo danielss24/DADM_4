@@ -1,3 +1,13 @@
 <resources>
+    <string-array name="pref_App_Themes">
+        <item>Por defecto</item>
+        <item>Azul</item>
+        <item>Verde</item>
+    </string-array>
 
+    <string-array name="pref_App_Themes_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>

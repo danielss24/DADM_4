@@ -12,5 +12,8 @@
     <color name="colorPrimaryDark_Blue">#0F0C8C </color>
     <color name="colorAccent_Blue">#E7BB20</color>
 
+    <color name="colorPrimary_Green">#69B36C</color>
+    <color name="colorPrimaryDark_Green">#2F8331 </color>
+    <color name="colorAccent_Green">#D3A2C8</color>
 
 </resources>

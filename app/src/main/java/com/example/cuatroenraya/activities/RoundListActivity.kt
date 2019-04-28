@@ -2,6 +2,7 @@ package com.example.cuatroenraya.activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
@@ -90,6 +91,28 @@ class RoundListActivity : AppCompatActivity(),
                 adapter?.notifyDataSetChanged()
             }
         }
+    }
+
+
+    /**
+     * @brief carga el tema correcto
+     */
+    override fun getTheme(): Resources.Theme {
+        val theme = super.getTheme()
+
+        /*Preferencias*/
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val themeVal = sharedPreferences.getString("themes_list", "1")
+        if(themeVal.toInt() == 1){
+            theme.applyStyle(R.style.AppTheme, true)
+        }else if(themeVal.toInt() == 2){
+            theme.applyStyle(R.style.AppTheme_Blue, true)
+        }else if (themeVal.toInt() == 3){
+            theme.applyStyle(R.style.AppTheme_Green,true )
+        }
+        /*Preferencias*/
+
+        return theme
     }
 
 }

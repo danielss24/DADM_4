@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.content.DialogInterface
+import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import com.example.cuatroenraya.R
 import com.example.cuatroenraya.model.RoundRepository
@@ -21,7 +22,12 @@ class AlertDialogFragment : DialogFragment() {
         val activity = activity as AppCompatActivity?
         val alertDialogBuilder = AlertDialog.Builder(getActivity())
         alertDialogBuilder.setTitle(R.string.finPartida)
-        alertDialogBuilder.setMessage(R.string.game_over_message)
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity())
+        val playerName = sharedPreferences.getString("playerName", "Jugador")
+        var mensaje =  getString(R.string.game_over_message) + " " + playerName + "?"
+
+        alertDialogBuilder.setMessage(mensaje)
         alertDialogBuilder.setPositiveButton("Yes") { dialog, which ->
             RoundRepository.addRound()
             if (activity is RoundListActivity)

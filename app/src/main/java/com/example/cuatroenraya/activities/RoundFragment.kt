@@ -175,14 +175,11 @@ class RoundFragment : Fragment(), PartidaListener {
         when (evento.tipo) {
             Evento.EVENTO_CAMBIO -> {
                 board_erview.invalidate()
-                //view?.update(round)
                 listener?.onRoundUpdated()
             }
             Evento.EVENTO_FIN -> {
                 board_erview.invalidate()
-                //view?.update(round)
                 listener?.onRoundUpdated()
-                //Snackbar.make(view!!, "Game over", Snackbar.LENGTH_SHORT).show()
                 AlertDialogFragment().show(activity?.supportFragmentManager,"ALERT_DIALOG")
             }
         }

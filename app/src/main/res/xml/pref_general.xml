@@ -6,17 +6,20 @@
                 android:capitalize="words"
                 android:defaultValue="@string/pref_default_display_name"
                 android:inputType="textCapWords"
-                android:key="display_name_text"
+                android:key="playerName"
                 android:maxLines="1"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
                 android:title="Nombre del jugador" />
 
-        <SwitchPreference
-                android:defaultValue="true"
-                android:key="theme_switch"
-                android:summary="Cambiar el tema de la aplicación"
-                android:title="Tema" />
+        <ListPreference
+                android:defaultValue="3"
+                android:entries="@array/pref_App_Themes"
+                android:entryValues="@array/pref_App_Themes_values"
+                android:key="themes_list"
+                android:negativeButtonText="@null"
+                android:positiveButtonText="@null"
+                android:title="Elige el Tema de la aplicación" />
 
         <Preference
                 android:key="prueba"

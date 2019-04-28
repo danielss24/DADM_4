@@ -6,8 +6,9 @@ import android.content.Intent
 import android.preference.PreferenceManager
 import android.widget.Button
 import com.example.cuatroenraya.R
-import com.example.cuatroenraya.model.RoundRepository
-import android.content.SharedPreferences
+import android.content.res.Resources
+import android.content.Context
+
 
 
 
@@ -15,6 +16,7 @@ import android.content.SharedPreferences
  * @brief Clase principal de aplicacion
  */
 class MainActivity : AppCompatActivity() {
+
     /**
      * @brief funcion creadora de vista/controlador
      * @param savedInstanceState vista
@@ -22,17 +24,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@MainActivity)
-        // enter the key from your xml and the default value
-        val value = sharedPreferences.getBoolean("theme_switch", false)
-
-        if(value){
-            setTheme(R.style.AppTheme_Bl)
-        }else if(!value){
-            setTheme(R.style.AppTheme)
-        }
         setContentView(R.layout.principal)
-
         val buttonPlay : Button = findViewById(R.id.buttonLoadGame)
         buttonPlay.setOnClickListener{
             val intent = Intent(this, RoundListActivity::class.java)
@@ -47,10 +39,26 @@ class MainActivity : AppCompatActivity() {
         }
 
         PreferenceManager.setDefaultValues(this, R.xml.pref_general, false)
-
-
-
     }
 
+    /**
+     * @brief carga el tema correcto
+     */
+    override fun getTheme(): Resources.Theme {
+        val theme = super.getTheme()
 
+        /*Preferencias*/
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@MainActivity)
+        val themeVal = sharedPreferences.getString("themes_list", "1")
+        if(themeVal.toInt() == 1){
+            theme.applyStyle(R.style.AppTheme, true)
+        }else if(themeVal.toInt() == 2){
+            theme.applyStyle(R.style.AppTheme_Blue, true)
+        }else if (themeVal.toInt() == 3){
+            theme.applyStyle(R.style.AppTheme_Green,true )
+        }
+        /*Preferencias*/
+
+        return theme
+    }
 }
