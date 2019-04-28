@@ -30,16 +30,16 @@
     <PreferenceCategory android:title="Ajustes del juego">
 
         <SwitchPreference
-                    android:defaultValue="true"
-                    android:key="music_switch"
-                    android:summary="Animar las jugadas con sonidos"
-                    android:title="Sonido" />
+                android:defaultValue="true"
+                android:key="music_switch"
+                android:summary="Animar las jugadas con sonidos"
+                android:title="Sonido" />
 
         <CheckBoxPreference
-            android:key="music"
-            android:summary="Click if you feel like listening to music"
-            android:title="Music"
-            android:defaultValue="false"/>
+                android:key="music"
+                android:summary="Click if you feel like listening to music"
+                android:title="Music"
+                android:defaultValue="false"/>
 
     </PreferenceCategory>
 </android.preference.PreferenceScreen>

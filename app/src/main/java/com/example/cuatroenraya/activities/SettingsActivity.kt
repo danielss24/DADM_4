@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.media.MediaPlayer
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
@@ -97,6 +98,16 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             preference.onPreferenceClickListener = Preference.OnPreferenceClickListener{
                 Toast.makeText(activity, "Preferencia pulsada", Toast.LENGTH_LONG).show()
                 true
+            }
+
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity)
+            val song = MediaPlayer.create(getActivity(),R.raw.backgroud)
+            val isChecked = sharedPreferences.getBoolean("music", false)
+
+            if(isChecked){
+                song.start()
+            }else if(!isChecked){
+                song.release()
             }
 
 
