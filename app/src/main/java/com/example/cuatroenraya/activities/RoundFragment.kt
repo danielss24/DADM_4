@@ -72,7 +72,6 @@ class RoundFragment : Fragment(), PartidaListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         try {
-            16
             arguments?.let {
                 round = Round.fromJSONString(it.getString(ARG_ROUND))
             }

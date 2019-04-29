@@ -44,14 +44,11 @@ class RoundListActivity : AppCompatActivity(),
 //        RoundRepository.addRound()
 //    }
 
-    override fun onRoundUpdated() {
-        print("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     /**
      * @brief actualizar partidas guardadas
      */
-    fun onRoundUpdated(round: Round) {
+    override fun onRoundUpdated(round: Round) {
         val repository = RoundRepositoryFactory.createRepository(this)
         val callback = object : RoundRepository.BooleanCallback {
             override fun onResponse(response: Boolean) {
