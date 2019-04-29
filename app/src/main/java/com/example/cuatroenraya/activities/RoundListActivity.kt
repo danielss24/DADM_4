@@ -141,7 +141,7 @@ class RoundListActivity : AppCompatActivity(),
     }
 
     fun onNewRoundAdded() {
-        val round = Round(SettingsActivity.getBoardSize(this).toInt())
+        val round = Round()
         round.firstPlayerName = "Random"
         round.firstPlayerUUID = "Random"
         round.secondPlayerName = SettingsActivity.getPlayerName(this)

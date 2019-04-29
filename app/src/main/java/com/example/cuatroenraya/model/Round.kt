@@ -10,7 +10,7 @@ import java.util.*
 import org.json.JSONObject
 import java.util.*
 
-class Round(val size: Int) {
+class Round() {
     var id: String
     var title: String
     var date: String
@@ -31,7 +31,6 @@ class Round(val size: Int) {
         json.put("id", id)
         json.put("title", title)
         json.put("date", date)
-        json.put("size", size)
         json.put("boardString", board.tableroToString())
         json.put("firstPlayerName", firstPlayerName)
         json.put("firstPlayerUUID", firstPlayerUUID)
@@ -43,8 +42,7 @@ class Round(val size: Int) {
     companion object {
         fun fromJSONString(string: String): Round {
             val jsonObject = JSONObject(string)
-            val round = Round(jsonObject.get("size") as Int)
-            15
+            val round = Round()
             round.id = jsonObject.get("id") as String
             round.title = jsonObject.get("title") as String
             round.date = jsonObject.get("date") as String

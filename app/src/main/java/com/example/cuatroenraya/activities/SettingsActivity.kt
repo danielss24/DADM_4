@@ -228,6 +228,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
 
         val BOARDSIZE_KEY = "boardsize_list"
         val BOARDSIZE_DEFAULT = "3"
+        val PLAYERUUID = ""
+        val PLAYER_NAME = "3"
         fun getBoardSize(context: Context): String {
             return PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(BOARDSIZE_KEY, BOARDSIZE_DEFAULT)
@@ -263,20 +265,30 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             )
         }
 
-        fun setPlayerUUID(activity: AppCompatActivity, playerUuid: String) {
-            PreferenceManager.setDefaultValues(activity, R.xml.pref_general,false)
+        fun setPlayerUUID(context: Context, playerUuid: String) {
+            val sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(context)
+            val editor = sharedPreferences.edit()
+            editor.putString(SettingsActivity.PLAYERUUID, playerUuid)
+            editor.commit()
         }
 
-        fun setPlayerName(activity: AppCompatActivity, toString: String) {
-            PreferenceManager.setDefaultValues(activity, R.xml.pref_general, false)
+        fun setPlayerName(context: Context, playerName: String) {
+            val sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(context)
+            val editor = sharedPreferences.edit()
+            editor.putString(SettingsActivity.PLAYER_NAME, playerName)
+            editor.commit()
         }
 
         fun getPlayerUUID(context: Context?): String {
-            return PreferenceManager.getDefaultSharedPreferences(context).getString("display_name_text","")
+            return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(PLAYERUUID, "")
         }
 
-        fun getPlayerName(activity: AppCompatActivity): String {
-            return PreferenceManager.getDefaultSharedPreferences(activity).getString("display_name_text","")
+        fun getPlayerName(context: Context): String {
+            return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(PLAYER_NAME, "")
         }
 
     }

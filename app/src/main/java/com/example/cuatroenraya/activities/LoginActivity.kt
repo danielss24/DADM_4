@@ -50,8 +50,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                 )
                 startActivity(
                     Intent(
-                        this@LoginActivity,
-                        RoundListActivity::class.java
+                        this@LoginActivity,MainActivity::class.java
                     )
                 )
                 finish()

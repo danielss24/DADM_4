@@ -17,9 +17,8 @@ class RoundCursorWrapper(cursor: Cursor) : CursorWrapper(cursor) {
             val rounduuid = getString(getColumnIndex(RoundTable.Cols.ROUNDUUID))
             val date = getString(getColumnIndex(RoundTable.Cols.DATE))
             val title = getString(getColumnIndex(RoundTable.Cols.TITLE))
-            val size = getString(getColumnIndex(RoundTable.Cols.SIZE))
             val board = getString(getColumnIndex(RoundTable.Cols.BOARD))
-            val round = Round(size.toInt())
+            val round = Round()
             round.firstPlayerName = "Random"
             round.firstPlayerUUID = "Random"
             round.secondPlayerName = playername

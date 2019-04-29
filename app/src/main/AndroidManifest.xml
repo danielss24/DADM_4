@@ -19,7 +19,7 @@
                 android:name=".activities.SettingsActivity"
                 android:label="@string/title_activity_settings">
         </activity>
-        <activity android:name=".activities.LoginActivity"></activity>
+        <activity android:name=".activities.MainActivity"></activity>
         <activity android:name=".activities.RoundListActivity">
         </activity>
         <activity
@@ -29,7 +29,7 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".activities.RoundListActivity"/>
         </activity>
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

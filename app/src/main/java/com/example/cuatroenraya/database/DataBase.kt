@@ -40,7 +40,6 @@ class DataBase(context: Context) : RoundRepository {
                     + RoundDataBaseSchema.UserTable.Cols.PLAYERUUID + ", "
                     + RoundDataBaseSchema.RoundTable.Cols.DATE + " TEXT, "
                     + RoundDataBaseSchema.RoundTable.Cols.TITLE + " TEXT, "
-                    + RoundDataBaseSchema.RoundTable.Cols.SIZE + " TEXT, "
                     + RoundDataBaseSchema.RoundTable.Cols.BOARD + " TEXT);")
             try {
                 db.execSQL(str1)
@@ -118,7 +117,6 @@ class DataBase(context: Context) : RoundRepository {
         values.put(RoundDataBaseSchema.RoundTable.Cols.ROUNDUUID, round.id)
         values.put(RoundDataBaseSchema.RoundTable.Cols.DATE, round.date)
         values.put(RoundDataBaseSchema.RoundTable.Cols.TITLE, round.title)
-        values.put(RoundDataBaseSchema.RoundTable.Cols.SIZE, round.size)
         values.put(RoundDataBaseSchema.RoundTable.Cols.BOARD, round.board.tableroToString())
         return values
     }
@@ -139,7 +137,6 @@ class DataBase(context: Context) : RoundRepository {
                 RoundDataBaseSchema.RoundTable.Cols.ROUNDUUID + ", " +
                 RoundDataBaseSchema.RoundTable.Cols.DATE + ", " +
                 RoundDataBaseSchema.RoundTable.Cols.TITLE + ", " +
-                RoundDataBaseSchema.RoundTable.Cols.SIZE + ", " +
                 RoundDataBaseSchema.RoundTable.Cols.BOARD + " " +
                 "FROM " + RoundDataBaseSchema.UserTable.NAME + " AS p, " +
                 RoundDataBaseSchema.RoundTable.NAME + " AS r " +
