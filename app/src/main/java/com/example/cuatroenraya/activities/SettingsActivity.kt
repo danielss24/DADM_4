@@ -3,6 +3,7 @@ package com.example.cuatroenraya.activities
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.media.MediaPlayer
@@ -16,6 +17,7 @@ import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
 import android.preference.PreferenceManager
 import android.preference.RingtonePreference
+import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.Toast
@@ -243,6 +245,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             return context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK >= Configuration.SCREENLAYOUT_SIZE_XLARGE
         }
 
+
+
         /**
          * Binds a preference's summary to its value. More specifically, when the
          * preference's value is changed, its summary (line of text below the
@@ -265,6 +269,33 @@ class SettingsActivity : AppCompatPreferenceActivity() {
                     .getString(preference.key, "")
             )
         }
+
+        fun setPlayerUUID(context: Context, playerUuid: String) {
+            val sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(context)
+            val editor = sharedPreferences.edit()
+            editor.putString(SettingsActivity.PLAYERUUID, playerUuid)
+            editor.commit()
+        }
+
+        fun setPlayerName(context: Context, playerName: String) {
+            val sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(context)
+            val editor = sharedPreferences.edit()
+            editor.putString(SettingsActivity.PLAYER_NAME, playerName)
+            editor.commit()
+        }
+
+        fun getPlayerUUID(context: Context?): String {
+            return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(PLAYERUUID, "")
+        }
+
+        fun getPlayerName(context: Context): String {
+            return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(PLAYER_NAME, "")
+        }
+
     }
     /**
      * @brief carga el tema correcto

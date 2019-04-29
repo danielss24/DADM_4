@@ -2,6 +2,7 @@ package com.example.cuatroenraya.utility
 
 import android.content.Context
 import android.graphics.Paint
+import android.support.design.widget.Snackbar
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
@@ -11,6 +12,7 @@ import com.example.cuatroenraya.activities.RoundAdapter
 import com.example.cuatroenraya.model.TableroConecta4
 import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.model.RoundRepository
+import com.example.cuatroenraya.model.RoundRepositoryFactory
 
 
 /**
@@ -32,14 +34,26 @@ fun Paint.setColor(board: TableroConecta4, i: Int, j: Int, context: Context) {
  * @brief addon para la vista recicladora
  * @param onClickListener clickable para la vista recicladora
  */
-fun RecyclerView.update(onClickListener: (Round) -> Unit) {
-    if (adapter == null){
-        adapter = RoundAdapter(RoundRepository.rounds, onClickListener)
-    }else{
-        adapter!!.notifyDataSetChanged()
-    }
 
+fun RecyclerView.update(userName: String, onClickListener: (Round) -> Unit) {
+    val repository = RoundRepositoryFactory.createRepository(context)
+    val roundsCallback = object : RoundRepository.RoundsCallback {
+        override fun onResponse(rounds: List<Round>) {
+            if (adapter == null)
+                adapter = RoundAdapter(rounds, onClickListener)
+            else {
+                (adapter as RoundAdapter).rounds = rounds
+                adapter?.notifyDataSetChanged()
+            }
+        }
+
+        override fun onError(error: String) {
+            Snackbar.make(findViewById(R.id.recyclerView),error, Snackbar.LENGTH_LONG).show()
+        }
+    }
+    repository?.getRounds(userName, "", "", roundsCallback)
 }
+
 
 /**
  * @brief addon para fragmentos

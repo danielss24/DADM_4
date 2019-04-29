@@ -10,7 +10,8 @@
                 android:maxLines="1"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
-                android:title="Nombre del jugador" />
+                android:title="Nombre del jugador"
+                android:id="@+id/display_name_textID"/>
 
         <ListPreference
                 android:defaultValue="3"

@@ -56,11 +56,9 @@ class RoundListFragment : Fragment() {
      * @return true o false
      */
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+        when (item!!.itemId) {
             R.id.menu_item_new_round -> {
                 listener?.onRoundAdded()
-                recyclerView.update { round ->
-                    listener?.onRoundSelected(round) }
                 return true
             }
             R.id.menu_item_settings -> {
@@ -131,9 +129,16 @@ class RoundListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
-            itemAnimator = DefaultItemAnimator()
-            update { round ->  listener?.onRoundSelected(round) }
+            update(SettingsActivity.getPlayerUUID(context!!))
+            { round -> listener?.onRoundSelected(round) }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        recyclerView.update(SettingsActivity.getPlayerUUID(context!!))
+        { round -> listener?.onRoundSelected(round) }
+    }
+
 
 }

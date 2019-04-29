@@ -58,7 +58,7 @@ class RoundHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClic
  * @param rounds partidas guardadas
  * @param listener listener de partidas guardadas
  */
-class RoundAdapter(val rounds: List<Round>, val listener: (Round) -> Unit): RecyclerView.Adapter<RoundHolder>() {
+class RoundAdapter(var rounds: List<Round>, var listener: (Round) -> Unit) : RecyclerView.Adapter<RoundHolder>() {
     /**
      * @brief creadora de vista/controlador
      * @param parent conjunto de vistas

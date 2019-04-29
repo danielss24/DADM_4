@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.cuatroenraya">
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_PROFILE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
@@ -15,6 +19,7 @@
                 android:name=".activities.SettingsActivity"
                 android:label="@string/title_activity_settings">
         </activity>
+        <activity android:name=".activities.MainActivity"></activity>
         <activity android:name=".activities.RoundListActivity">
         </activity>
         <activity
@@ -24,7 +29,7 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".activities.RoundListActivity"/>
         </activity>
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import com.example.cuatroenraya.R
+import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.utility.executeTransaction
 import kotlinx.android.synthetic.main.activity_fragment.*
 
@@ -22,9 +23,11 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment)
         val fm = supportFragmentManager
+        /*
+         * Esto es un solo fragmento
+         */
         if (fm.findFragmentById(R.id.fragment_container) == null) {
-            val fragment =
-                RoundFragment.newInstance(intent.getStringExtra(ROUND_ID))
+            val fragment = RoundFragment.newInstance(intent.getStringExtra(ROUND_ID))
             fm.executeTransaction { add(R.id.fragment_container, fragment) }
         }
         // my_toolbar is defined in the layout file
@@ -42,7 +45,8 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
             return intent
         }
     }
-    override fun onRoundUpdated() {
+    override fun onRoundUpdated(round: Round) {
+
     }
 
     /**

@@ -7,37 +7,28 @@ import java.io.File
 /**
  * @brief objeto de lista de partidas
  */
-object RoundRepository {
-    val rounds = ArrayList<Round>()
+interface RoundRepository {
+    @Throws(Exception::class)
+    fun open()
 
-    init {
+    fun close()
+    interface LoginRegisterCallback {
+        fun onLogin(playerUuid: String)
+        fun onError(error: String)
     }
 
-    /**
-     * @brief funcion que devuelve partidas
-     * @param id id de partida a devolver
-     * @return devuelve la partida o error
-     */
-    fun getRound(id: String): Round {
-        val round = rounds.find { it.id == id }
-        return round ?: throw Exception("Round not found.")
+    fun login(playername: String, password: String, callback: LoginRegisterCallback)
+    fun register(playername: String, password: String, callback: LoginRegisterCallback)
+
+    interface BooleanCallback {
+        fun onResponse(ok: Boolean)
     }
 
-    /**
-     * @brief funcion que añade partidas
-     * @return id de partida añadida
-     */
-    fun addRound():String{
-        var round = Round()
-        rounds.add(round)
-        return round.id
-    }
-
-    /**
-     * @brief guarda partida
-     * @param round partida a guardar
-     */
-    fun saveRound(round: Round){
-        rounds.add(round)
+    fun getRounds(playeruuid: String, orderByField: String, group: String, callback: RoundsCallback)
+    fun addRound(round: Round, callback: BooleanCallback)
+    fun updateRound(round: Round, callback: BooleanCallback)
+    interface RoundsCallback {
+        fun onResponse(rounds: List<Round>)
+        fun onError(error: String)
     }
 }
