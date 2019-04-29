@@ -6,10 +6,15 @@ import android.content.res.Resources
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.support.design.widget.Snackbar
 import com.example.cuatroenraya.R
 import com.example.cuatroenraya.model.Round
+import com.example.cuatroenraya.model.RoundRepository
+import com.example.cuatroenraya.model.RoundRepositoryFactory
 import com.example.cuatroenraya.utility.executeTransaction
+import com.example.cuatroenraya.utility.update
 import kotlinx.android.synthetic.main.activity_fragment.*
+import kotlinx.android.synthetic.main.fragment_round_list.*
 
 /**
  * @brief Clase de vista tablero
@@ -46,7 +51,19 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
         }
     }
     override fun onRoundUpdated(round: Round) {
-
+        val repository = RoundRepositoryFactory.createRepository(this)
+        val callback = object : RoundRepository.BooleanCallback {
+            override fun onResponse(response: Boolean) {
+                if (response != true) {
+                    Snackbar.make(
+                        findViewById(R.id.title),
+                        R.string.error_updating_round,
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+        repository?.updateRound(round, callback)
     }
 
     /**

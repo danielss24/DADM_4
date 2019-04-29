@@ -193,7 +193,6 @@ class RoundFragment : Fragment(), PartidaListener {
         when (evento.tipo) {
             Evento.EVENTO_CAMBIO -> {
                 board_erview.invalidate()
-                listener?.onRoundUpdated()
                 listener?.onRoundUpdated(round)
             }
             Evento.EVENTO_FIN -> {
