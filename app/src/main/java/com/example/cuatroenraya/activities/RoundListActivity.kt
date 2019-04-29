@@ -143,7 +143,9 @@ class RoundListActivity : AppCompatActivity(),
         round.firstPlayerUUID = "Random"
         round.secondPlayerName = SettingsActivity.getPlayerName(this)
         round.secondPlayerUUID = SettingsActivity.getPlayerUUID(this)
+
         val repository = RoundRepositoryFactory.createRepository(this)
+
         val callback = object : RoundRepository.BooleanCallback {
             override fun onResponse(response: Boolean) {
                 if (response == false) {

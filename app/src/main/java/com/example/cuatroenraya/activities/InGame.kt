@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.cuatroenraya.R
+import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.utility.executeTransaction
 import kotlinx.android.synthetic.main.activity_fragment.*
 
@@ -44,7 +45,7 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
             return intent
         }
     }
-    override fun onRoundUpdated() {
+    override fun onRoundUpdated(round: Round) {
 
     }
 }

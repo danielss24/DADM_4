@@ -40,7 +40,7 @@ class RoundFragment : Fragment(), PartidaListener {
     var listener: OnRoundFragmentInteractionListener? = null
 
     interface OnRoundFragmentInteractionListener {
-        fun onRoundUpdated()
+        fun onRoundUpdated(round: Round)
     }
 
     /**
@@ -156,7 +156,7 @@ class RoundFragment : Fragment(), PartidaListener {
             }
             var tableroTMP = TableroConecta4()
             round.board.stringToTablero(tableroTMP.tableroToString())
-            listener?.onRoundUpdated()
+            listener?.onRoundUpdated(round)
             board_erview.invalidate()
             Snackbar.make(view as View, R.string.round_restarted,
                 Snackbar.LENGTH_SHORT).show()
@@ -194,12 +194,12 @@ class RoundFragment : Fragment(), PartidaListener {
             Evento.EVENTO_CAMBIO -> {
                 board_erview.invalidate()
                 //view?.update(round)
-                listener?.onRoundUpdated()
+                listener?.onRoundUpdated(round)
             }
             Evento.EVENTO_FIN -> {
                 board_erview.invalidate()
                 //view?.update(round)
-                listener?.onRoundUpdated()
+                listener?.onRoundUpdated(round)
                 //Snackbar.make(view!!, "Game over", Snackbar.LENGTH_SHORT).show()
                 AlertDialogFragment().show(activity?.supportFragmentManager,"ALERT_DIALOG")
             }

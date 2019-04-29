@@ -25,7 +25,7 @@ class AlertDialogFragment : DialogFragment() {
         alertDialogBuilder.setPositiveButton("Yes") { dialog, which ->
             //            RoundRepository.addRound()
             if (activity is RoundListActivity)
-                activity.onRoundUpdated()
+                //activity.onRoundUpdated()
             else
                 activity?.finish()
             dialog.dismiss()
