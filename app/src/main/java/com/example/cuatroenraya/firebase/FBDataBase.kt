@@ -13,8 +13,7 @@ class FBDataBase: RoundRepository {
         db = FirebaseDatabase.getInstance().reference.child(DATABASENAME)
     }
     override fun close() {
-        TODO("not implemented")
-        //To change body of created functions use File | Settings | File Templates.
+        db.database.goOffline()
     }
     override fun login(playername: String, password: String,
                        callback: RoundRepository.LoginRegisterCallback) {
@@ -31,8 +30,14 @@ class FBDataBase: RoundRepository {
     }
     override fun register(playername: String, password: String,
                           callback: RoundRepository.LoginRegisterCallback) {
-        TODO("not implemented")
-        //To change body of created functions use File | Settings | File Templates.
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val authResult = firebaseAuth.createUserWithEmailAndPassword(playername, password)
+        if (authResult.isSuccessful) {
+            callback.onLogin(playername)
+        } else {
+            callback.onLogin(playername)
+        }
+
     }
     override fun getRounds(playeruuid: String,
                            orderByField: String,
@@ -53,6 +58,12 @@ class FBDataBase: RoundRepository {
             }
         })
     }
+
+    fun isOpenOrIamIn(round: Round) : Boolean{
+        //TODO
+        return false
+    }
+
     override fun addRound(round: Round, callback: RoundRepository.BooleanCallback) {
         if (db.child(round.id).setValue(round).isSuccessful)
             //El metodo callback te da la respuesta de FireBase
@@ -69,7 +80,6 @@ class FBDataBase: RoundRepository {
         db.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 Log.d("DEBUG", p0.toString())
-                13
             }
             override fun onDataChange(p0: DataSnapshot) {
                 var rounds = listOf<Round>()
