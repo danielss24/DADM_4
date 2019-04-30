@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "15004406659",
+    "firebase_url": "https://dadm4-f053e.firebaseio.com",
+    "project_id": "dadm4-f053e",
+    "storage_bucket": "dadm4-f053e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15004406659:android:baae40022f420669",
+        "android_client_info": {
+          "package_name": "com.example.cuatroenraya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "15004406659-75smaj09faefuaj4krs7ao4oi2748i14.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cuatroenraya",
+            "certificate_hash": "3b5f721cc2331e84914f13852219de4a0631c3e2"
+          }
+        },
+        {
+          "client_id": "15004406659-l15k8c1dl825fgbpc9e2pcure0n9quoo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDT2i0s3G9q4wzeqLd_DuJI3rFJ8Sqljjk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "15004406659-l15k8c1dl825fgbpc9e2pcure0n9quoo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
