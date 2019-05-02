@@ -9,6 +9,7 @@ import com.example.cuatroenraya.model.RoundRepository
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import es.uam.eps.multij.Tablero
 
 class FBDataBase: RoundRepository {
     private val DATABASENAME = "partidas"
@@ -31,8 +32,7 @@ class FBDataBase: RoundRepository {
         }
 
     }
-    override fun register(playername: String, password: String,
-                          callback: RoundRepository.LoginRegisterCallback) {
+    override fun register(playername: String, password: String,callback: RoundRepository.LoginRegisterCallback) {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(playername,password).addOnCompleteListener(){
             task ->
             if (task.isSuccessful){
@@ -43,10 +43,7 @@ class FBDataBase: RoundRepository {
         }
 
     }
-    override fun getRounds(playeruuid: String,
-                           orderByField: String,
-                           group: String,
-                           callback: RoundRepository.RoundsCallback) {
+    override fun getRounds(playeruuid: String,orderByField: String,group: String,callback: RoundRepository.RoundsCallback) {
         db.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 Log.d("DEBUG", p0.toString())
@@ -56,7 +53,7 @@ class FBDataBase: RoundRepository {
                 for (postSnapshot in dataSnapshot.children) {
                     val round = postSnapshot.getValue(Round::class.java)!!
                     if (isOpenOrIamIn(round))
-                        if(round.board.estado == 1){
+                        if(round.board.estado == Tablero.EN_CURSO){
                             rounds += round
                         }
                 }
@@ -67,7 +64,12 @@ class FBDataBase: RoundRepository {
 
     fun isOpenOrIamIn(round: Round) : Boolean{
 
-        if(round.secondPlayerUUID == FirebaseAuth.getInstance().currentUser!!.uid || (round.firstPlayerUUID == FirebaseAuth.getInstance().currentUser!!.uid))
+        if(round.secondPlayerUUID == FirebaseAuth.getInstance().currentUser!!.uid ||
+            (round.firstPlayerUUID == FirebaseAuth.getInstance().currentUser!!.uid))
+            return true
+
+        if(round.secondPlayerUUID == "null"||
+            (round.firstPlayerUUID == "null"))
             return true
 
         return false

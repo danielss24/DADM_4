@@ -72,7 +72,6 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
                 when (comprobacionConecta4()) {
                     EN_CURSO -> {
                         this.cambiaTurno()
-                        //this.ultimoMovimiento = m
                         this.lastMove = m.col
                     }
                     FINALIZADA -> {
@@ -362,12 +361,5 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
             //seteando tablero
             this.stringToTablero(iteradorFichero[5].split(":")[1].trim())
         }
-    }
-
-    /**
-     *
-     */
-    public fun cambiaEstado (){
-        this.estado = this.comprobacionConecta4()
     }
 }

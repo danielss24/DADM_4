@@ -2,6 +2,7 @@ package com.example.cuatroenraya.activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Resources
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -29,8 +30,12 @@ class RoundListActivity : AppCompatActivity(),
     RoundListFragment.OnRoundListFragmentInteractionListener,
     RoundFragment.OnRoundFragmentInteractionListener{
     override fun onRoundAdded() {
-        print("not implemented") //To change body of created functions use File | Settings | File Templates.
-        onNewRoundAdded()
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("OnlineMode",false)){
+            print("CHE")
+            onNewRoundAdded()
+        } else {
+            onNewRoundAdded()
+        }
     }
 
     override fun onPreferenceSelected() {
@@ -141,8 +146,8 @@ class RoundListActivity : AppCompatActivity(),
 
     fun onNewRoundAdded() {
         val round = Round()
-        round.firstPlayerName = "Random"
-        round.firstPlayerUUID = "Random"
+        round.firstPlayerName = "null"
+        round.firstPlayerUUID = "null"
         round.secondPlayerName = SettingsActivity.getPlayerName(this)
         round.secondPlayerUUID = SettingsActivity.getPlayerUUID(this)
 

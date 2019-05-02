@@ -52,8 +52,7 @@ class RoundFragment : Fragment(), PartidaListener {
         if (context is OnRoundFragmentInteractionListener)
             listener = context
         else {
-            throw RuntimeException(context.toString() +
-                    " must implement OnRoundFragmentInteractionListener")
+            throw RuntimeException(context.toString() + " must implement OnRoundFragmentInteractionListener")
         }
     }
 
@@ -174,7 +173,7 @@ class RoundFragment : Fragment(), PartidaListener {
         board_erview = view!!.findViewById(R.id.board_erview) as ERView
         board_erview.setBoard(round.board)
         board_erview.setOnPlayListener(localPlayer)
-        round.board.cambiaEstado()
+        //round.board.cambiaEstado()
 
         if (game.tablero.estado == Tablero.EN_CURSO)
             game.comenzar()
