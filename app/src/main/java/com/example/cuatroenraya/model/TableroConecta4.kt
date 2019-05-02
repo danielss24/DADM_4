@@ -16,15 +16,17 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
 
     val JUGADOR1 = 1
 
-	var tablero = Array(NUM_COL) { arrayOfNulls<Int>(NUM_FIL) }
+	var tablero = mutableListOf<MutableList<Int>>()
+    var lastMove: Int = 0
 
     init {
         this.name = name
         this.turno = 0
         this.estado = EN_CURSO
 		for (col in 0..(NUM_COL-1)){
+            tablero.add(mutableListOf())
             for(fil in 0 ..(NUM_FIL-1)){
-                tablero[col][fil] = IS_EMPTY
+                tablero[col].add(IS_EMPTY)
             }
         }
     }
@@ -70,7 +72,8 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
                 when (comprobacionConecta4()) {
                     EN_CURSO -> {
                         this.cambiaTurno()
-                        this.ultimoMovimiento = m
+                        //this.ultimoMovimiento = m
+                        this.lastMove = m.col
                     }
                     FINALIZADA -> {
 
@@ -359,5 +362,12 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
             //seteando tablero
             this.stringToTablero(iteradorFichero[5].split(":")[1].trim())
         }
+    }
+
+    /**
+     *
+     */
+    public fun cambiaEstado (){
+        this.estado = this.comprobacionConecta4()
     }
 }

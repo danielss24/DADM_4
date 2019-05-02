@@ -56,9 +56,17 @@ class AlertDialogFragment : DialogFragment() {
                     }
                 }
             }
+
             repository?.addRound(round, callback)
-            val intent = Intent(context!!, RoundListActivity::class.java)
-            startActivity(intent)
+            if(activity is RoundListActivity){
+                val intent = Intent(context!!, RoundListActivity::class.java)
+                startActivity(intent)
+            }else if (activity is Ingame){
+                val intent = Ingame.newIntent(context!!,round.toJSONString())
+                startActivity(intent)
+            }
+
+            dialog.dismiss()
         }
         alertDialogBuilder.setNegativeButton("No",
             object : DialogInterface.OnClickListener {

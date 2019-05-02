@@ -174,6 +174,7 @@ class RoundFragment : Fragment(), PartidaListener {
         board_erview = view!!.findViewById(R.id.board_erview) as ERView
         board_erview.setBoard(round.board)
         board_erview.setOnPlayListener(localPlayer)
+        round.board.cambiaEstado()
 
         if (game.tablero.estado == Tablero.EN_CURSO)
             game.comenzar()

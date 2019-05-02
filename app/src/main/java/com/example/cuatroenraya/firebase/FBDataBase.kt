@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.model.RoundRepository
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -23,7 +24,7 @@ class FBDataBase: RoundRepository {
         firebaseAuth.signInWithEmailAndPassword(playername, password).addOnCompleteListener{
                 task ->
             if (task.isSuccessful) {
-                callback.onLogin(playername)
+                callback.onLogin(FirebaseAuth.getInstance().currentUser!!.uid)
             } else {
                 callback.onError(playername)
             }
@@ -35,7 +36,7 @@ class FBDataBase: RoundRepository {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(playername,password).addOnCompleteListener(){
             task ->
             if (task.isSuccessful){
-                callback.onLogin(playername)
+                callback.onLogin(FirebaseAuth.getInstance().currentUser!!.uid)
             } else {
                 callback.onError("Error de inicio de sesion.")
             }
@@ -55,7 +56,9 @@ class FBDataBase: RoundRepository {
                 for (postSnapshot in dataSnapshot.children) {
                     val round = postSnapshot.getValue(Round::class.java)!!
                     if (isOpenOrIamIn(round))
-                        rounds += round
+                        if(round.board.estado == 1){
+                            rounds += round
+                        }
                 }
                 callback.onResponse(rounds)
             }
@@ -64,19 +67,36 @@ class FBDataBase: RoundRepository {
 
     fun isOpenOrIamIn(round: Round) : Boolean{
 
+        if(round.secondPlayerUUID == FirebaseAuth.getInstance().currentUser!!.uid || (round.firstPlayerUUID == FirebaseAuth.getInstance().currentUser!!.uid))
+            return true
+
         return false
     }
 
     override fun addRound(round: Round, callback: RoundRepository.BooleanCallback) {
-        if (db.child(round.id).setValue(round).isSuccessful)
-            //El metodo callback te da la respuesta de FireBase
-            callback.onResponse(true)
-        else
-            callback.onResponse(false)
+
+        var task = db.child(round.id).setValue(round)
+
+        task.addOnCompleteListener {
+            if (it.isSuccessful) {
+                callback.onResponse(true)
+            } else {
+                callback.onResponse(false)
+            }
+        }
+
     }
     override fun updateRound(round: Round, callback: RoundRepository.BooleanCallback) {
-        db = FirebaseDatabase.getInstance().getReference().child(DATABASENAME)
 
+        var task = db.child(round.id).setValue(round)
+
+        task.addOnCompleteListener {
+            if (it.isSuccessful) {
+                callback.onResponse(true)
+            } else {
+                callback.onResponse(false)
+            }
+        }
     }
 
     fun startListeningChanges(callback: RoundRepository.RoundsCallback) {
