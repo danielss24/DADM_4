@@ -24,7 +24,9 @@ import android.widget.TextView
 import java.util.ArrayList
 import android.Manifest.permission.READ_CONTACTS
 import android.content.Intent
+import android.content.SharedPreferences
 import com.example.cuatroenraya.R
+import com.example.cuatroenraya.firebase.FBDataBase
 import com.example.cuatroenraya.model.RoundRepository
 import com.example.cuatroenraya.model.RoundRepositoryFactory
 
@@ -43,16 +45,10 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         val repository = RoundRepositoryFactory.createRepository(this)
         val loginRegisterCallback = object : RoundRepository.LoginRegisterCallback {
             override fun onLogin(playerUuid: String) {
+
                 SettingsActivity.setPlayerUUID(this@LoginActivity, playerUuid)
-                SettingsActivity.setPlayerName(
-                    this@LoginActivity,
-                    email.text.toString()
-                )
-                startActivity(
-                    Intent(
-                        this@LoginActivity,MainActivity::class.java
-                    )
-                )
+                SettingsActivity.setPlayerName(this@LoginActivity, email.text.toString())
+                startActivity(Intent(this@LoginActivity,MainActivity::class.java))
                 finish()
             }
 
@@ -63,14 +59,14 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             }
         }
         when (type) {
-            "login" -> repository?.login(
-                email.text.toString(),
-                password.text.toString(), loginRegisterCallback
-            )
-            "register" -> repository?.register(
-                email.text.toString(),
-                password.text.toString(), loginRegisterCallback
-            )
+            "login" -> {
+                SettingsActivity.setOnlineMode(this,OnlineCheckBox.isChecked)
+                repository?.login(email.text.toString(), password.text.toString(), loginRegisterCallback)
+            }
+            "register" -> {
+                SettingsActivity.setOnlineMode(this,OnlineCheckBox.isChecked)
+                repository?.register(email.text.toString(), password.text.toString(), loginRegisterCallback)
+            }
         }
     }
 

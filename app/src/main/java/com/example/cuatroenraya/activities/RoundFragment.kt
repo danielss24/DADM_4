@@ -147,16 +147,14 @@ class RoundFragment : Fragment(), PartidaListener {
         val resetButton = view!!.findViewById(R.id.reset_round_fab) as FloatingActionButton
         resetButton.setOnClickListener(View.OnClickListener {
             if (round.board.getEstado() !== Tablero.EN_CURSO) {
-                Snackbar.make(view as View,
-                    R.string.round_already_finished, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(view as View,R.string.round_already_finished, Snackbar.LENGTH_SHORT).show()
                 return@OnClickListener
             }
             var tableroTMP = TableroConecta4()
             round.board.stringToTablero(tableroTMP.tableroToString())
             listener?.onRoundUpdated(round)
             board_erview.invalidate()
-            Snackbar.make(view as View, R.string.round_restarted,
-                Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(view as View, R.string.round_restarted,Snackbar.LENGTH_SHORT).show()
         })
     }
 

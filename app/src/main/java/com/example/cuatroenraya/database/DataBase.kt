@@ -2,9 +2,11 @@ package com.example.cuatroenraya.database
 
 import android.content.ContentValues
 import android.content.Context
+import android.content.SharedPreferences
 import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.preference.PreferenceManager
 import android.util.Log
 import com.example.cuatroenraya.model.RoundRepository
 import com.example.cuatroenraya.database.RoundCursorWrapper
@@ -66,9 +68,7 @@ class DataBase(context: Context) : RoundRepository {
         db?.close()
     }
 
-    override fun login(
-        playername: String, playerpassword: String, callback:
-        RoundRepository.LoginRegisterCallback
+    override fun login(playername: String, playerpassword: String, callback:RoundRepository.LoginRegisterCallback
     ) {
         Log.d(DEBUG_TAG, "Login $playername")
         val cursor = db!!.query(
@@ -147,7 +147,7 @@ class DataBase(context: Context) : RoundRepository {
     }
 
     companion object {
-        private val DATABASE_NAME = "er.db"
+        private val DATABASE_NAME = "conectacuatro.db"
         private val DATABASE_VERSION = 1
     }
 

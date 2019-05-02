@@ -239,6 +239,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
 
         val PLAYERUUID = ""
         val PLAYER_NAME = "3"
+        var ONLINE = "OnlineMode"
 
         /**
          * Helper method to determine if the device has an extra-large screen. For
@@ -272,6 +273,16 @@ class SettingsActivity : AppCompatPreferenceActivity() {
                     .getString(preference.key, "")
             )
         }
+        fun setOnlineMode(context: Context, mode: Boolean) {
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+            val editor = sharedPreferences.edit()
+            editor.putBoolean(SettingsActivity.ONLINE, mode)
+            editor.commit()
+        }
+
+        fun getOnlineMode(context: Context?): Boolean {
+            return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(ONLINE, false)
+        }
 
         fun setPlayerUUID(context: Context, playerUuid: String) {
             val sharedPreferences = PreferenceManager
@@ -290,13 +301,11 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         }
 
         fun getPlayerUUID(context: Context?): String {
-            return PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(PLAYERUUID, "")
+            return PreferenceManager.getDefaultSharedPreferences(context).getString(PLAYERUUID, "")
         }
 
         fun getPlayerName(context: Context): String {
-            return PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(PLAYER_NAME, "")
+            return PreferenceManager.getDefaultSharedPreferences(context).getString(PLAYER_NAME, "")
         }
 
     }

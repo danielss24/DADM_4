@@ -1,6 +1,9 @@
 package com.example.cuatroenraya.firebase
 
+import android.app.Application
+import android.support.design.widget.Snackbar
 import android.util.Log
+import android.widget.Toast
 import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.model.RoundRepository
 import com.google.firebase.auth.FirebaseAuth
@@ -15,8 +18,7 @@ class FBDataBase: RoundRepository {
     override fun close() {
         db.database.goOffline()
     }
-    override fun login(playername: String, password: String,
-                       callback: RoundRepository.LoginRegisterCallback) {
+    override fun login(playername: String, password: String,callback: RoundRepository.LoginRegisterCallback) {
         val firebaseAuth = FirebaseAuth.getInstance()
         firebaseAuth.signInWithEmailAndPassword(playername, password).addOnCompleteListener{
                 task ->
@@ -30,12 +32,13 @@ class FBDataBase: RoundRepository {
     }
     override fun register(playername: String, password: String,
                           callback: RoundRepository.LoginRegisterCallback) {
-        val firebaseAuth = FirebaseAuth.getInstance()
-        val authResult = firebaseAuth.createUserWithEmailAndPassword(playername, password)
-        if (authResult.isSuccessful) {
-            callback.onLogin(playername)
-        } else {
-            callback.onLogin(playername)
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(playername,password).addOnCompleteListener(){
+            task ->
+            if (task.isSuccessful){
+                callback.onLogin(playername)
+            } else {
+                callback.onError("Error de inicio de sesion.")
+            }
         }
 
     }
@@ -60,7 +63,7 @@ class FBDataBase: RoundRepository {
     }
 
     fun isOpenOrIamIn(round: Round) : Boolean{
-        //TODO
+
         return false
     }
 
@@ -72,9 +75,10 @@ class FBDataBase: RoundRepository {
             callback.onResponse(false)
     }
     override fun updateRound(round: Round, callback: RoundRepository.BooleanCallback) {
-        TODO("not implemented")
-        //To change body of created functions use File | Settings | File Templates.
+        db = FirebaseDatabase.getInstance().getReference().child(DATABASENAME)
+
     }
+
     fun startListeningChanges(callback: RoundRepository.RoundsCallback) {
         db = FirebaseDatabase.getInstance().getReference().child(DATABASENAME)
         db.addValueEventListener(object : ValueEventListener {
