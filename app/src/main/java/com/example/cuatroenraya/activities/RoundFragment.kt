@@ -109,10 +109,6 @@ class RoundFragment : Fragment(), PartidaListener {
         super.onSaveInstanceState(outState)
     }
 
-
-
-
-
     /**
      * @brief vista creadora
      * @param view vista creada
@@ -124,6 +120,7 @@ class RoundFragment : Fragment(), PartidaListener {
         if (savedInstanceState != null) {
             round.board.stringToTablero(savedInstanceState.getString(BOARDSTRING))
         }
+        registerResetButton()
     }
 
     /**
@@ -161,7 +158,6 @@ class RoundFragment : Fragment(), PartidaListener {
             Snackbar.make(view as View, R.string.round_restarted,
                 Snackbar.LENGTH_SHORT).show()
         })
-
     }
 
     /**
@@ -202,6 +198,4 @@ class RoundFragment : Fragment(), PartidaListener {
             }
         }
     }
-
-
 }

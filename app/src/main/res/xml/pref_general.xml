@@ -4,7 +4,7 @@
 
         <EditTextPreference
                 android:capitalize="words"
-                android:defaultValue="Player"
+                android:defaultValue="@string/player1"
                 android:inputType="textCapWords"
                 android:key="playerName"
                 android:maxLines="1"
