@@ -9,6 +9,7 @@ import com.example.cuatroenraya.model.RoundRepository
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import es.uam.eps.multij.Tablero
 
 class FBDataBase: RoundRepository {
     private val DATABASENAME = "partidas"
@@ -55,10 +56,11 @@ class FBDataBase: RoundRepository {
                 var rounds = listOf<Round>()
                 for (postSnapshot in dataSnapshot.children) {
                     val round = postSnapshot.getValue(Round::class.java)!!
-                    if (isOpenOrIamIn(round))
-                        if(round.board.estado == 1){
+                    if (isOpenOrIamIn(round)) {
+                        if (round.board.estado == Tablero.EN_CURSO) {
                             rounds += round
                         }
+                    }
                 }
                 callback.onResponse(rounds)
             }
@@ -70,6 +72,8 @@ class FBDataBase: RoundRepository {
         if(round.secondPlayerUUID == FirebaseAuth.getInstance().currentUser!!.uid || (round.firstPlayerUUID == FirebaseAuth.getInstance().currentUser!!.uid))
             return true
 
+        if(round.secondPlayerUUID == "Random" || (round.firstPlayerUUID == "Random"))
+            return true
         return false
     }
 
@@ -97,9 +101,25 @@ class FBDataBase: RoundRepository {
                 callback.onResponse(false)
             }
         }
+
     }
 
     fun startListeningChanges(callback: RoundRepository.RoundsCallback) {
+        db = FirebaseDatabase.getInstance().getReference().child(DATABASENAME)
+        db.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                Log.d("DEBUG", p0.toString())
+            }
+            override fun onDataChange(p0: DataSnapshot) {
+                var rounds = listOf<Round>()
+                for (postSnapshot in p0.children)
+                    if (isOpenOrIamIn(postSnapshot.getValue(Round::class.java)!!))
+                        rounds += postSnapshot.getValue(Round::class.java)!!
+                callback.onResponse(rounds)
+            }
+        })
+    }
+    fun startListeningBoardChanges(callback: RoundRepository.RoundsCallback){
         db = FirebaseDatabase.getInstance().getReference().child(DATABASENAME)
         db.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -112,8 +132,6 @@ class FBDataBase: RoundRepository {
                 callback.onResponse(rounds)
             }
         })
-    }
-    fun startListeningBoardChanges(callback: RoundRepository.RoundsCallback){
 
     }
 }

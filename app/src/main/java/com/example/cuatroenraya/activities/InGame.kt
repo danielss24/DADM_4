@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.design.widget.Snackbar
 import com.example.cuatroenraya.R
+import com.example.cuatroenraya.firebase.FBDataBase
 import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.model.RoundRepository
 import com.example.cuatroenraya.model.RoundRepositoryFactory
@@ -39,6 +40,21 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
         setSupportActionBar(my_toolbar)
         // Enable the Up button from the support ActionBar corresponding to this toolbar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        /*val repository = RoundRepositoryFactory.createRepository(this.applicationContext!!)
+        if(repository is FBDataBase){
+            val callback = object : RoundRepository.RoundsCallback {
+                override fun onResponse(rounds: List<Round>) {
+                    onRoundUpdated()
+                }
+                override fun onError(error: String) {
+                    Snackbar.make(findViewById(R.id.recyclerView),resources.getString(R.string.error_updating_round), Snackbar.LENGTH_LONG).show()
+                }
+
+            }
+
+            repository.startListeningBoardChanges(callback)
+        }*/
 
     }
 

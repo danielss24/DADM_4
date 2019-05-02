@@ -1,5 +1,6 @@
 package com.example.cuatroenraya.activities
 
+import android.app.Application
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -13,10 +14,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 
 import com.example.cuatroenraya.R
-import com.example.cuatroenraya.model.JugadorConecta4
-import com.example.cuatroenraya.model.Round
-import com.example.cuatroenraya.model.RoundRepository
-import com.example.cuatroenraya.model.TableroConecta4
+import com.example.cuatroenraya.model.*
 import com.example.cuatroenraya.utility.update
 import com.example.cuatroenraya.views.ERView
 import es.uam.eps.multij.*
@@ -146,7 +144,7 @@ class RoundFragment : Fragment(), PartidaListener {
     private fun registerResetButton() {
         val resetButton = view!!.findViewById(R.id.reset_round_fab) as FloatingActionButton
         resetButton.setOnClickListener(View.OnClickListener {
-            if (round.board.getEstado() !== Tablero.EN_CURSO) {
+            if (round.board.getEstado() != Tablero.EN_CURSO) {
                 Snackbar.make(view as View,R.string.round_already_finished, Snackbar.LENGTH_SHORT).show()
                 return@OnClickListener
             }
@@ -164,9 +162,8 @@ class RoundFragment : Fragment(), PartidaListener {
     internal fun startRound() {
         val players = ArrayList<Jugador>()
         val localPlayer = JugadorConecta4("Local player")
-        val randomPlayer = JugadorAleatorio("Random player")
         players.add(localPlayer)
-        players.add(randomPlayer)
+        set2Player(players)
         game = Partida(round.board, players)
         game.addObservador(this)
         localPlayer.setPartida(game)
@@ -178,6 +175,20 @@ class RoundFragment : Fragment(), PartidaListener {
 
         if (game.tablero.estado == Tablero.EN_CURSO)
             game.comenzar()
+    }
+
+    /**
+     * @brief funcion poara añadir el segundo jugador de la partida
+     */
+    internal fun set2Player(players: ArrayList<Jugador>){
+
+        if(SettingsActivity.getOnlineMode(this.context)){
+            val player2 = JugadorConecta4("Open spot")
+            players.add(player2)
+        }else{
+            val randomPlayer = JugadorAleatorio("Random player")
+            players.add(randomPlayer)
+        }
     }
 
     /**

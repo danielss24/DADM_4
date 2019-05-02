@@ -18,9 +18,11 @@ import com.example.cuatroenraya.utility.executeTransaction
 import kotlinx.android.synthetic.main.activity_fragment.*
 import kotlinx.android.synthetic.main.activity_twopane.*
 import android.widget.Button
+import com.example.cuatroenraya.firebase.FBDataBase
 import com.example.cuatroenraya.model.RoundRepositoryFactory
 import com.example.cuatroenraya.utility.update
 import kotlinx.android.synthetic.main.fragment_round_list.*
+import java.lang.Exception
 
 /**
  * @brief objeto de partidas guardadas
@@ -62,7 +64,7 @@ class RoundListActivity : AppCompatActivity(),
                 } else
                     Snackbar.make(
                         findViewById(R.id.title),
-                        "R.string.error_updating_round",
+                        resources.getString(R.string.error_updating_round),
                         Snackbar.LENGTH_LONG
                     ).show()
             }
@@ -108,21 +110,10 @@ class RoundListActivity : AppCompatActivity(),
      */
     override fun onResume() {
         super.onResume()
-//        updateUI()
-    }
 
-    /**
-     * @brief actualiza vista de partidas
-     */
-//    fun updateUI() {
-//        recyclerView.apply {
-//            if (adapter == null) {
-//                adapter = RoundAdapter(rounds){ round -> onRoundSelected(round) }
-//            } else {
-//                adapter?.notifyDataSetChanged()
-//            }
-//        }
-//    }
+        recyclerView.update(SettingsActivity.getPlayerUUID(baseContext),
+        { round -> onRoundSelected(round)})
+    }
 
     private fun startRound(round: Round) {
         val fm = supportFragmentManager
@@ -151,7 +142,7 @@ class RoundListActivity : AppCompatActivity(),
         val callback = object : RoundRepository.BooleanCallback {
             override fun onResponse(response: Boolean) {
                 if (response == false) {
-                    Snackbar.make(findViewById(R.id.recyclerView),"R.string.error_adding_round", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.recyclerView),resources.getString(R.string.error_adding_round), Snackbar.LENGTH_LONG).show()
                 } else {
                     Snackbar.make(findViewById(R.id.recyclerView),"New " + round.title + " added", Snackbar.LENGTH_LONG).show()
                     val fragmentManager = supportFragmentManager
