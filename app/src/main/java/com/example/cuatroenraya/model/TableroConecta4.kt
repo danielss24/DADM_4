@@ -46,6 +46,14 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         return false
     }
 
+    fun setTurno(turno: Int){
+        this.turno = turno
+    }
+    fun setNumJugadas(num: Int){
+        this.numJugadas = num
+    }
+
+
     /**
      * @brief devuelve lista de movimientos validos
      * @return lista de movimientos validos

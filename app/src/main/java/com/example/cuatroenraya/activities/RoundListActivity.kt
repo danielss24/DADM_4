@@ -19,6 +19,7 @@ import com.example.cuatroenraya.utility.executeTransaction
 import kotlinx.android.synthetic.main.activity_fragment.*
 import kotlinx.android.synthetic.main.activity_twopane.*
 import android.widget.Button
+import com.example.cuatroenraya.firebase.FBDataBase
 import com.example.cuatroenraya.model.RoundRepositoryFactory
 import com.example.cuatroenraya.utility.update
 import kotlinx.android.synthetic.main.fragment_round_list.*
@@ -30,12 +31,7 @@ class RoundListActivity : AppCompatActivity(),
     RoundListFragment.OnRoundListFragmentInteractionListener,
     RoundFragment.OnRoundFragmentInteractionListener{
     override fun onRoundAdded() {
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("OnlineMode",false)){
-            print("CHE")
-            onNewRoundAdded()
-        } else {
-            onNewRoundAdded()
-        }
+        onNewRoundAdded()
     }
 
     override fun onPreferenceSelected() {
@@ -84,10 +80,7 @@ class RoundListActivity : AppCompatActivity(),
             startActivity(Ingame.newIntent(this, round.toJSONString()))
         } else {
             supportFragmentManager.executeTransaction {
-                replace(
-                    R.id.detail_fragment_container,
-                    RoundFragment.newInstance(round.toJSONString())
-                )
+                replace(R.id.detail_fragment_container,RoundFragment.newInstance(round.toJSONString()))
             }
         }
     }
@@ -146,10 +139,10 @@ class RoundListActivity : AppCompatActivity(),
 
     fun onNewRoundAdded() {
         val round = Round()
-        round.firstPlayerName = "null"
-        round.firstPlayerUUID = "null"
-        round.secondPlayerName = SettingsActivity.getPlayerName(this)
-        round.secondPlayerUUID = SettingsActivity.getPlayerUUID(this)
+        round.firstPlayerName = SettingsActivity.getPlayerName(this)
+        round.firstPlayerUUID = SettingsActivity.getPlayerUUID(this)
+        round.secondPlayerName = "null"
+        round.secondPlayerUUID = "null"
 
         val repository = RoundRepositoryFactory.createRepository(this)
 

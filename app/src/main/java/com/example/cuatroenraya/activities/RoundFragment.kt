@@ -1,8 +1,10 @@
 package com.example.cuatroenraya.activities
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -13,10 +15,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 
 import com.example.cuatroenraya.R
-import com.example.cuatroenraya.model.JugadorConecta4
-import com.example.cuatroenraya.model.Round
-import com.example.cuatroenraya.model.RoundRepository
-import com.example.cuatroenraya.model.TableroConecta4
+import com.example.cuatroenraya.firebase.FBDataBase
+import com.example.cuatroenraya.model.*
 import com.example.cuatroenraya.utility.update
 import com.example.cuatroenraya.views.ERView
 import es.uam.eps.multij.*
@@ -162,10 +162,59 @@ class RoundFragment : Fragment(), PartidaListener {
      */
     internal fun startRound() {
         val players = ArrayList<Jugador>()
-        val localPlayer = JugadorConecta4("Local player")
-        val randomPlayer = JugadorAleatorio("Random player")
-        players.add(localPlayer)
-        players.add(randomPlayer)
+        val localPlayer = JugadorConecta4(SettingsActivity.getPlayerName(this.context!!))
+
+        var local = true
+        var player2 : Jugador
+        if (PreferenceManager.getDefaultSharedPreferences(this.context).getBoolean("OnlineMode",false)==false){
+            player2 = JugadorAleatorio("PC player")
+            players.add(localPlayer)
+            players.add(player2)
+        }
+        //TODO ESTO DEBERIA IR EN EL ONROUNDSELECTED
+        val repository = RoundRepositoryFactory.createRepository(this.context!!)
+        if (PreferenceManager.getDefaultSharedPreferences(this.context).getBoolean("OnlineMode", false) == true){
+            if (repository is FBDataBase){
+                if (true == repository.isOpenOrIamIn(round)){
+                    //Si soy el primero, me meto y creo un segundo jugador que es NULL
+                    if (round.firstPlayerName == SettingsActivity.getPlayerName(this.context!!)){
+                        player2 = JugadorConecta4(round.secondPlayerName)
+                        players.add(localPlayer)
+                        players.add(player2)
+                    } else if (round.secondPlayerName == "null"){ // Si el segundo sitio esta libre me meto yo
+                        player2 = JugadorConecta4(SettingsActivity.getPlayerName(this.context!!))
+                        players.add(player2)
+                        players.add(localPlayer)
+                    } else if (round.secondPlayerName == SettingsActivity.getPlayerName(this.context!!)){ // Si creo yo la partida
+                        player2 = JugadorConecta4(round.firstPlayerName)
+                        players.add(player2)
+                        players.add(localPlayer)
+                    }
+                }
+            }
+        }
+        var numEmpty = 0
+        var numFirst = 0
+        var numSecond = 0
+        for (col in 0..(round.board.NUM_COL-1)){
+            for(fil in 0 ..(round.board.NUM_FIL-1)){
+                var value = round.board.getTablero(fil,col)
+                if (value == 0){
+                    numFirst++
+                } else if (value == 1){
+                    numSecond++
+                } else {
+                    numEmpty++
+                }
+            }
+        }
+
+        if (numFirst == numSecond){
+            round.board.setTurno(0)
+        } else {
+            round.board.setTurno(1)
+        }
+        round.board.numJugadas=(numFirst+numSecond)
         game = Partida(round.board, players)
         game.addObservador(this)
         localPlayer.setPartida(game)

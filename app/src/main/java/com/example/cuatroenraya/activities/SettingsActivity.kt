@@ -237,8 +237,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             true
         }
 
-        val PLAYERUUID = ""
-        val PLAYER_NAME = "3"
+        val PLAYERUUID = "playerUUID"
+        val PLAYER_NAME = "playerName"
         var ONLINE = "OnlineMode"
 
         /**

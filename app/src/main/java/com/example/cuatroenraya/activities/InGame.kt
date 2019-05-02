@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.design.widget.Snackbar
 import com.example.cuatroenraya.R
+import com.example.cuatroenraya.firebase.FBDataBase
 import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.model.RoundRepository
 import com.example.cuatroenraya.model.RoundRepositoryFactory
@@ -55,14 +56,12 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
         val callback = object : RoundRepository.BooleanCallback {
             override fun onResponse(response: Boolean) {
                 if (response != true) {
-                    Snackbar.make(
-                        findViewById(R.id.title),
-                        R.string.error_updating_round,
-                        Snackbar.LENGTH_LONG
-                    ).show()
+                    Snackbar.make(findViewById(R.id.title),R.string.error_updating_round,Snackbar.LENGTH_LONG).show()
                 }
             }
         }
+        //TODO
+        cargarCorrectamentePartida(repository!!,round)
         repository?.updateRound(round, callback)
     }
 
@@ -85,6 +84,41 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
         /*Preferencias*/
 
         return theme
+    }
+
+    fun cargarCorrectamentePartida(repository: RoundRepository, round: Round){
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("OnlineMode", false) == true){
+            if (repository is FBDataBase){
+                if (true == repository.isOpenOrIamIn(round)){
+                    if (round.firstPlayerName != SettingsActivity.getPlayerName(this)){
+                        round.secondPlayerName = SettingsActivity.getPlayerName(this)
+                        round.secondPlayerUUID = SettingsActivity.getPlayerUUID(this)
+                    }
+                }
+            }
+        }
+        var numEmpty = 0
+        var numFirst = 0
+        var numSecond = 0
+        for (col in 0..(round.board.NUM_COL-1)){
+            for(fil in 0 ..(round.board.NUM_FIL-1)){
+                var value = round.board.getTablero(fil,col)
+                if (value == 0){
+                    numFirst++
+                } else if (value == 1){
+                    numSecond++
+                } else {
+                    numEmpty++
+                }
+            }
+        }
+
+        if (numFirst == numSecond){
+            round.board.setTurno(0)
+        } else {
+            round.board.setTurno(1)
+        }
+        round.board.numJugadas=(numFirst+numSecond)
     }
 }
 

@@ -1,9 +1,11 @@
 package com.example.cuatroenraya.model
 
+import android.preference.PreferenceManager
 import java.io.File
 import android.support.design.widget.Snackbar
 import android.view.View
 import com.example.cuatroenraya.R
+import com.example.cuatroenraya.activities.SettingsActivity
 import com.example.cuatroenraya.views.ERView
 import es.uam.eps.multij.*
 
@@ -94,7 +96,12 @@ constructor(private val nombre: String) : ERView.OnPlayListener, Jugador {
         if (game.tablero.esValido(m)==false){
             Snackbar.make(this as View,"Columna llena", Snackbar.LENGTH_SHORT).show()
         }
-        game.realizaAccion(AccionMover(this, m))
+
+        if (this.game.getJugador(this.game.tablero.turno).nombre.equals(this.nombre)){
+            game.realizaAccion(AccionMover(this, m))
+        } else{
+            Snackbar.make(this as View,"No te toca mover a ti", Snackbar.LENGTH_SHORT).show()
+        }
 
     }
 
