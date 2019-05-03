@@ -8,6 +8,7 @@ import com.example.cuatroenraya.R
 import com.example.cuatroenraya.activities.SettingsActivity
 import com.example.cuatroenraya.views.ERView
 import es.uam.eps.multij.*
+import java.lang.Exception
 
 /**
  * @brief Jugador conecta 4
@@ -36,13 +37,13 @@ constructor(private val nombre: String) : ERView.OnPlayListener, Jugador {
         val m: MovimientoConecta4
         m = MovimientoConecta4(column)
         if (game.tablero.esValido(m)==false){
-            Snackbar.make(this as View,"Columna llena", Snackbar.LENGTH_SHORT).show()
+            throw Exception("Columna llena")
         }
 
         if (this.game.getJugador(this.game.tablero.turno).nombre.equals(this.nombre)){
             game.realizaAccion(AccionMover(this, m))
         } else{
-            Snackbar.make(this as View,"No te toca mover a ti", Snackbar.LENGTH_SHORT).show()
+            throw Exception("No te toca a ti")
         }
 
     }

@@ -133,20 +133,18 @@ class RoundFragment : Fragment(), PartidaListener {
         if (repository is FBDataBase){
             val callback = object : RoundRepository.RoundsCallback {
                 override fun onResponse(rounds: List<Round>) {
-                    print("CAMBIO")
-                    //listener?.onRoundUpdated(round)
                     for (ronda in rounds){
                         if (round.id == ronda.id){
                             round.board.stringToTablero(ronda.board.toString())
                             round.board.numJugadas = ronda.board.numJugadas
                             round.board.setTurno(ronda.board.turno)
                             round.board.estado = ronda.board.estado
-                            //round.board = ronda.board
-                            //round.board.setTurno(ronda.board.turno)
-                            //round.board.numJugadas = ronda.board.numJugadas
+                            round.secondPlayerUUID = ronda.secondPlayerUUID
+                            round.secondPlayerName = ronda.secondPlayerName
+                            round.firstPlayerUUID = ronda.firstPlayerUUID
+                            round.firstPlayerName = ronda.firstPlayerName
                             board_erview.setBoard(ronda.board)
                             board_erview.invalidate()
-                            print("SON IGUALES")
                         }
                     }
 
@@ -157,13 +155,7 @@ class RoundFragment : Fragment(), PartidaListener {
             }
             repository.startListeningBoardChanges(callback)
         }
-        print("CAMBIA COÑO")
-
         startRound()
-
-
-
-
     }
 
     /**
