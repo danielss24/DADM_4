@@ -369,4 +369,11 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
             this.stringToTablero(iteradorFichero[5].split(":")[1].trim())
         }
     }
+
+    /**
+     *
+     */
+    public fun cambiaEstado (){
+        this.estado = this.comprobacionConecta4()
+    }
 }
