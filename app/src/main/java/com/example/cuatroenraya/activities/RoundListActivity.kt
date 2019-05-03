@@ -62,11 +62,7 @@ class RoundListActivity : AppCompatActivity(),
                         { round -> onRoundSelected(round) }
                     )
                 } else
-                    Snackbar.make(
-                        findViewById(R.id.title),
-                        resources.getString(R.string.error_updating_round),
-                        Snackbar.LENGTH_LONG
-                    ).show()
+                    Snackbar.make(findViewById(R.id.title),resources.getString(R.string.error_updating_round),Snackbar.LENGTH_LONG).show()
             }
         }
         repository?.updateRound(round, callback)

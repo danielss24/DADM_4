@@ -376,4 +376,8 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
     public fun cambiaEstado (){
         this.estado = this.comprobacionConecta4()
     }
+
+    fun setEstado(estado: Int){
+        this.estado = estado
+    }
 }

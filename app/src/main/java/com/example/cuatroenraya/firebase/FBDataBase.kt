@@ -4,6 +4,7 @@ import android.app.Application
 import android.support.design.widget.Snackbar
 import android.util.Log
 import android.widget.Toast
+import com.example.cuatroenraya.activities.SettingsActivity
 import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.model.RoundRepository
 import com.google.android.gms.tasks.OnCompleteListener
@@ -118,6 +119,7 @@ class FBDataBase: RoundRepository {
     }
     fun startListeningBoardChanges(callback: RoundRepository.RoundsCallback){
         db = FirebaseDatabase.getInstance().getReference().child(DATABASENAME)
+        //db = FirebaseDatabase.getInstance().getReference().child(DATABASENAME)
         db.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 Log.d("DEBUG", p0.toString())
@@ -129,6 +131,5 @@ class FBDataBase: RoundRepository {
                 callback.onResponse(rounds)
             }
         })
-
     }
 }

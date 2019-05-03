@@ -22,6 +22,7 @@ import com.example.cuatroenraya.utility.update
 import com.example.cuatroenraya.views.ERView
 import es.uam.eps.multij.*
 import kotlinx.android.synthetic.main.fragment_round.*
+import java.security.cert.Extension
 
 
 /**
@@ -128,7 +129,41 @@ class RoundFragment : Fragment(), PartidaListener {
      */
     override fun onStart() {
         super.onStart()
+        val repository = RoundRepositoryFactory.createRepository(this.context!!)
+        if (repository is FBDataBase){
+            val callback = object : RoundRepository.RoundsCallback {
+                override fun onResponse(rounds: List<Round>) {
+                    print("CAMBIO")
+                    //listener?.onRoundUpdated(round)
+                    for (ronda in rounds){
+                        if (round.id == ronda.id){
+                            round.board.stringToTablero(ronda.board.toString())
+                            round.board.numJugadas = ronda.board.numJugadas
+                            round.board.setTurno(ronda.board.turno)
+                            round.board.estado = ronda.board.estado
+                            //round.board = ronda.board
+                            //round.board.setTurno(ronda.board.turno)
+                            //round.board.numJugadas = ronda.board.numJugadas
+                            board_erview.setBoard(ronda.board)
+                            board_erview.invalidate()
+                            print("SON IGUALES")
+                        }
+                    }
+
+                }
+                override fun onError(error: String) {
+                    print(error)
+                }
+            }
+            repository.startListeningBoardChanges(callback)
+        }
+        print("CAMBIA COÑO")
+
         startRound()
+
+
+
+
     }
 
     /**
@@ -183,7 +218,7 @@ class RoundFragment : Fragment(), PartidaListener {
                         players.add(localPlayer)
                         players.add(player2)
                     } else if (round.secondPlayerName == "null"){ // Si el segundo sitio esta libre me meto yo
-                        player2 = JugadorConecta4(SettingsActivity.getPlayerName(this.context!!))
+                        player2 = JugadorConecta4(round.firstPlayerName)
                         players.add(player2)
                         players.add(localPlayer)
                     } else if (round.secondPlayerName == SettingsActivity.getPlayerName(this.context!!)){ // Si creo yo la partida
@@ -227,6 +262,7 @@ class RoundFragment : Fragment(), PartidaListener {
 
         if (game.tablero.estado == Tablero.EN_CURSO)
             game.comenzar()
+
     }
 
     /**

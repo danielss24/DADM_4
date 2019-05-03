@@ -55,7 +55,6 @@ fun RecyclerView.update(userName: String, onClickListener: (Round) -> Unit) {
     }
 
     if (repository is DataBase){
-
         repository?.getRounds(userName, "", "", roundsCallback)
     }else if (repository is FBDataBase){
         repository.startListeningChanges(roundsCallback)

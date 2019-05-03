@@ -11,7 +11,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.*
 
 import com.example.cuatroenraya.R
+import com.example.cuatroenraya.firebase.FBDataBase
 import com.example.cuatroenraya.model.Round
+import com.example.cuatroenraya.model.RoundRepository
+import com.example.cuatroenraya.model.RoundRepositoryFactory
 import com.example.cuatroenraya.utility.update
 import kotlinx.android.synthetic.main.fragment_round_list.*
 
@@ -107,6 +110,7 @@ class RoundListFragment : Fragment() {
     fun onRoundSelected(round: Round) {
         val intent = Ingame.newIntent(context!!, round.board.tableroToString())
         startActivity(intent)
+
     }
 
     /**

@@ -36,10 +36,10 @@ class AlertDialogFragment : DialogFragment() {
         alertDialogBuilder.setMessage(mensaje)
         alertDialogBuilder.setPositiveButton("Yes") { dialog, which ->
             val round = Round()
-            round.firstPlayerName = "Random"
-            round.firstPlayerUUID = "Random"
-            round.secondPlayerName = SettingsActivity.getPlayerName(context!!)
-            round.secondPlayerUUID = SettingsActivity.getPlayerUUID(context!!)
+            round.firstPlayerName = SettingsActivity.getPlayerName(context!!)
+            round.firstPlayerUUID = SettingsActivity.getPlayerUUID(context!!)
+            round.secondPlayerName = "null"
+            round.secondPlayerUUID = "null"
 
             val repository = RoundRepositoryFactory.createRepository(context!!)
 

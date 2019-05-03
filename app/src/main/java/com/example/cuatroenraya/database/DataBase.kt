@@ -113,7 +113,7 @@ class DataBase(context: Context) : RoundRepository {
 
     private fun getContentValues(round: Round): ContentValues {
         val values = ContentValues()
-        values.put(RoundDataBaseSchema.RoundTable.Cols.PLAYERUUID, round.secondPlayerUUID)
+        values.put(RoundDataBaseSchema.RoundTable.Cols.PLAYERUUID, round.firstPlayerUUID)
         values.put(RoundDataBaseSchema.RoundTable.Cols.ROUNDUUID, round.id)
         values.put(RoundDataBaseSchema.RoundTable.Cols.DATE, round.date)
         values.put(RoundDataBaseSchema.RoundTable.Cols.TITLE, round.title)
@@ -162,7 +162,7 @@ class DataBase(context: Context) : RoundRepository {
         cursor!!.moveToFirst()
         while (!cursor.isAfterLast()) {
             val round = cursor.round
-            if (round.secondPlayerUUID.equals(playeruuid))
+            if (round.firstPlayerUUID.equals(playeruuid))
                 rounds.add(round)
             cursor.moveToNext()
         }
