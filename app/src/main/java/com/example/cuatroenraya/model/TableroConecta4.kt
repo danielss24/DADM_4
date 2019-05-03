@@ -74,7 +74,6 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
      */
     override fun mueve(m: Movimiento?) {
         if (m is MovimientoConecta4){
-
             if (esValido(m)==true){
                 tablero[m.col][getFreePos(m.col)] = this.turno//m.playerId
                 when (comprobacionConecta4()) {

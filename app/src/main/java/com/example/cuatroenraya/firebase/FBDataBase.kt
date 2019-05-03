@@ -52,10 +52,11 @@ class FBDataBase: RoundRepository {
                 var rounds = listOf<Round>()
                 for (postSnapshot in dataSnapshot.children) {
                     val round = postSnapshot.getValue(Round::class.java)!!
-                    if (isOpenOrIamIn(round))
-                        if(round.board.estado == Tablero.EN_CURSO){
+                    if (isOpenOrIamIn(round)) {
+                        if (round.board.estado == Tablero.EN_CURSO) {
                             rounds += round
                         }
+                    }
                 }
                 callback.onResponse(rounds)
             }
@@ -109,12 +110,25 @@ class FBDataBase: RoundRepository {
             override fun onDataChange(p0: DataSnapshot) {
                 var rounds = listOf<Round>()
                 for (postSnapshot in p0.children)
-                    rounds += postSnapshot.getValue(Round::class.java)!!
+                    if (isOpenOrIamIn(postSnapshot.getValue(Round::class.java)!!))
+                        rounds += postSnapshot.getValue(Round::class.java)!!
                 callback.onResponse(rounds)
             }
         })
     }
     fun startListeningBoardChanges(callback: RoundRepository.RoundsCallback){
+        db = FirebaseDatabase.getInstance().getReference().child(DATABASENAME)
+        db.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                Log.d("DEBUG", p0.toString())
+            }
+            override fun onDataChange(p0: DataSnapshot) {
+                var rounds = listOf<Round>()
+                for (postSnapshot in p0.children)
+                    rounds += postSnapshot.getValue(Round::class.java)!!
+                callback.onResponse(rounds)
+            }
+        })
 
     }
 }

@@ -1,5 +1,6 @@
 package com.example.cuatroenraya.activities
 
+import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
@@ -145,7 +146,7 @@ class RoundFragment : Fragment(), PartidaListener {
     private fun registerResetButton() {
         val resetButton = view!!.findViewById(R.id.reset_round_fab) as FloatingActionButton
         resetButton.setOnClickListener(View.OnClickListener {
-            if (round.board.getEstado() !== Tablero.EN_CURSO) {
+            if (round.board.getEstado() != Tablero.EN_CURSO) {
                 Snackbar.make(view as View,R.string.round_already_finished, Snackbar.LENGTH_SHORT).show()
                 return@OnClickListener
             }
@@ -222,7 +223,7 @@ class RoundFragment : Fragment(), PartidaListener {
         board_erview = view!!.findViewById(R.id.board_erview) as ERView
         board_erview.setBoard(round.board)
         board_erview.setOnPlayListener(localPlayer)
-        //round.board.cambiaEstado()
+        round.board.cambiaEstado()
 
         if (game.tablero.estado == Tablero.EN_CURSO)
             game.comenzar()

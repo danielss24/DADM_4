@@ -9,6 +9,8 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import com.example.cuatroenraya.R
 import com.example.cuatroenraya.activities.RoundAdapter
+import com.example.cuatroenraya.database.DataBase
+import com.example.cuatroenraya.firebase.FBDataBase
 import com.example.cuatroenraya.model.TableroConecta4
 import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.model.RoundRepository
@@ -51,7 +53,13 @@ fun RecyclerView.update(userName: String, onClickListener: (Round) -> Unit) {
             Snackbar.make(findViewById(R.id.recyclerView),error, Snackbar.LENGTH_LONG).show()
         }
     }
-    repository?.getRounds(userName, "", "", roundsCallback)
+
+    if (repository is DataBase){
+
+        repository?.getRounds(userName, "", "", roundsCallback)
+    }else if (repository is FBDataBase){
+        repository.startListeningChanges(roundsCallback)
+    }
 }
 
 
