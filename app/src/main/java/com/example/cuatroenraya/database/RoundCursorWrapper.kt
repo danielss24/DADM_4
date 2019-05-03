@@ -3,10 +3,12 @@ package com.example.cuatroenraya.database
 import android.database.Cursor
 import android.database.CursorWrapper
 import android.util.Log
+import com.example.cuatroenraya.R
 import com.example.cuatroenraya.model.Round
 import es.uam.eps.multij.ExcepcionJuego
 import com.example.cuatroenraya.database.RoundDataBaseSchema.RoundTable
 import com.example.cuatroenraya.database.RoundDataBaseSchema.UserTable
+import android.content.res.Resources
 
 class RoundCursorWrapper(cursor: Cursor) : CursorWrapper(cursor) {
     private val DEBUG = "DEBUG"
@@ -21,8 +23,8 @@ class RoundCursorWrapper(cursor: Cursor) : CursorWrapper(cursor) {
             val round = Round()
             round.firstPlayerName = playername
             round.firstPlayerUUID = playeruuid
-            round.secondPlayerName = "null"
-            round.secondPlayerUUID = "null"
+            round.secondPlayerName = "jugador_OPEN"
+            round.secondPlayerUUID = "jugador_OPEN"
             round.id = rounduuid
             round.date = date
             round.title = title

@@ -41,21 +41,6 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
         // Enable the Up button from the support ActionBar corresponding to this toolbar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        /*val repository = RoundRepositoryFactory.createRepository(this.applicationContext!!)
-        if(repository is FBDataBase){
-            val callback = object : RoundRepository.RoundsCallback {
-                override fun onResponse(rounds: List<Round>) {
-                    onRoundUpdated()
-                }
-                override fun onError(error: String) {
-                    Snackbar.make(findViewById(R.id.recyclerView),resources.getString(R.string.error_updating_round), Snackbar.LENGTH_LONG).show()
-                }
-
-            }
-
-            repository.startListeningBoardChanges(callback)
-        }*/
-
     }
 
     companion object {
@@ -75,7 +60,6 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
                 }
             }
         }
-        //TODO
         cargarCorrectamentePartida(repository!!,round)
         repository?.updateRound(round, callback)
     }
@@ -102,7 +86,7 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
     }
 
     fun cargarCorrectamentePartida(repository: RoundRepository, round: Round){
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("OnlineMode", false) == true){
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(SettingsActivity.ONLINE, false) == true){
             if (repository is FBDataBase){
                 if (true == repository.isOpenOrIamIn(round)){
                     if (round.firstPlayerName != SettingsActivity.getPlayerName(this)){

@@ -1,5 +1,5 @@
 package com.example.cuatroenraya.firebase
-
+import android.content.res.Resources
 import android.app.Application
 import android.support.design.widget.Snackbar
 import android.util.Log
@@ -70,7 +70,7 @@ class FBDataBase: RoundRepository {
             (round.firstPlayerUUID == FirebaseAuth.getInstance().currentUser!!.uid))
             return true
 
-        if(round.secondPlayerUUID == "null"||(round.firstPlayerUUID == "null"))
+        if(round.secondPlayerUUID == "jugador_OPEN"||(round.firstPlayerUUID == "jugador_OPEN"))
             return true
 
         return false
@@ -119,7 +119,6 @@ class FBDataBase: RoundRepository {
     }
     fun startListeningBoardChanges(callback: RoundRepository.RoundsCallback){
         db = FirebaseDatabase.getInstance().getReference().child(DATABASENAME)
-        //db = FirebaseDatabase.getInstance().getReference().child(DATABASENAME)
         db.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 Log.d("DEBUG", p0.toString())

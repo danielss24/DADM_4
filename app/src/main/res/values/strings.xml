@@ -24,8 +24,13 @@
     <string name="board_saved">Partida guardada</string>
     <string name="title_activity_login">Sign in</string>
     <string name="error_updating_round">Error actualizando la ronda</string>
-    <string name="error_adding_round">Error añadiendo la ronda</string>
+    <string name="error_adding_round">Error anadiendo la ronda</string>
+    <string name="PC_NAME">PC player</string>
+    <string name="jugador_OPEN">jugador_OPEN</string>
+    <string name="online_string">Online</string>
+
     <!-- Strings related to Settings -->
+
 
     <!-- Strings related to Settings -->
     <string name="settings">Settings</string>

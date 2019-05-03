@@ -36,18 +36,9 @@ class RoundListActivity : AppCompatActivity(),
     }
 
     override fun onPreferenceSelected() {
-        print("not implemented") //To change body of created functions use File | Settings | File Templates.
         val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
     }
-
-    /**
-     * @brief añadir partidas guardadas
-     */
-//    override fun onRoundAdded() {
-//        RoundRepository.addRound()
-//    }
-
 
     /**
      * @brief actualizar partidas guardadas
@@ -127,8 +118,8 @@ class RoundListActivity : AppCompatActivity(),
         val round = Round()
         round.firstPlayerName = SettingsActivity.getPlayerName(this)
         round.firstPlayerUUID = SettingsActivity.getPlayerUUID(this)
-        round.secondPlayerName = "null"
-        round.secondPlayerUUID = "null"
+        round.secondPlayerName = resources.getString(R.string.jugador_OPEN)
+        round.secondPlayerUUID = resources.getString(R.string.jugador_OPEN)
 
         val repository = RoundRepositoryFactory.createRepository(this)
 

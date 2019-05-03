@@ -192,16 +192,14 @@ class RoundFragment : Fragment(), PartidaListener {
         val players = ArrayList<Jugador>()
         val localPlayer = JugadorConecta4(SettingsActivity.getPlayerName(this.context!!))
 
-        var local = true
         var player2 : Jugador
-        if (PreferenceManager.getDefaultSharedPreferences(this.context).getBoolean("OnlineMode",false)==false){
-            player2 = JugadorAleatorio("PC player")
+        if (PreferenceManager.getDefaultSharedPreferences(this.context).getBoolean(SettingsActivity.ONLINE,false)==false){
+            player2 = JugadorAleatorio(resources.getString(R.string.PC_NAME))
             players.add(localPlayer)
             players.add(player2)
         }
-        //TODO ESTO DEBERIA IR EN EL ONROUNDSELECTED
         val repository = RoundRepositoryFactory.createRepository(this.context!!)
-        if (PreferenceManager.getDefaultSharedPreferences(this.context).getBoolean("OnlineMode", false) == true){
+        if (PreferenceManager.getDefaultSharedPreferences(this.context).getBoolean(SettingsActivity.ONLINE, false) == true){
             if (repository is FBDataBase){
                 if (true == repository.isOpenOrIamIn(round)){
                     //Si soy el primero, me meto y creo un segundo jugador que es NULL
@@ -209,7 +207,7 @@ class RoundFragment : Fragment(), PartidaListener {
                         player2 = JugadorConecta4(round.secondPlayerName)
                         players.add(localPlayer)
                         players.add(player2)
-                    } else if (round.secondPlayerName == "null"){ // Si el segundo sitio esta libre me meto yo
+                    } else if (round.secondPlayerName == resources.getString(R.string.jugador_OPEN)){ // Si el segundo sitio esta libre me meto yo
                         player2 = JugadorConecta4(round.firstPlayerName)
                         players.add(player2)
                         players.add(localPlayer)

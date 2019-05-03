@@ -38,8 +38,8 @@ class AlertDialogFragment : DialogFragment() {
             val round = Round()
             round.firstPlayerName = SettingsActivity.getPlayerName(context!!)
             round.firstPlayerUUID = SettingsActivity.getPlayerUUID(context!!)
-            round.secondPlayerName = "null"
-            round.secondPlayerUUID = "null"
+            round.secondPlayerName = resources.getString(R.string.jugador_OPEN)
+            round.secondPlayerUUID = resources.getString(R.string.jugador_OPEN)
 
             val repository = RoundRepositoryFactory.createRepository(context!!)
 

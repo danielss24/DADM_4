@@ -25,6 +25,8 @@ import java.util.ArrayList
 import android.Manifest.permission.READ_CONTACTS
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Resources
+import android.preference.PreferenceManager
 import com.example.cuatroenraya.R
 import com.example.cuatroenraya.firebase.FBDataBase
 import com.example.cuatroenraya.model.RoundRepository
@@ -182,12 +184,10 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     }
 
     private fun isEmailValid(email: String): Boolean {
-        //TODO: Replace this with your own logic
         return email.contains("@")
     }
 
     private fun isPasswordValid(password: String): Boolean {
-        //TODO: Replace this with your own logic
         return password.length > 4
     }
 
@@ -292,7 +292,6 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         AsyncTask<Void, Void, Boolean>() {
 
         override fun doInBackground(vararg params: Void): Boolean? {
-            // TODO: attempt authentication against a network service.
 
             try {
                 // Simulate network access.
@@ -338,8 +337,28 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
 
         /**
          * A dummy authentication store containing known user names and passwords.
-         * TODO: remove after connecting to a real authentication system.
          */
         private val DUMMY_CREDENTIALS = arrayOf("foo@example.com:hello", "bar@example.com:world")
+    }
+
+    /**
+     * @brief carga el tema correcto
+     */
+    override fun getTheme(): Resources.Theme {
+        val theme = super.getTheme()
+
+        /*Preferencias*/
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val themeVal = sharedPreferences.getString("themes_list", "1")
+        if(themeVal.toInt() == 1){
+            theme.applyStyle(R.style.AppTheme, true)
+        }else if(themeVal.toInt() == 2){
+            theme.applyStyle(R.style.AppTheme_Blue, true)
+        }else if (themeVal.toInt() == 3){
+            theme.applyStyle(R.style.AppTheme_Green,true )
+        }
+        /*Preferencias*/
+
+        return theme
     }
 }
