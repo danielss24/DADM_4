@@ -46,9 +46,18 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         return false
     }
 
+    /**
+     * @brief funcion para setear el turno
+     * @param turno turno
+     */
     fun setTurno(turno: Int){
         this.turno = turno
     }
+
+    /**
+     * @brief funcion para setear el numero de jugadas
+     * @param num numero de jugadas
+     */
     fun setNumJugadas(num: Int){
         this.numJugadas = num
     }
@@ -371,12 +380,16 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
     }
 
     /**
-     *
+     * @brief Funcion para cambiar el estado del tablero en funcion de movimientos ajenos
      */
     public fun cambiaEstado (){
         this.estado = this.comprobacionConecta4()
     }
 
+    /**
+     * @brief funcion para setear el estado
+     * @param estado estado
+     */
     fun setEstado(estado: Int){
         this.estado = estado
     }

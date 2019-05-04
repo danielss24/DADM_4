@@ -5,7 +5,7 @@ import es.uam.eps.multij.JugadorAleatorio
 import java.io.File
 
 /**
- * @brief objeto de lista de partidas
+ * @brief interfez que implementará la lista de partidas
  */
 interface RoundRepository {
     @Throws(Exception::class)

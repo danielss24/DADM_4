@@ -10,6 +10,9 @@ import java.util.*
 import org.json.JSONObject
 import java.util.*
 
+/**
+ * @brief clase de la ronda
+ */
 class Round() {
     var id: String
     var title: String
@@ -26,6 +29,10 @@ class Round() {
         board = TableroConecta4("tablero")
     }
 
+    /**
+     * @brief Funcion para añadir los valor de la ronda a un JSONString
+     * @return el JSON string
+     */
     fun toJSONString(): String {
         val json = JSONObject()
         json.put("id", id)

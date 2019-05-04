@@ -15,6 +15,9 @@ import com.example.cuatroenraya.utility.setColor
 import es.uam.eps.multij.Tablero
 import kotlinx.android.synthetic.main.fragment_round.view.*
 
+/**
+ * @brief Clase ERView para manejar mejor el temaño del tablero en funcion de la pantalla
+ */
 class ERView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
     private val backgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val linePaint = Paint(Paint.ANTI_ALIAS_FLAG)

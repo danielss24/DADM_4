@@ -31,7 +31,6 @@ class FBDataBase: RoundRepository {
                 callback.onError(playername)
             }
         }
-
     }
     override fun register(playername: String, password: String,callback: RoundRepository.LoginRegisterCallback) {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(playername,password).addOnCompleteListener(){
