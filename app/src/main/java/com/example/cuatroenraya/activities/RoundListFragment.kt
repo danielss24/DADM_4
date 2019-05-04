@@ -137,6 +137,9 @@ class RoundListFragment : Fragment() {
         }
     }
 
+    /**
+     * @brief funcion para reanuedar el fragmento
+     */
     override fun onResume() {
         super.onResume()
         recyclerView.update(SettingsActivity.getPlayerUUID(context!!))

@@ -10,6 +10,9 @@ import com.example.cuatroenraya.database.RoundDataBaseSchema.RoundTable
 import com.example.cuatroenraya.database.RoundDataBaseSchema.UserTable
 import android.content.res.Resources
 
+/**
+ * @brief clase de contenedor para el cursor que delega todas las llamadas al objeto del cursor real.
+ */
 class RoundCursorWrapper(cursor: Cursor) : CursorWrapper(cursor) {
     private val DEBUG = "DEBUG"
     val round: Round

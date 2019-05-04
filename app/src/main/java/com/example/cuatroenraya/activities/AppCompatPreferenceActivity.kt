@@ -17,6 +17,9 @@ import android.view.ViewGroup
  */
 abstract class AppCompatPreferenceActivity : PreferenceActivity() {
 
+    /**
+     *
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         delegate.installViewFactory()
         delegate.onCreate(savedInstanceState)
@@ -30,6 +33,7 @@ abstract class AppCompatPreferenceActivity : PreferenceActivity() {
 
     val supportActionBar: ActionBar?
         get() = delegate.supportActionBar
+
 
     fun setSupportActionBar(toolbar: Toolbar?) {
         delegate.setSupportActionBar(toolbar)

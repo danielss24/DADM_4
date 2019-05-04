@@ -43,6 +43,10 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      */
     private var mAuthTask: UserLoginTask? = null
 
+    /**
+     * @brief Funcion para intentar loggearnos en la base de datos correspondiente
+     * @param type Tipo de loggin, si es registro o login
+     */
     private fun ERattempt(type: String) {
         val repository = RoundRepositoryFactory.createRepository(this)
         val loginRegisterCallback = object : RoundRepository.LoginRegisterCallback {
@@ -72,6 +76,10 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         }
     }
 
+    /**
+     * @brief funcion creadora de vista/controlador
+     * @param savedInstanceState vista
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -90,6 +98,9 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
 
     }
 
+    /**
+     * @brief funcion para solicitar permisos para los contactos
+     */
     private fun populateAutoComplete() {
         if (!mayRequestContacts()) {
             return
@@ -98,6 +109,10 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         loaderManager.initLoader(0, null, this)
     }
 
+    /**
+     * @brief funcion para solicitar permisos para guardar informacion en los contactos
+     * @return true si nos los dan, false sino
+     */
     private fun mayRequestContacts(): Boolean {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true
@@ -183,10 +198,20 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         }
     }
 
+    /**
+     * @brief Funcion para comprobar si el email es válido
+     * @param email Email a comprobar
+     * @return true si es válido, false si no
+     */
     private fun isEmailValid(email: String): Boolean {
         return email.contains("@")
     }
 
+    /**
+     * @brief Funcion para comprobar si la contraseña es valida
+     * @param password contraseña a comprobar
+     * @return true si es válida, false si no
+     */
     private fun isPasswordValid(password: String): Boolean {
         return password.length > 4
     }

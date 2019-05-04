@@ -31,10 +31,17 @@ import java.lang.Exception
 class RoundListActivity : AppCompatActivity(),
     RoundListFragment.OnRoundListFragmentInteractionListener,
     RoundFragment.OnRoundFragmentInteractionListener{
+
+    /**
+     * @brief Funcion para cuando añadimos una nueva partida
+     */
     override fun onRoundAdded() {
         onNewRoundAdded()
     }
 
+    /**
+     * @brief Funcionm para lanzar el menu de opciones cuando la preferencia ha sido seleccionada
+     */
     override fun onPreferenceSelected() {
         val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
@@ -42,6 +49,7 @@ class RoundListActivity : AppCompatActivity(),
 
     /**
      * @brief actualizar partidas guardadas
+     * @param round partida que se ha actulizado
      */
     override fun onRoundUpdated(round: Round) {
         val repository = RoundRepositoryFactory.createRepository(this)
@@ -61,7 +69,7 @@ class RoundListActivity : AppCompatActivity(),
 
     /**
      * @brief seleccion de partidas
-     * @param round partidas guardadas
+     * @param round partida guardada
      */
     override fun onRoundSelected(round: Round) {
         if (detail_fragment_container == null) {
@@ -99,6 +107,10 @@ class RoundListActivity : AppCompatActivity(),
         { round -> onRoundSelected(round)})
     }
 
+    /**
+     * @brief Funcion para comenzar una ronda
+     * @param round Partida a comenzar
+     */
     private fun startRound(round: Round) {
         val fm = supportFragmentManager
         if (findViewById<View>(R.id.detail_fragment_container) == null) {
@@ -114,6 +126,9 @@ class RoundListActivity : AppCompatActivity(),
         }
     }
 
+    /**
+     * @brief Funcion para añadir una nueva ronda a la lista de partidas y la base de datos
+     */
     fun onNewRoundAdded() {
         val round = Round()
         round.firstPlayerName = SettingsActivity.getPlayerName(this)

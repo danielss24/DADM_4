@@ -105,6 +105,10 @@ class RoundFragment : Fragment(), PartidaListener {
             }
     }
 
+    /**
+     * @brief funcion para cuando se guarda la instancia
+     * @param outState Bundle asociado a la instancia
+     */
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putString(BOARDSTRING, round.board.tableroToString())
         super.onSaveInstanceState(outState)

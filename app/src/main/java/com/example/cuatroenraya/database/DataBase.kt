@@ -14,6 +14,10 @@ import com.example.cuatroenraya.database.RoundDataBaseSchema
 import com.example.cuatroenraya.model.Round
 import java.util.*
 
+/**
+ * @brief clase para la base de datos local
+ * @param context contexto
+ */
 class DataBase(context: Context) : RoundRepository {
     private val DEBUG_TAG = "DEBUG"
     private val helper: DatabaseHelper
@@ -23,12 +27,26 @@ class DataBase(context: Context) : RoundRepository {
         helper = DatabaseHelper(context)
     }
 
+    /**
+     * @brief Clase con utilidades para la base de datos
+     * @param context contexto
+     */
     private class DatabaseHelper(context: Context) :
         SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+
+        /**
+         * @brief funcion creadora de la base de datos
+         * @param db base de datos
+         */
         override fun onCreate(db: SQLiteDatabase) {
             createTable(db)
         }
 
+
+        /**
+         * @brief funcion para crear las tablas de la base de datos
+         * @param db base de datos
+         */
         private fun createTable(db: SQLiteDatabase) {
             val str1 = ("CREATE TABLE " + RoundDataBaseSchema.UserTable.NAME + " ("
                     + "_id integer primary key autoincrement, "
@@ -51,6 +69,13 @@ class DataBase(context: Context) : RoundRepository {
             }
         }
 
+        /**
+         * @brief funcion para actualizar la base de datos
+         * @param db base de datos
+         * @param oldVersion version antigua
+         * @param newVersion version nueva
+         *
+         */
         override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
             db.execSQL("DROP TABLE IF EXISTS " + RoundDataBaseSchema.UserTable.NAME)
             db.execSQL("DROP TABLE IF EXISTS " + RoundDataBaseSchema.RoundTable.NAME)
@@ -64,10 +89,19 @@ class DataBase(context: Context) : RoundRepository {
         db = helper.writableDatabase
     }
 
+    /**
+     * @brief funcion para cerrar la base de datos
+     */
     override fun close() {
         db?.close()
     }
 
+    /**
+     * @brief funcion para loggearnos en funcion de la base de datos
+     * @param playername nombre del jugador
+     * @param playerpassword contraseña
+     * @param callback callback
+     */
     override fun login(playername: String, playerpassword: String, callback:RoundRepository.LoginRegisterCallback
     ) {
         Log.d(DEBUG_TAG, "Login $playername")
@@ -89,6 +123,12 @@ class DataBase(context: Context) : RoundRepository {
             callback.onError("Username or password incorrect.")
     }
 
+    /**
+     * @brief funcion para insertar un nuevo usuario en la base de datos
+     * @param playername nombre del jugador
+     * @param playerpassword contraseña
+     * @param callback callback
+     */
     override fun register(
         playername: String, password: String, callback:
         RoundRepository.LoginRegisterCallback
@@ -105,12 +145,22 @@ class DataBase(context: Context) : RoundRepository {
             callback.onLogin(uuid)
     }
 
+    /**
+     * @brief funcion para añadir una ronda a la base de datos
+     * @param round ronda
+     * @param callback callback
+     */
     override fun addRound(round: Round, callback: RoundRepository.BooleanCallback) {
         val values = getContentValues(round)
         val id = db!!.insert(RoundDataBaseSchema.RoundTable.NAME, null, values)
         callback.onResponse(id >= 0)
     }
 
+    /**
+     * @brief Funcion para añadir los valores de una ronda a la base de datos
+     * @param round ronda
+     * @return los valores de la ronda
+     */
     private fun getContentValues(round: Round): ContentValues {
         val values = ContentValues()
         values.put(RoundDataBaseSchema.RoundTable.Cols.PLAYERUUID, round.firstPlayerUUID)
@@ -121,6 +171,11 @@ class DataBase(context: Context) : RoundRepository {
         return values
     }
 
+    /**
+     * @brief funcion para actualizar una ronda en la base de datos
+     * @param round ronda
+     * @param callback callback
+     */
     override fun updateRound(round: Round, callback: RoundRepository.BooleanCallback) {
         val values = getContentValues(round)
         val id = db!!.update(
@@ -131,6 +186,10 @@ class DataBase(context: Context) : RoundRepository {
         callback.onResponse(id >= 0)
     }
 
+    /**
+     * @brief funcion que ensambla una query para obtener las rondas de un jugador
+     * @return La query
+     */
     private fun queryRounds(): RoundCursorWrapper? {
         val sql = "SELECT " + RoundDataBaseSchema.UserTable.Cols.PLAYERNAME + ", " +
                 RoundDataBaseSchema.UserTable.Cols.PLAYERUUID + ", " +
@@ -152,6 +211,13 @@ class DataBase(context: Context) : RoundRepository {
     }
 
 
+    /**
+     * @brief funcion para obtenner las rondas de un jugador
+     * @param playeruuid id del jugador
+     * @param orderByField campo por el que ordenar
+     * @param group grupo
+     * @param callback calbback
+     */
     override fun getRounds(
         playeruuid: String, orderByField: String, group: String,
         callback: RoundRepository.RoundsCallback

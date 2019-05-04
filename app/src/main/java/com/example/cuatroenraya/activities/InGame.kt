@@ -43,6 +43,9 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
 
     }
 
+    /**
+     * Companion object
+     */
     companion object {
         val ROUND_ID = "ROUND_ID"
         fun newIntent(package_context: Context, round_id: String): Intent {
@@ -51,6 +54,11 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
             return intent
         }
     }
+
+    /**
+     * @brief funcion para actualizar la base de datos cuando se produce un cambio en la aprtida
+     * @param round Partida en la que se producer el cambio
+     */
     override fun onRoundUpdated(round: Round) {
         val repository = RoundRepositoryFactory.createRepository(this)
         val callback = object : RoundRepository.BooleanCallback {
@@ -85,6 +93,11 @@ class Ingame : AppCompatActivity(),RoundFragment.OnRoundFragmentInteractionListe
         return theme
     }
 
+    /**
+     * @brief carga la partida de  manera correcta respecto a la base de datos online
+     * @param repository repositorio actual
+     * @param round partida que vamos a actualizar
+     */
     fun cargarCorrectamentePartida(repository: RoundRepository, round: Round){
         if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(SettingsActivity.ONLINE, false) == true){
             if (repository is FBDataBase){
