@@ -30,6 +30,7 @@
     <string name="online_string">Online</string>
     <string name="mueve_string">Mueve</string>
     <string name="gana_string">Ganó</string>
+    <string name="noTurno">No es tu turno</string>
 
     <!-- Strings related to Settings -->
 

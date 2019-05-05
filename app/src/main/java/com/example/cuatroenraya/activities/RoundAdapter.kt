@@ -47,8 +47,8 @@ class RoundHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClic
         board_erview.setBoard(round.board)
         dateTextView.text = round.date.toString().substring(0,19)
 
-        plater1Text.text = itemView.context.resources.getString(R.string.player1) + ": " + round.firstPlayerName
-        plater2Text.text = itemView.context.resources.getString(R.string.player2) + ": " + round.secondPlayerName
+        plater1Text.text = itemView.context.resources.getString(R.string.player1) + ": " + round.firstPlayerName.split("@")[0]
+        plater2Text.text = itemView.context.resources.getString(R.string.player2) + ": " + round.secondPlayerName.split("@")[0]
         turnoText.text = ganaOMueve(round)
 
 
@@ -68,9 +68,9 @@ class RoundHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClic
      */
     private fun textoMueveFun(round: Round): String{
         if (round.board.turno == 0){
-            return itemView.context.resources.getString(R.string.mueve_string) + ": " + round.firstPlayerName
+            return itemView.context.resources.getString(R.string.mueve_string) + ": " + round.firstPlayerName.split("@")[0]
         }else{
-            return itemView.context.resources.getString(R.string.mueve_string) + ": " + round.secondPlayerName
+            return itemView.context.resources.getString(R.string.mueve_string) + ": " + round.secondPlayerName.split("@")[0]
         }
     }
 
@@ -95,9 +95,9 @@ class RoundHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClic
 
     private fun ganaJugador(round: Round): String{
         if (round.board.turno == 0){
-            return itemView.context.resources.getString(R.string.gana_string) + ": " + round.secondPlayerName
+            return itemView.context.resources.getString(R.string.gana_string) + ": " + round.secondPlayerName.split("@")[0]
         }else{
-            return itemView.context.resources.getString(R.string.gana_string) + ": " + round.firstPlayerName
+            return itemView.context.resources.getString(R.string.gana_string) + ": " + round.firstPlayerName.split("@")[0]
         }
     }
 

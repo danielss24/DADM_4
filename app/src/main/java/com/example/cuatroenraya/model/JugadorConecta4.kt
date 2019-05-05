@@ -1,5 +1,6 @@
 package com.example.cuatroenraya.model
 
+import android.app.Application
 import android.preference.PreferenceManager
 import java.io.File
 import android.support.design.widget.Snackbar
@@ -43,7 +44,7 @@ constructor(private val nombre: String) : ERView.OnPlayListener, Jugador {
         if (this.game.getJugador(this.game.tablero.turno).nombre.equals(this.nombre)){
             game.realizaAccion(AccionMover(this, m))
         } else{
-            throw Exception("No te toca a ti")
+            throw Exception("No es tu turno")
         }
 
     }
