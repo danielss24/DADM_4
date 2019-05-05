@@ -1,6 +1,8 @@
 package com.example.cuatroenraya.activities
 
 import android.app.Application
+import android.content.Context
+import android.preference.PreferenceManager
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.View
@@ -48,9 +50,8 @@ class RoundHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClic
         dateTextView.text = round.date.toString().substring(0,19)
 
         plater1Text.text = itemView.context.resources.getString(R.string.player1) + ": " + round.firstPlayerName.split("@")[0]
-        plater2Text.text = itemView.context.resources.getString(R.string.player2) + ": " + round.secondPlayerName.split("@")[0]
+        plater2Text.text = itemView.context.resources.getString(R.string.player2) + ": " + getSecondPlayerName(round)
         turnoText.text = ganaOMueve(round)
-
 
 
         idTextView.setOnClickListener { listener(round) }
@@ -108,6 +109,23 @@ class RoundHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClic
     override fun onClick(v: View?) {
         Snackbar.make(itemView, "Item ${idTextView.text} selected",Snackbar.LENGTH_SHORT).show()
     }
+
+    /**
+     * @brief devuelve el nombre del segundo jugador
+     * @param round partida
+     * @return string con nombre del segundo jugador
+     */
+    private fun getSecondPlayerName(round: Round): String {
+        if (round.secondPlayerName == itemView.context.resources.getString(R.string.jugador_OPEN)) {
+            if (true == SettingsActivity.getOnlineMode(itemView.context)) {
+                return "Disponible"
+            } else {
+                return "Maquina"
+            }
+        } else {
+            return round.secondPlayerName.split("@")[0]
+        }
+    }
 }
 
 /**
@@ -139,6 +157,7 @@ class RoundAdapter(var rounds: List<Round>, var listener: (Round) -> Unit) : Rec
     override fun onBindViewHolder(holder: RoundHolder, position: Int) {
         holder.bindRound(rounds[position], listener)
     }
+
 
 }
 

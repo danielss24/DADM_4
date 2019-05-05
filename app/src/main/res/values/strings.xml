@@ -22,7 +22,7 @@
     <string name="round_already_finished">Partida finalizada</string>
     <string name="round_restarted">Partida reiniciada</string>
     <string name="board_saved">Partida guardada</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">Entrar</string>
     <string name="error_updating_round">Error actualizando la ronda</string>
     <string name="error_adding_round">Error anadiendo la ronda</string>
     <string name="PC_NAME">PC player</string>
@@ -94,9 +94,9 @@
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in">Logearse o registrarse</string>
+    <string name="action_sign_in_short">Logearse</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
@@ -104,6 +104,6 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="title_activity_settings">title_activity_settings</string>
 
-    <string name="action_register">register</string>
+    <string name="action_register">Registrarse</string>
 
 </resources>

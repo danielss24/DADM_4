@@ -103,7 +103,7 @@ class FBDataBase: RoundRepository {
             (round.firstPlayerUUID == FirebaseAuth.getInstance().currentUser!!.uid))
             return true
 
-        if(round.secondPlayerUUID == "jugador_OPEN"||(round.firstPlayerUUID == "jugador_OPEN"))
+        if (round.secondPlayerUUID == "jugador_OPEN" || (round.firstPlayerUUID == "jugador_OPEN"))
             return true
 
         return false
