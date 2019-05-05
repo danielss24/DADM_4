@@ -206,6 +206,7 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
         var colRecorrer = 0
         var colComprobacion = 0
         var fil = 0
+
         while (colRecorrer < NUM_COL - 3) {
             colComprobacion = colRecorrer
             fil = 0
@@ -218,7 +219,6 @@ class TableroConecta4(var name: String = "com.example.cuatroenraya.model.Tablero
                     return FINALIZADA
                 }
                 fil++
-                colComprobacion++
             }
             colRecorrer++
         }

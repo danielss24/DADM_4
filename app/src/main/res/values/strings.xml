@@ -28,6 +28,8 @@
     <string name="PC_NAME">PC player</string>
     <string name="jugador_OPEN">jugador_OPEN</string>
     <string name="online_string">Online</string>
+    <string name="mueve_string">Mueve</string>
+    <string name="gana_string">Ganó</string>
 
     <!-- Strings related to Settings -->
 
