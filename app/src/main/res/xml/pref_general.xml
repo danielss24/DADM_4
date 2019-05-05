@@ -10,7 +10,7 @@
                 android:maxLines="1"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
-                android:title="Nombre del jugador"
+                android:title="@string/cuentajugador"
                 android:id="@+id/display_name_textID"/>
 
         <ListPreference
@@ -20,26 +20,26 @@
                 android:key="themes_list"
                 android:negativeButtonText="@null"
                 android:positiveButtonText="@null"
-                android:title="Elige el Tema de la aplicación" />
+                android:title="@string/eligeTema"/>
 
         <Preference
                 android:key="prueba"
                 android:summary="Pulsa para mostrar un Toast"
-                android:title="Esto es una prueba" />
+                android:title="@string/pruebaSetting"/>
 
     </PreferenceCategory>
-    <PreferenceCategory android:title="Ajustes del juego">
+    <PreferenceCategory android:title="@string/settings_AjustesJuego">
 
         <SwitchPreference
                 android:defaultValue="true"
                 android:key="music_switch"
                 android:summary="Animar las jugadas con sonidos"
-                android:title="Sonido" />
+                android:title="@string/settings_Sonido"/>
 
         <CheckBoxPreference
                 android:key="music"
                 android:summary="Click if you feel like listening to music"
-                android:title="Music"
+                android:title="@string/settings_Music"
                 android:defaultValue="false"/>
 
     </PreferenceCategory>

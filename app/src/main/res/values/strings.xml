@@ -105,5 +105,11 @@
     <string name="title_activity_settings">title_activity_settings</string>
 
     <string name="action_register">Registrarse</string>
+    <string name="cuentajugador">Cuenta del jugador</string>
+    <string name="eligeTema">Elige el Tema de la aplicación</string>
+    <string name="pruebaSetting">Esto es una prueba</string>
+    <string name="settings_AjustesJuego">Ajustes del juego</string>
+    <string name="settings_Sonido">Sonido</string>
+    <string name="settings_Music">Music</string>
 
 </resources>
