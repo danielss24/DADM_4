@@ -273,6 +273,12 @@ class SettingsActivity : AppCompatPreferenceActivity() {
                     .getString(preference.key, "")
             )
         }
+
+        /**
+         * @brief Funcion para activar el modo online o no
+         * @param context contexto
+         * @param mode valor de la variable
+         */
         fun setOnlineMode(context: Context, mode: Boolean) {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
             val editor = sharedPreferences.edit()
@@ -280,10 +286,20 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             editor.commit()
         }
 
+        /**
+         * @brief FUncion para obtener el valor de la preferencia de modo online
+         * @param context contexto
+         * @return true o false
+         */
         fun getOnlineMode(context: Context?): Boolean {
             return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(ONLINE, false)
         }
 
+        /**
+         * @brief Funcion para settear el player ID
+         * @param context contexto
+         * @param playerUuid ID del player
+         */
         fun setPlayerUUID(context: Context, playerUuid: String) {
             val sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(context)
@@ -292,6 +308,11 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             editor.commit()
         }
 
+        /**
+         * @brief Funcion para settear el nombre del jugador
+         * @param context contexto
+         * @param playerName ID del player
+         */
         fun setPlayerName(context: Context, playerName: String) {
             val sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(context)
@@ -300,10 +321,20 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             editor.commit()
         }
 
+        /**
+         * @brief Funcion para obetner el ID del jugador
+         * @param context contexto
+         * @retrurn ID del player
+         */
         fun getPlayerUUID(context: Context?): String {
             return PreferenceManager.getDefaultSharedPreferences(context).getString(PLAYERUUID, "")
         }
 
+        /**
+         * @brief Funcion para obetner el nombre del jugador
+         * @param context contexto
+         * @retrurn nombre del player
+         */
         fun getPlayerName(context: Context): String {
             return PreferenceManager.getDefaultSharedPreferences(context).getString(PLAYER_NAME, "")
         }

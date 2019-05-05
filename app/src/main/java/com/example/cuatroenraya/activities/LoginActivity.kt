@@ -254,6 +254,11 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         }
     }
 
+    /**
+     * @brief onCreate del loader
+     * @param i iterator
+     * @param bundle bundle
+     */
     override fun onCreateLoader(i: Int, bundle: Bundle?): Loader<Cursor> {
         return CursorLoader(
             this,
@@ -275,6 +280,11 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         )
     }
 
+    /**
+     * @brief Funcion para cuandgo la carga termina
+     * @param cursorLoader cargador del curso
+     * @param cursor cursor
+     */
     override fun onLoadFinished(cursorLoader: Loader<Cursor>, cursor: Cursor) {
         val emails = ArrayList<String>()
         cursor.moveToFirst()
@@ -290,6 +300,10 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
 
     }
 
+    /**
+     * @brief FUncion para añadir el autocompletar
+     * @param emailAddressCollection coleccion de emails
+     */
     private fun addEmailsToAutoComplete(emailAddressCollection: List<String>) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         val adapter = ArrayAdapter(
