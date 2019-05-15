@@ -10,4 +10,19 @@
         <item>2</item>
         <item>3</item>
     </string-array>
+
+    <string-array name="pref_ColorThemes">
+        <item>Rojo</item>
+        <item>Azul</item>
+        <item>Verde</item>
+        <item>Amarillo</item>
+    </string-array>
+
+    <string-array name="pref_ColorThemes_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
 </resources>

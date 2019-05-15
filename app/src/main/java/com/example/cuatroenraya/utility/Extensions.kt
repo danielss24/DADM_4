@@ -1,6 +1,7 @@
 package com.example.cuatroenraya.utility
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Paint
 import android.support.design.widget.Snackbar
 import android.support.v4.app.FragmentManager
@@ -9,12 +10,14 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import com.example.cuatroenraya.R
 import com.example.cuatroenraya.activities.RoundAdapter
+import com.example.cuatroenraya.activities.SettingsActivity
 import com.example.cuatroenraya.database.DataBase
 import com.example.cuatroenraya.firebase.FBDataBase
 import com.example.cuatroenraya.model.TableroConecta4
 import com.example.cuatroenraya.model.Round
 import com.example.cuatroenraya.model.RoundRepository
 import com.example.cuatroenraya.model.RoundRepositoryFactory
+import java.lang.Exception
 
 
 /**
@@ -24,12 +27,17 @@ import com.example.cuatroenraya.model.RoundRepositoryFactory
  * @param j fila del tablero
  */
 fun Paint.setColor(board: TableroConecta4, i: Int, j: Int, context: Context) {
-    if (board.getTablero(i, j) === board.JUGADOR1)
-        setColor(ContextCompat.getColor(context, R.color.colorPlayerOneChip))
-    else if (board.getTablero(i, j) === board.IS_EMPTY)
+    if (board.getTablero(i, j) === board.JUGADOR1) {
+        var color = SettingsActivity.getColorP1(context)
+        var colorInt = Color.parseColor(color)
+        setColor(colorInt)
+    } else if (board.getTablero(i, j) === board.IS_EMPTY)
         setColor(ContextCompat.getColor(context, R.color.colorNoPlayer))
-    else
-        setColor(ContextCompat.getColor(context, R.color.colorPlayerTwoChip))
+    else {
+        var color = SettingsActivity.getColorP2(context)
+        var colorInt = Color.parseColor(color)
+        setColor(colorInt)
+    }
 }
 
 /**

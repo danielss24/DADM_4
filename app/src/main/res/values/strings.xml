@@ -111,5 +111,7 @@
     <string name="settings_AjustesJuego">Ajustes del juego</string>
     <string name="settings_Sonido">Sonido</string>
     <string name="settings_Music">Music</string>
+    <string name="eligeColor1">Elige color ficha 1</string>
+    <string name="eligeColor2">Elige color ficha 2</string>
 
 </resources>

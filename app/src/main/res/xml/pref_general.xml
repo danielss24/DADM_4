@@ -27,6 +27,25 @@
                 android:summary="Pulsa para mostrar un Toast"
                 android:title="@string/pruebaSetting"/>
 
+        <ListPreference
+                android:defaultValue="2"
+                android:entries="@array/pref_ColorThemes"
+                android:entryValues="@array/pref_ColorThemes_values"
+                android:key="color1"
+                android:negativeButtonText="@null"
+                android:positiveButtonText="@null"
+                android:title="@string/eligeColor1"/>
+
+        <ListPreference
+                android:defaultValue="1"
+                android:entries="@array/pref_ColorThemes"
+                android:entryValues="@array/pref_ColorThemes_values"
+                android:key="color2"
+                android:negativeButtonText="@null"
+                android:positiveButtonText="@null"
+                android:title="@string/eligeColor2"/>
+
+
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/settings_AjustesJuego">
 

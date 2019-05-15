@@ -59,6 +59,7 @@ class RoundHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClic
         layoutId.setOnClickListener { listener(round) }
         plater1Text.setOnClickListener { listener(round) }
         plater2Text.setOnClickListener { listener(round) }
+//        layoutId.setOnLongClickListener{ listener(round)}
 
     }
 

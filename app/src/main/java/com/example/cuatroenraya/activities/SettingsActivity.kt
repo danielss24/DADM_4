@@ -95,6 +95,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             // guidelines.
             bindPreferenceSummaryToValue(findPreference("playerName"))
             bindPreferenceSummaryToValue(findPreference("themes_list"))
+            bindPreferenceSummaryToValue(findPreference(COLOR1))
+            bindPreferenceSummaryToValue(findPreference(COLOR2))
 
             val preference = findPreference("prueba")
             preference.onPreferenceClickListener = Preference.OnPreferenceClickListener{
@@ -240,6 +242,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         val PLAYERUUID = "playerUUID"
         val PLAYER_NAME = "playerName"
         var ONLINE = "OnlineMode"
+        var COLOR1 = "color1"
+        var COLOR2 = "color2"
 
         /**
          * Helper method to determine if the device has an extra-large screen. For
@@ -268,9 +272,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             // current value.
             sBindPreferenceSummaryToValueListener.onPreferenceChange(
                 preference,
-                PreferenceManager
-                    .getDefaultSharedPreferences(preference.context)
-                    .getString(preference.key, "")
+                PreferenceManager.getDefaultSharedPreferences(preference.context).getString(preference.key, "")
             )
         }
 
@@ -301,8 +303,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
          * @param playerUuid ID del player
          */
         fun setPlayerUUID(context: Context, playerUuid: String) {
-            val sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(context)
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
             val editor = sharedPreferences.edit()
             editor.putString(SettingsActivity.PLAYERUUID, playerUuid)
             editor.commit()
@@ -337,6 +338,41 @@ class SettingsActivity : AppCompatPreferenceActivity() {
          */
         fun getPlayerName(context: Context): String {
             return PreferenceManager.getDefaultSharedPreferences(context).getString(PLAYER_NAME, "")
+        }
+
+        fun getColorP1(context: Context): String {
+            return converColorCoin(PreferenceManager.getDefaultSharedPreferences(context).getString(COLOR1, ""))
+        }
+
+        fun setColorP1(context: Context, color: Int) {
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+            val editor = sharedPreferences.edit()
+            editor.putInt(SettingsActivity.COLOR1, color)
+            editor.commit()
+        }
+
+        fun getColorP2(context: Context): String {
+            return converColorCoin(PreferenceManager.getDefaultSharedPreferences(context).getString(COLOR2, ""))
+        }
+
+        fun setColorP2(context: Context, color: Int) {
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+            val editor = sharedPreferences.edit()
+            editor.putInt(SettingsActivity.COLOR1, color)
+            editor.commit()
+        }
+
+        fun converColorCoin(option: String): String {
+            if (option == "1") {
+                return "#FF0000"
+            } else if (option == "2") {
+                return "#3F51B5"
+            } else if (option == "3") {
+                return "#39C93F"
+            } else if (option == "4") {
+                return "#FFF000"
+            }
+            return "#000000"
         }
 
     }
