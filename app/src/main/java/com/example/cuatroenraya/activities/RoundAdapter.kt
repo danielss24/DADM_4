@@ -44,7 +44,7 @@ class RoundHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClic
      * @param round partida a guardar
      * @param listener listener de partida
      */
-    fun bindRound(round: Round, listener: (Round) -> Unit) {
+    fun bindRound(round: Round, listener: (Round) -> Unit, listenerLong: (Round) -> Boolean) {
         idTextView.text = round.title
         board_erview.setBoard(round.board)
         dateTextView.text = round.date.toString().substring(0,19)
@@ -59,7 +59,12 @@ class RoundHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClic
         layoutId.setOnClickListener { listener(round) }
         plater1Text.setOnClickListener { listener(round) }
         plater2Text.setOnClickListener { listener(round) }
-//        layoutId.setOnLongClickListener{ listener(round)}
+
+        idTextView.setOnLongClickListener { listenerLong(round) }
+        dateTextView.setOnLongClickListener { listenerLong(round) }
+        layoutId.setOnLongClickListener { listenerLong(round) }
+        plater1Text.setOnLongClickListener { listenerLong(round) }
+        plater2Text.setOnLongClickListener { listenerLong(round) }
 
     }
 
@@ -134,7 +139,7 @@ class RoundHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClic
  * @param rounds partidas guardadas
  * @param listener listener de partidas guardadas
  */
-class RoundAdapter(var rounds: List<Round>, var listener: (Round) -> Unit) : RecyclerView.Adapter<RoundHolder>() {
+class RoundAdapter(var rounds: List<Round>, var listener: (Round) -> Unit, var listenerLong: (Round) -> Boolean) : RecyclerView.Adapter<RoundHolder>() {
     /**
      * @brief creadora de vista/controlador
      * @param parent conjunto de vistas
@@ -156,7 +161,7 @@ class RoundAdapter(var rounds: List<Round>, var listener: (Round) -> Unit) : Rec
      * @param holder manejador
      */
     override fun onBindViewHolder(holder: RoundHolder, position: Int) {
-        holder.bindRound(rounds[position], listener)
+        holder.bindRound(rounds[position], listener, listenerLong)
     }
 
 

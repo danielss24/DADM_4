@@ -58,7 +58,8 @@ class RoundListActivity : AppCompatActivity(),
                 if (response == true) {
                     recyclerView.update(
                         SettingsActivity.getPlayerUUID(baseContext),
-                        { round -> onRoundSelected(round) }
+                        { round -> onRoundSelected(round) },
+                        { round -> onRoundDeleted(round) }
                     )
                 } else
                     Snackbar.make(findViewById(R.id.title),resources.getString(R.string.error_updating_round),Snackbar.LENGTH_LONG).show()
@@ -104,7 +105,9 @@ class RoundListActivity : AppCompatActivity(),
         super.onResume()
 
         recyclerView.update(SettingsActivity.getPlayerUUID(baseContext),
-        { round -> onRoundSelected(round)})
+            { round -> onRoundSelected(round)},
+            { round -> onRoundDeleted(round)}
+        )
     }
 
     /**
@@ -146,7 +149,7 @@ class RoundListActivity : AppCompatActivity(),
                     Snackbar.make(findViewById(R.id.recyclerView),"New " + round.title + " added", Snackbar.LENGTH_LONG).show()
                     val fragmentManager = supportFragmentManager
                     val roundListFragment =fragmentManager.findFragmentById(R.id.fragment_container)as RoundListFragment
-                    roundListFragment.recyclerView.update(SettingsActivity.getPlayerUUID(baseContext), { round -> onRoundSelected(round) }
+                    roundListFragment.recyclerView.update(SettingsActivity.getPlayerUUID(baseContext), { round -> onRoundSelected(round) }, { round -> onRoundDeleted(round) }
                     )
                 }
             }
@@ -154,6 +157,30 @@ class RoundListActivity : AppCompatActivity(),
         repository?.addRound(round, callback)
     }
 
+    override fun onRoundDeleted(round: Round): Boolean {
+        val repository = RoundRepositoryFactory.createRepository(this)
+        val callback = object : RoundRepository.BooleanCallback {
+            override fun onResponse(response: Boolean) {
+                if (response == false) {
+                    Snackbar.make(findViewById(R.id.recyclerView),resources.getString(R.string.error_adding_round), Snackbar.LENGTH_LONG).show()
+                } else {
+                    Snackbar.make(findViewById(R.id.recyclerView),round.title + " deleted", Snackbar.LENGTH_LONG).show()
+                    val fragmentManager = supportFragmentManager
+                    val roundListFragment =fragmentManager.findFragmentById(R.id.fragment_container)as RoundListFragment
+                    roundListFragment.recyclerView.update(SettingsActivity.getPlayerUUID(baseContext), { round -> onRoundSelected(round) }, { round -> onRoundDeleted(round) }
+                    )
+                }
+            }
+        }
+        var deleteDialog = AlertDialogFragmentDelete()
+        var bundle = Bundle()
+        bundle.putString("round",round.toString())
+        deleteDialog.arguments = bundle
+        deleteDialog.show(this.supportFragmentManager,"ALERT DIALOG")
+//        repository?.deleteRound(round, callback)
+
+        return true
+    }
 
     /**
      * @brief carga el tema correcto

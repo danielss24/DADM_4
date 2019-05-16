@@ -184,4 +184,18 @@ class FBDataBase: RoundRepository {
             }
         })
     }
+
+    override fun deleteRound(round: Round, callback: RoundRepository.BooleanCallback):Boolean {
+
+        var task = db.child(round.id).removeValue()
+
+        task.addOnCompleteListener {
+            if (it.isSuccessful) {
+                callback.onResponse(true)
+            } else {
+                callback.onResponse(false)
+            }
+        }
+        return true
+    }
 }

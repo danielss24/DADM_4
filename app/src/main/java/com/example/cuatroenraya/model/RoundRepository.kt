@@ -26,6 +26,7 @@ interface RoundRepository {
 
     fun getRounds(playeruuid: String, orderByField: String, group: String, callback: RoundsCallback)
     fun addRound(round: Round, callback: BooleanCallback)
+    fun deleteRound(round: Round, callback: BooleanCallback): Boolean
     fun updateRound(round: Round, callback: BooleanCallback)
     interface RoundsCallback {
         fun onResponse(rounds: List<Round>)

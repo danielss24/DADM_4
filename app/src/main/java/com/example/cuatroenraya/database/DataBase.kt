@@ -233,9 +233,17 @@ class DataBase(context: Context) : RoundRepository {
             cursor.moveToNext()
         }
         cursor.close()
-        if (cursor.getCount() > 0)
+        if (cursor.getCount() >= 0)
             callback.onResponse(rounds)
         else
             callback.onError("No rounds found in database")
+    }
+
+    override fun deleteRound(round: Round, callback: RoundRepository.BooleanCallback): Boolean {
+        print("TODO")
+        val sql = "DELETE FROM " + RoundDataBaseSchema.RoundTable.NAME + " WHERE " + RoundDataBaseSchema.RoundTable.Cols.ROUNDUUID + " =  \"" + round.id + "\";"
+        val cursor = db!!.delete(RoundDataBaseSchema.RoundTable.NAME,RoundDataBaseSchema.RoundTable.Cols.ROUNDUUID + "=?", arrayOf(round.id.toString()))
+        callback.onResponse(cursor >= 0)
+        return true
     }
 }

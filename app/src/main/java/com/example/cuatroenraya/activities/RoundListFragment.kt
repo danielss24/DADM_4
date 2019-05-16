@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.provider.SyncStateContract.Helpers.update
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -38,6 +39,7 @@ class RoundListFragment : Fragment() {
 
     interface OnRoundListFragmentInteractionListener {
         fun onRoundSelected(round: Round)
+        fun onRoundDeleted(round: Round) : Boolean
         fun onPreferenceSelected()
         fun onRoundAdded()
     }
@@ -86,11 +88,22 @@ class RoundListFragment : Fragment() {
      */
     override fun onAttach(context: Context?) {
         super.onAttach(context)
+        val repository = RoundRepositoryFactory.createRepository(this.context!!)
+        val callback = object : RoundRepository.BooleanCallback {
+            override fun onResponse(response: Boolean) {
+                if (response == true) {
+                    recyclerView.update(
+                        SettingsActivity.getPlayerUUID(context),
+                        { round -> onRoundSelected(round) },
+                        { round -> onRoundDeleted(round) }
+                    )
+                }
+            }
+        }
         if (context is OnRoundListFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() +
-                    " must implement OnRoundListFragmentInteractionListener")
+            throw RuntimeException(context.toString() + " must implement OnRoundListFragmentInteractionListener")
         }
     }
 
@@ -113,6 +126,21 @@ class RoundListFragment : Fragment() {
     }
 
     /**
+     * @brief seleccion de partidas guardadas
+     * @param round partida guardada
+     */
+    fun onRoundDeleted(round: Round): Boolean {
+        var repository = RoundRepositoryFactory.createRepository(context!!)
+        if (repository is FBDataBase){
+            //Modo Online
+        } else {
+            //Modof Offline
+
+        }
+        return true
+    }
+
+    /**
      * @brief creadora de vista
      * @param inflater inflater layout
      * @param container contenedor de vista
@@ -132,8 +160,10 @@ class RoundListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
-            update(SettingsActivity.getPlayerUUID(context!!))
-            { round -> listener?.onRoundSelected(round) }
+            update(SettingsActivity.getPlayerUUID(context!!),
+            { round -> listener?.onRoundSelected(round) },
+            { round -> listener?.onRoundDeleted(round)!!}
+            )
         }
     }
 
@@ -142,8 +172,10 @@ class RoundListFragment : Fragment() {
      */
     override fun onResume() {
         super.onResume()
-        recyclerView.update(SettingsActivity.getPlayerUUID(context!!))
-        { round -> listener?.onRoundSelected(round) }
+        recyclerView.update(SettingsActivity.getPlayerUUID(context!!),
+            { round -> listener?.onRoundSelected(round) },
+            { round -> listener?.onRoundDeleted(round)!! }
+        )
     }
 
 

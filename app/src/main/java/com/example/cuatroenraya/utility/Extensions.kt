@@ -45,12 +45,12 @@ fun Paint.setColor(board: TableroConecta4, i: Int, j: Int, context: Context) {
  * @param onClickListener clickable para la vista recicladora
  */
 
-fun RecyclerView.update(userName: String, onClickListener: (Round) -> Unit) {
+fun RecyclerView.update(userName: String, onClickListener: (Round) -> Unit, onLongClickListener: (Round) -> Boolean) {
     val repository = RoundRepositoryFactory.createRepository(context)
     val roundsCallback = object : RoundRepository.RoundsCallback {
         override fun onResponse(rounds: List<Round>) {
             if (adapter == null)
-                adapter = RoundAdapter(rounds, onClickListener)
+                adapter = RoundAdapter(rounds, onClickListener, onLongClickListener)
             else {
                 (adapter as RoundAdapter).rounds = rounds
                 adapter?.notifyDataSetChanged()
