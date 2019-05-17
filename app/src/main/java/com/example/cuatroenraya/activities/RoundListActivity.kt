@@ -174,7 +174,7 @@ class RoundListActivity : AppCompatActivity(),
         }
         var deleteDialog = AlertDialogFragmentDelete()
         var bundle = Bundle()
-        bundle.putString("round",round.toString())
+        bundle.putString("round",round.toJSONString())
         deleteDialog.arguments = bundle
         deleteDialog.show(this.supportFragmentManager,"ALERT DIALOG")
 //        repository?.deleteRound(round, callback)
